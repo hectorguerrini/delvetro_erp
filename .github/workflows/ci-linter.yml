@@ -1,0 +1,34 @@
+name: CI linter test
+
+on: 
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+    name: Run Flutter analyze and test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Setup Java Version
+        uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: "stable"
+
+      - name: Get flutter dependencies
+        run: flutter pub get
+
+      - name: Run Analyze code
+        run: flutter analyze
+
+      - name: Run Code format lib/
+        run: flutter format --dry-run --set-exit-if-changed lib/
+
+      - name: Run Code format test/
+        run: flutter format --dry-run --set-exit-if-changed test/
