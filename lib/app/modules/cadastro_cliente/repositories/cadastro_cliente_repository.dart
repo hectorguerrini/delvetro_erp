@@ -41,12 +41,15 @@ class CadastroRepository implements ICadastroClienteRepository {
 
   @override
   Future<void> salvarCliente(ClienteModel cliente) async {
+    clientes.add(cliente);
+  }
+
+  @override
+  Future<void> alterarCliente(ClienteModel cliente) async {
     var clienteAlterado = cliente;
     for (var i = 0; i < clientes.length; i++) {
-      if (clienteAlterado.cpf == clientes[i].cpf) {
+      if (clienteAlterado.idCliente == clientes[i].idCliente) {
         clientes[i] = clienteAlterado;
-      } else {
-        clientes.add(cliente);
       }
     }
   }

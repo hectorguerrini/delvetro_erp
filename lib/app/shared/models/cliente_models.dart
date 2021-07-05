@@ -14,7 +14,7 @@ class ClienteModel {
   final String bairro;
   final String cidade;
   final String estado;
-  final int idCliente;
+  final int? idCliente;
   final List<String> telefones;
 
   ClienteModel({
@@ -32,7 +32,7 @@ class ClienteModel {
     required this.bairro,
     required this.cidade,
     required this.estado,
-    required this.idCliente,
+    this.idCliente,
   });
 
   ClienteModel copyWith(

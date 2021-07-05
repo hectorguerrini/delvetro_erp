@@ -8,7 +8,7 @@ class AppModule extends Module {
   @override
   final List<Bind> binds = [
     Bind.lazySingleton((i) => CadastroRepository()),
-    Bind.lazySingleton((i) => CadastroStore()),
+    Bind.lazySingleton((i) => CadastroStore(i())),
   ];
 
   @override
