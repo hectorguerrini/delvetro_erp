@@ -1,9 +1,9 @@
-import 'package:delvetro_erp/app/shared/enumerates/enum_lojista.dart';
+import 'package:delvetro_erp/app/modules/cadastro_cliente/enumerates/enum_lojista.dart';
 import 'package:delvetro_erp/app/shared/models/cliente_models.dart';
 
 import 'cadastro_cliente_repository_interface.dart';
 
-class CadastroRepository implements ICadastroClienteRepository {
+class ClienteCadastroRepository implements ICadastroClienteRepository {
   var clientes = <ClienteModel>[
     ClienteModel(
         telefones: [],

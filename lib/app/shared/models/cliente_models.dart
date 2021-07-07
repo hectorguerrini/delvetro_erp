@@ -1,4 +1,4 @@
-import 'package:delvetro_erp/app/shared/enumerates/enum_lojista.dart';
+import 'package:delvetro_erp/app/modules/cadastro_cliente/enumerates/enum_lojista.dart';
 
 class ClienteModel {
   final String nome;
@@ -6,7 +6,7 @@ class ClienteModel {
   final String cpf;
   final String nomeContato;
   final String rgContato;
-  final LojistaEnum lojista;
+  final LojistaEnum? lojista;
   final String cep;
   final String endereco;
   final String numero;
@@ -24,7 +24,7 @@ class ClienteModel {
     required this.cpf,
     required this.nomeContato,
     required this.rgContato,
-    required this.lojista,
+    this.lojista,
     required this.cep,
     required this.endereco,
     required this.numero,
