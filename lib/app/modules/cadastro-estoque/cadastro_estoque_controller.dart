@@ -40,4 +40,28 @@ abstract class CadastroEstoqueControllerBase with Store {
       await repository.salvarItem(itensEstoque);
     }
   }
+
+  @action
+  Future<void> limparTexto() async {
+    itensEstoque = ItensEstoqueModel(
+        descricao: '',
+        localizacao: '',
+        quantidade: 0,
+        estoqueMinimo: 0,
+        estoqueMaximo: 0,
+        espessura: 0.0,
+        custo: 0.0);
+  }
+
+  @action
+  bool validaTexto() {
+    var validacao = (itensEstoque.tipoItem == null ||
+            itensEstoque.unidadeItem == null ||
+            itensEstoque.estoqueMinimo == 0 ||
+            itensEstoque.estoqueMaximo == 0 ||
+            itensEstoque.estoqueMaximo <= itensEstoque.estoqueMinimo)
+        ? false
+        : true;
+    return validacao;
+  }
 }
