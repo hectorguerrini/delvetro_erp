@@ -57,4 +57,26 @@ void main() {
     await controller.salvarCliente();
     verify(repository.alterarCliente(clienteTeste)).called(1);
   });
+
+  test('Limpar texto', () async {
+    var clienteTeste = ClienteModel(
+        telefones: [],
+        nome: 'nome',
+        razaoSocial: 'razaoSocial',
+        cpf: 'cpf',
+        nomeContato: 'nomeContato',
+        rgContato: 'rgContato',
+        lojista: LojistaEnum.Sim,
+        cep: 'cep',
+        endereco: 'endereco',
+        numero: 'numero',
+        complemento: 'complemento',
+        bairro: 'bairro',
+        cidade: 'cidade',
+        estado: 'estado',
+        idCliente: 2);
+    controller.cliente = clienteTeste;
+    await controller.limparTexto();
+    expect(controller.cliente.idCliente, null);
+  });
 }

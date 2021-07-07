@@ -37,4 +37,24 @@ abstract class _CadastroStoreBase with Store {
       await repository.salvarCliente(cliente);
     }
   }
+
+  @action
+  Future<void> limparTexto() async {
+    cliente = ClienteModel(
+        telefones: [],
+        nome: '',
+        razaoSocial: '',
+        cpf: '',
+        nomeContato: '',
+        rgContato: '',
+        lojista: null,
+        cep: '',
+        endereco: '',
+        numero: '',
+        complemento: '',
+        bairro: '',
+        cidade: '',
+        estado: '',
+        idCliente: null);
+  }
 }
