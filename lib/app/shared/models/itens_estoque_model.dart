@@ -5,25 +5,25 @@ class ItensEstoqueModel {
   final int? idEstoque;
   final String descricao;
   final TipoItemEnum? tipoItem;
-  final String localizacao;
+  final String? localizacao;
   final UnidadeItemEnum? unidadeItem;
-  final int quantidade;
+  final int? quantidade;
   final int estoqueMinimo;
   final int estoqueMaximo;
-  final double espessura;
-  final double custo;
+  final double? espessura;
+  final double? custo;
 
   ItensEstoqueModel(
       {this.idEstoque,
       required this.descricao,
       this.tipoItem,
-      required this.localizacao,
+      this.localizacao,
       this.unidadeItem,
-      required this.quantidade,
+      this.quantidade,
       required this.estoqueMinimo,
       required this.estoqueMaximo,
-      required this.espessura,
-      required this.custo});
+      this.espessura,
+      this.custo});
 
   ItensEstoqueModel copyWith(
       {int? idEstoque,

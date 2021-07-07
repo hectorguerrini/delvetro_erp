@@ -53,15 +53,15 @@ abstract class CadastroEstoqueControllerBase with Store {
         custo: 0.0);
   }
 
-  @action
-  bool validaTexto() {
-    var validacao = (itensEstoque.tipoItem == null ||
-            itensEstoque.unidadeItem == null ||
-            itensEstoque.estoqueMinimo == 0 ||
-            itensEstoque.estoqueMaximo == 0 ||
-            itensEstoque.estoqueMaximo <= itensEstoque.estoqueMinimo)
-        ? false
-        : true;
-    return validacao;
-  }
+  // @action
+  // bool validaTexto() {
+  //   var validacao = (itensEstoque.tipoItem == null ||
+  //           itensEstoque.unidadeItem == null ||
+  //           itensEstoque.estoqueMinimo == 0 ||
+  //           itensEstoque.estoqueMaximo == 0 ||
+  //           itensEstoque.estoqueMaximo <= itensEstoque.estoqueMinimo)
+  //       ? false
+  //       : true;
+  //   return validacao;
+  // }
 }

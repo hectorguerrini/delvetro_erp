@@ -57,6 +57,14 @@ mixin _$CadastroEstoqueController on CadastroEstoqueControllerBase, Store {
     return _$salvarItemAsyncAction.run(() => super.salvarItem());
   }
 
+  final _$limparTextoAsyncAction =
+      AsyncAction('CadastroEstoqueControllerBase.limparTexto');
+
+  @override
+  Future<void> limparTexto() {
+    return _$limparTextoAsyncAction.run(() => super.limparTexto());
+  }
+
   @override
   String toString() {
     return '''

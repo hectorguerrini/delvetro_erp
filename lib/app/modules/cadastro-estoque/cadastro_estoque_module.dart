@@ -3,7 +3,7 @@ import 'package:delvetro_erp/app/modules/cadastro-estoque/cadastro_estoque_page.
 import 'package:delvetro_erp/app/modules/cadastro-estoque/repositories/cadastro_estoque_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class HomeModule extends Module {
+class CadastroEstoqueModule extends Module {
   @override
   final List<Bind> binds = [
     Bind.lazySingleton((i) => CadastroEstoqueController(i())),
