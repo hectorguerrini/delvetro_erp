@@ -1,5 +1,4 @@
 import 'package:delvetro_erp/app/modules/cadastro-estoque/cadastro_estoque_controller.dart';
-import 'package:delvetro_erp/app/shared/widgets/drop_down_field_widget.dart';
 import 'package:delvetro_erp/app/shared/widgets/text_form_field_padrao_widget.dart';
 import 'package:delvetro_erp/app/shared/widgets/text_form_field_pequeno_widget.dart';
 import 'package:flutter/material.dart';
