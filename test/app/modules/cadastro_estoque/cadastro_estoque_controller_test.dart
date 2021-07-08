@@ -1,6 +1,6 @@
 import 'package:delvetro_erp/app/modules/cadastro-estoque/cadastro_estoque_controller.dart';
+import 'package:delvetro_erp/app/modules/cadastro-estoque/models/itens_estoque_model.dart';
 import 'package:delvetro_erp/app/modules/cadastro-estoque/repositories/cadastro_estoque_repository_interface.dart';
-import 'package:delvetro_erp/app/shared/models/itens_estoque_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -12,7 +12,7 @@ void main() {
   ICadastroEstoqueRepository repository = MockICadastroEstoqueRepository();
   late CadastroEstoqueController cadastroEstoqueController;
   var array = [
-    ItensEstoqueModel(descricao: "", estoqueMinimo: 5, estoqueMaximo: 10)
+    ItensEstoqueModel(descricao: '', estoqueMinimo: 5, estoqueMaximo: 10)
   ];
 
   setUpAll(() {

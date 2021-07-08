@@ -1,5 +1,6 @@
+import 'package:delvetro_erp/app/modules/cadastro-estoque/models/itens_estoque_model.dart';
 import 'package:delvetro_erp/app/modules/cadastro-estoque/repositories/cadastro_estoque_repository.dart';
-import 'package:delvetro_erp/app/shared/models/itens_estoque_model.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

@@ -4,9 +4,10 @@
 
 import 'dart:async' as _i3;
 
+import 'package:delvetro_erp/app/modules/cadastro-estoque/models/itens_estoque_model.dart'
+    as _i4;
 import 'package:delvetro_erp/app/modules/cadastro-estoque/repositories/cadastro_estoque_repository_interface.dart'
     as _i2;
-import 'package:delvetro_erp/app/shared/models/itens_estoque_model.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: avoid_redundant_argument_values

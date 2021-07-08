@@ -25,6 +25,21 @@ class ItensEstoqueModel {
       this.espessura,
       this.custo});
 
+  factory ItensEstoqueModel.newInstance() {
+    return ItensEstoqueModel(
+      idEstoque: null,
+      descricao: '',
+      tipoItem: null,
+      localizacao: '',
+      unidadeItem: null,
+      quantidade: 0,
+      estoqueMinimo: 0,
+      estoqueMaximo: 0,
+      espessura: 0,
+      custo: 0,
+    );
+  }
+
   ItensEstoqueModel copyWith(
       {int? idEstoque,
       String? descricao,

@@ -1,5 +1,7 @@
+import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/tipo_item_enum.dart';
+import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/unidade_item_enum.dart';
 import 'package:delvetro_erp/app/modules/cadastro-estoque/repositories/cadastro_estoque_repository_interface.dart';
-import 'package:delvetro_erp/app/shared/models/itens_estoque_model.dart';
+import 'package:delvetro_erp/app/modules/cadastro-estoque/models/itens_estoque_model.dart';
 import 'package:mobx/mobx.dart';
 
 part 'cadastro_estoque_controller.g.dart';
@@ -15,17 +17,55 @@ abstract class CadastroEstoqueControllerBase with Store {
   }
 
   @observable
-  ItensEstoqueModel itensEstoque = ItensEstoqueModel(
-      descricao: '',
-      localizacao: '',
-      quantidade: 0,
-      estoqueMinimo: 0,
-      estoqueMaximo: 0,
-      espessura: 0.0,
-      custo: 0.0);
+  ItensEstoqueModel itensEstoque = ItensEstoqueModel.newInstance();
 
   @observable
   List<ItensEstoqueModel> listaItensEstoque = [];
+
+  @action
+  void setDescricao(String value) {
+    itensEstoque = itensEstoque.copyWith(descricao: value);
+  }
+
+  @action
+  void setTipoItem(TipoItemEnum? value) {
+    itensEstoque = itensEstoque.copyWith(tipoItem: value);
+  }
+
+  @action
+  void setLocalizacao(String value) {
+    itensEstoque = itensEstoque.copyWith(localizacao: value);
+  }
+
+  @action
+  void setUnidade(UnidadeItemEnum value) {
+    itensEstoque = itensEstoque.copyWith(unidadeItem: value);
+  }
+
+  @action
+  void setQuantidade(int value) {
+    itensEstoque = itensEstoque.copyWith(quantidade: value);
+  }
+
+  @action
+  void setEstoqueMinimo(int value) {
+    itensEstoque = itensEstoque.copyWith(estoqueMinimo: value);
+  }
+
+  @action
+  void setEstoqueMaximo(int value) {
+    itensEstoque = itensEstoque.copyWith(estoqueMaximo: value);
+  }
+
+  @action
+  void setCusto(double value) {
+    itensEstoque = itensEstoque.copyWith(custo: value);
+  }
+
+  @action
+  void setEspessura(double value) {
+    itensEstoque = itensEstoque.copyWith(espessura: value);
+  }
 
   @action
   Future<void> getListaItens() async {
@@ -43,14 +83,7 @@ abstract class CadastroEstoqueControllerBase with Store {
 
   @action
   Future<void> limparTexto() async {
-    itensEstoque = ItensEstoqueModel(
-        descricao: '',
-        localizacao: '',
-        quantidade: 0,
-        estoqueMinimo: 0,
-        estoqueMaximo: 0,
-        espessura: 0.0,
-        custo: 0.0);
+    itensEstoque = ItensEstoqueModel.newInstance();
   }
 
   // @action

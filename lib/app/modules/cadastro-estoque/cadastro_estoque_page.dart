@@ -1,6 +1,8 @@
 import 'package:delvetro_erp/app/modules/cadastro-estoque/cadastro_estoque_controller.dart';
+import 'package:delvetro_erp/app/shared/widgets/drop_down_field_widget.dart';
+import 'package:delvetro_erp/app/shared/widgets/text_form_field_padrao_widget.dart';
+import 'package:delvetro_erp/app/shared/widgets/text_form_field_pequeno_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class CadastroEstoquePage extends StatefulWidget {
@@ -43,32 +45,57 @@ class _CadastroEstoquePageState
                     'Cadastro de Estoque',
                     style: TextStyle(fontSize: 36),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.25,
-                        child: Observer(
-                          builder: (BuildContext context) => TextFormField(
-                            onChanged: (value) {
-                              //atribuir para o cotroller.descricao
-                            },
-                            style: TextStyle(
-                              fontSize: 24,
-                            ),
-                            decoration: InputDecoration(
-                              labelText: 'Descrição',
-                              labelStyle: TextStyle(
-                                fontSize: 24,
-                              ),
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 16, vertical: 20),
-                              border: OutlineInputBorder(),
-                            ),
-                          ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TextFormFieldPadraoWidget(
+                          titulo: 'Descrição',
+                          onChanged: controller.setDescricao,
                         ),
-                      ),
-                    ],
+                        TextFormFieldPadraoWidget(
+                          titulo: 'Localizacao',
+                          onChanged: controller.setLocalizacao,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TextFormFieldPequenoWidget(
+                          titulo: 'Quantidade',
+                          onChanged: (value) {
+                            var valor = int.parse(value);
+                            controller.setQuantidade(valor);
+                          },
+                        ),
+                        TextFormFieldPequenoWidget(
+                          titulo: 'Estoque Mínimo',
+                          onChanged: (value) {
+                            var valor = int.parse(value);
+                            controller.setEstoqueMinimo(valor);
+                          },
+                        ),
+                        TextFormFieldPequenoWidget(
+                          titulo: 'Estoque Máximo',
+                          onChanged: (value) {
+                            var valor = int.parse(value);
+                            controller.setEstoqueMaximo(valor);
+                          },
+                        ),
+                        TextFormFieldPequenoWidget(
+                          titulo: 'Custo',
+                          onChanged: (value) {
+                            var valor = double.parse(value);
+                            controller.setCusto(valor);
+                          },
+                        ),
+                      ],
+                    ),
                   )
                 ],
               ),

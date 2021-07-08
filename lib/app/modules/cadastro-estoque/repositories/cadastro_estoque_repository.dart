@@ -1,6 +1,6 @@
 import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/tipo_item_enum.dart';
 import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/unidade_item_enum.dart';
-import 'package:delvetro_erp/app/shared/models/itens_estoque_model.dart';
+import 'package:delvetro_erp/app/modules/cadastro-estoque/models/itens_estoque_model.dart';
 
 import 'cadastro_estoque_repository_interface.dart';
 
@@ -9,7 +9,7 @@ class CadastroEstoqueRepository implements ICadastroEstoqueRepository {
     ItensEstoqueModel(
         idEstoque: 1,
         descricao: 'Vidro',
-        tipoItem: TipoItemEnum.VIDRO,
+        tipoItem: TipoItemEnum.CHAPARIA,
         localizacao: 'Paulista',
         unidadeItem: UnidadeItemEnum.METROQUADRADO,
         quantidade: 10,
