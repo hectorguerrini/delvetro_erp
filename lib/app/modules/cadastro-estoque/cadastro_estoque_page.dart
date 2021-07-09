@@ -3,6 +3,7 @@ import 'package:delvetro_erp/app/shared/widgets/drop_down_field_widget.dart';
 import 'package:delvetro_erp/app/shared/widgets/elevated_button_padrao_widget.dart';
 import 'package:delvetro_erp/app/shared/widgets/text_form_field_padrao_widget.dart';
 import 'package:delvetro_erp/app/shared/widgets/text_form_field_pequeno_widget.dart';
+import 'package:delvetro_erp/app/shared/widgets/type_ahead_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -63,9 +64,9 @@ class _CadastroEstoquePageState
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        TextFormFieldPadraoWidget(
-                          titulo: 'Descrição *',
-                          onChanged: controller.setDescricao,
+                        TypeAheadFieldWidget(
+                          titulo: 'Descricao',
+                          list: controller.getListaDescricao(),
                           isRequired: true,
                         ),
                         DropDownFieldWidget(

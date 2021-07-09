@@ -16,7 +16,29 @@ class CadastroEstoqueRepository implements ICadastroEstoqueRepository {
         estoqueMinimo: 8,
         estoqueMaximo: 200,
         espessura: 3.12,
-        custo: 3.8)
+        custo: 3.8),
+    ItensEstoqueModel(
+        idEstoque: 1,
+        descricao: 'Painel',
+        tipoItem: TipoItemEnum.CHAPARIA,
+        localizacao: 'Paulista',
+        unidadeItem: UnidadeItemEnum.METROQUADRADO,
+        quantidade: 10,
+        estoqueMinimo: 8,
+        estoqueMaximo: 200,
+        espessura: 3.12,
+        custo: 3.8),
+    ItensEstoqueModel(
+        idEstoque: 1,
+        descricao: 'Ferramentas',
+        tipoItem: TipoItemEnum.CHAPARIA,
+        localizacao: 'Paulista',
+        unidadeItem: UnidadeItemEnum.METROQUADRADO,
+        quantidade: 10,
+        estoqueMinimo: 8,
+        estoqueMaximo: 200,
+        espessura: 3.12,
+        custo: 3.8),
   ];
 
   @override

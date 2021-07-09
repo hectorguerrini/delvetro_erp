@@ -14,6 +14,7 @@ abstract class CadastroEstoqueControllerBase with Store {
 
   CadastroEstoqueControllerBase(this.repository) {
     getListaItens();
+    getListaDescricao();
   }
 
   @observable
@@ -21,6 +22,18 @@ abstract class CadastroEstoqueControllerBase with Store {
 
   @observable
   List<ItensEstoqueModel> listaItensEstoque = [];
+
+  @observable
+  List<String> listaDescricao = [];
+
+  @action
+  List<String> getListaDescricao() {
+    var list = <String>[];
+    for (var i = 0; i < listaItensEstoque.length; i++) {
+      list.add(listaItensEstoque[i].descricao);
+    }
+    return list;
+  }
 
   @action
   void setDescricao(String value) {
