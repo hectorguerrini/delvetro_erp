@@ -14,6 +14,7 @@ void main() {
       estoqueMinimo: 5,
       localizacao: 'Avenida Padre Arlindo Vieira',
       quantidade: 10);
+
   test('[TEST] - getListaItensEstoque', () {
     expect(cadastroEstoqueRepository.listaItensEstoque.length, 1);
   });

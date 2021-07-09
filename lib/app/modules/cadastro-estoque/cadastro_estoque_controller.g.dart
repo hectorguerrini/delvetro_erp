@@ -102,7 +102,7 @@ mixin _$CadastroEstoqueController on CadastroEstoqueControllerBase, Store {
   }
 
   @override
-  void setUnidade(UnidadeItemEnum value) {
+  void setUnidade(UnidadeItemEnum? value) {
     final _$actionInfo = _$CadastroEstoqueControllerBaseActionController
         .startAction(name: 'CadastroEstoqueControllerBase.setUnidade');
     try {

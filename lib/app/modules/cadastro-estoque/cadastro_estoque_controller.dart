@@ -38,7 +38,7 @@ abstract class CadastroEstoqueControllerBase with Store {
   }
 
   @action
-  void setUnidade(UnidadeItemEnum value) {
+  void setUnidade(UnidadeItemEnum? value) {
     itensEstoque = itensEstoque.copyWith(unidadeItem: value);
   }
 

@@ -5,14 +5,14 @@ class TextFormFieldPadraoWidget extends StatelessWidget {
   final String titulo;
   final TextEditingController? controller;
   final void Function(String value)? onChanged;
-  final bool fieldRequired;
+  final bool isRequired;
   final bool isNumber;
   const TextFormFieldPadraoWidget(
       {Key? key,
       required this.titulo,
       this.controller,
       this.onChanged,
-      this.fieldRequired = false,
+      this.isRequired = false,
       this.isNumber = false})
       : super(key: key);
 
@@ -22,7 +22,7 @@ class TextFormFieldPadraoWidget extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.25,
       child: TextFormField(
         validator: (value) {
-          if (fieldRequired && (value == null || value.isEmpty)) {
+          if (isRequired && (value == null || value.isEmpty)) {
             return 'Este campo é obrigatório';
           }
           return null;

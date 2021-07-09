@@ -1,4 +1,6 @@
 import 'package:delvetro_erp/app/modules/cadastro-estoque/cadastro_estoque_controller.dart';
+import 'package:delvetro_erp/app/shared/widgets/drop_down_field_widget.dart';
+import 'package:delvetro_erp/app/shared/widgets/elevated_button_padrao_widget.dart';
 import 'package:delvetro_erp/app/shared/widgets/text_form_field_padrao_widget.dart';
 import 'package:delvetro_erp/app/shared/widgets/text_form_field_pequeno_widget.dart';
 import 'package:flutter/material.dart';
@@ -40,9 +42,21 @@ class _CadastroEstoquePageState
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Cadastro de Estoque',
-                    style: TextStyle(fontSize: 36),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Cadastro de Estoque',
+                          style: TextStyle(fontSize: 36),
+                        ),
+                        Text(
+                          '* Campos obrigatórios',
+                          style: TextStyle(fontSize: 20),
+                        )
+                      ],
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16),
@@ -50,8 +64,14 @@ class _CadastroEstoquePageState
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         TextFormFieldPadraoWidget(
-                          titulo: 'Descrição',
+                          titulo: 'Descrição *',
                           onChanged: controller.setDescricao,
+                          isRequired: true,
+                        ),
+                        DropDownFieldWidget(
+                          titulo: 'Tipo *',
+                          tipoItemOnChanged: controller.setTipoItem,
+                          isRequired: true,
                         ),
                         TextFormFieldPadraoWidget(
                           titulo: 'Localizacao',
@@ -65,6 +85,11 @@ class _CadastroEstoquePageState
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        DropDownFieldWidget(
+                          titulo: 'Unidade *',
+                          unidadeItemOnChanged: controller.setUnidade,
+                          isRequired: true,
+                        ),
                         TextFormFieldPequenoWidget(
                           titulo: 'Quantidade',
                           onChanged: (value) {
@@ -73,24 +98,50 @@ class _CadastroEstoquePageState
                           },
                         ),
                         TextFormFieldPequenoWidget(
-                          titulo: 'Estoque Mínimo',
+                          titulo: 'Estoque Mínimo *',
                           onChanged: (value) {
                             var valor = int.parse(value);
                             controller.setEstoqueMinimo(valor);
                           },
+                          isRequired: true,
                         ),
                         TextFormFieldPequenoWidget(
-                          titulo: 'Estoque Máximo',
+                          titulo: 'Estoque Máximo *',
                           onChanged: (value) {
                             var valor = int.parse(value);
                             controller.setEstoqueMaximo(valor);
                           },
+                          isRequired: true,
                         ),
                         TextFormFieldPequenoWidget(
                           titulo: 'Custo',
                           onChanged: (value) {
                             var valor = double.parse(value);
                             controller.setCusto(valor);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 32),
+                          child: ElevatedButtonPadraoWidget(
+                            icon: Icons.check,
+                            titulo: 'Salvar',
+                            onPressed: () {
+                              controller.salvarItem();
+                            },
+                          ),
+                        ),
+                        ElevatedButtonPadraoWidget(
+                          icon: Icons.replay_outlined,
+                          titulo: 'Limpar',
+                          onPressed: () {
+                            controller.limparTexto();
                           },
                         ),
                       ],
