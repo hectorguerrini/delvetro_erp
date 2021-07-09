@@ -31,7 +31,6 @@ class TextFormFieldPequenoWidget extends StatelessWidget {
         inputFormatters: isNumber
             ? <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly]
             : null,
-        controller: controller,
         onChanged: onChanged,
         style: TextStyle(
           fontSize: 24,

@@ -65,9 +65,12 @@ class _CadastroEstoquePageState
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         TypeAheadFieldWidget(
-                          titulo: 'Descricao',
+                          titulo: 'Descricao *',
                           list: controller.getListaDescricao(),
                           isRequired: true,
+                          onChanged: (value) {
+                            controller.setDescricao(value);
+                          },
                         ),
                         DropDownFieldWidget(
                           titulo: 'Tipo *',
@@ -97,6 +100,7 @@ class _CadastroEstoquePageState
                             var valor = int.parse(value);
                             controller.setQuantidade(valor);
                           },
+                          isNumber: true,
                         ),
                         TextFormFieldPequenoWidget(
                           titulo: 'Estoque Mínimo *',
@@ -105,6 +109,7 @@ class _CadastroEstoquePageState
                             controller.setEstoqueMinimo(valor);
                           },
                           isRequired: true,
+                          isNumber: true,
                         ),
                         TextFormFieldPequenoWidget(
                           titulo: 'Estoque Máximo *',
@@ -113,6 +118,7 @@ class _CadastroEstoquePageState
                             controller.setEstoqueMaximo(valor);
                           },
                           isRequired: true,
+                          isNumber: true,
                         ),
                         TextFormFieldPequenoWidget(
                           titulo: 'Custo',

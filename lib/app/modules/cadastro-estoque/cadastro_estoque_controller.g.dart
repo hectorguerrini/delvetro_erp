@@ -41,6 +41,22 @@ mixin _$CadastroEstoqueController on CadastroEstoqueControllerBase, Store {
     });
   }
 
+  final _$listaDescricaoAtom =
+      Atom(name: 'CadastroEstoqueControllerBase.listaDescricao');
+
+  @override
+  List<String> get listaDescricao {
+    _$listaDescricaoAtom.reportRead();
+    return super.listaDescricao;
+  }
+
+  @override
+  set listaDescricao(List<String> value) {
+    _$listaDescricaoAtom.reportWrite(value, super.listaDescricao, () {
+      super.listaDescricao = value;
+    });
+  }
+
   final _$getListaItensAsyncAction =
       AsyncAction('CadastroEstoqueControllerBase.getListaItens');
 
@@ -67,6 +83,17 @@ mixin _$CadastroEstoqueController on CadastroEstoqueControllerBase, Store {
 
   final _$CadastroEstoqueControllerBaseActionController =
       ActionController(name: 'CadastroEstoqueControllerBase');
+
+  @override
+  List<String> getListaDescricao() {
+    final _$actionInfo = _$CadastroEstoqueControllerBaseActionController
+        .startAction(name: 'CadastroEstoqueControllerBase.getListaDescricao');
+    try {
+      return super.getListaDescricao();
+    } finally {
+      _$CadastroEstoqueControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void setDescricao(String value) {
@@ -171,7 +198,8 @@ mixin _$CadastroEstoqueController on CadastroEstoqueControllerBase, Store {
   String toString() {
     return '''
 itensEstoque: ${itensEstoque},
-listaItensEstoque: ${listaItensEstoque}
+listaItensEstoque: ${listaItensEstoque},
+listaDescricao: ${listaDescricao}
     ''';
   }
 }

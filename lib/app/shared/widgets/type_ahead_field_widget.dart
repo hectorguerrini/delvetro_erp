@@ -5,23 +5,28 @@ class TypeAheadFieldWidget extends StatelessWidget {
   final String titulo;
   final bool isRequired;
   final List<String> list;
-  final TextEditingController? controller;
+
+  final void Function(String value) onChanged;
   const TypeAheadFieldWidget(
       {Key? key,
       required this.titulo,
       this.isRequired = false,
-      this.controller,
-      required this.list})
+      required this.list,
+      required this.onChanged})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var controller = TextEditingController();
     return Container(
       width: MediaQuery.of(context).size.width * 0.25,
       child: TypeAheadField(
         textFieldConfiguration: TextFieldConfiguration(
           controller: controller,
-          style: DefaultTextStyle.of(context).style.copyWith(),
+          onChanged: onChanged,
+          style: TextStyle(
+            fontSize: 24,
+          ),
           decoration: InputDecoration(
             labelText: titulo,
             labelStyle: TextStyle(
@@ -32,16 +37,28 @@ class TypeAheadFieldWidget extends StatelessWidget {
           ),
         ),
         suggestionsCallback: (pattern) {
-          return list.where((value) =>
-              value.toLowerCase().startsWith(pattern.toString().toLowerCase()));
+          return list
+              .where((value) => value
+                  .toLowerCase()
+                  .startsWith(pattern.toString().toLowerCase()))
+              .take(10);
         },
         itemBuilder: (context, suggestion) {
           return ListTile(
-            title: Text(suggestion.toString()),
+            title: Text(
+              suggestion.toString(),
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            ),
           );
         },
+        hideOnLoading: true,
+        hideOnEmpty: true,
+        hideOnError: true,
         onSuggestionSelected: (suggestion) {
-          controller!.text = suggestion.toString();
+          onChanged;
+          controller.text = suggestion.toString();
         },
       ),
     );
