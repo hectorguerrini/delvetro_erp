@@ -4,9 +4,9 @@ import 'package:delvetro_erp/app/modules/cadastro-estoque/repositories/cadastro_
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  var cadastroEstoqueRepository = CadastroEstoqueRepository();
+  late CadastroEstoqueRepository cadastroEstoqueRepository;
   var itemAdicional = ItensEstoqueModel(
-      idEstoque: 1,
+      idEstoque: 8,
       custo: 10.9,
       descricao: 'Vidro',
       espessura: 0,
@@ -15,8 +15,12 @@ void main() {
       localizacao: 'Avenida Padre Arlindo Vieira',
       quantidade: 10);
 
+  setUpAll(() {
+    cadastroEstoqueRepository = CadastroEstoqueRepository();
+  });
+
   test('[TEST] - getListaItensEstoque', () {
-    expect(cadastroEstoqueRepository.listaItensEstoque.length, 1);
+    expect(cadastroEstoqueRepository.listaItensEstoque.isNotEmpty, true);
   });
 
   test('[TEST] - salvarItem', () async {
