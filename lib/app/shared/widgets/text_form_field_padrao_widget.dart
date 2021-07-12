@@ -3,21 +3,22 @@ import 'package:flutter/services.dart';
 
 class TextFormFieldPadraoWidget extends StatelessWidget {
   final String titulo;
-  final TextEditingController? controller;
   final void Function(String value)? onChanged;
   final bool isRequired;
+  final String? value;
   final bool isNumber;
   const TextFormFieldPadraoWidget(
       {Key? key,
       required this.titulo,
-      this.controller,
       this.onChanged,
       this.isRequired = false,
-      this.isNumber = false})
+      this.isNumber = false,
+      this.value})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var controller = TextEditingController(text: value);
     return Container(
       width: MediaQuery.of(context).size.width * 0.25,
       child: TextFormField(
@@ -27,11 +28,11 @@ class TextFormFieldPadraoWidget extends StatelessWidget {
           }
           return null;
         },
+        controller: controller,
         keyboardType: isNumber ? TextInputType.number : null,
         inputFormatters: isNumber
             ? <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly]
             : null,
-        controller: controller,
         onChanged: onChanged,
         style: TextStyle(
           fontSize: 24,

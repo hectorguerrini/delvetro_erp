@@ -18,7 +18,7 @@ class CadastroEstoqueRepository implements ICadastroEstoqueRepository {
         espessura: 3.12,
         custo: 3.8),
     ItensEstoqueModel(
-        idEstoque: 1,
+        idEstoque: 2,
         descricao: 'Painel',
         tipoItem: TipoItemEnum.CHAPARIA,
         localizacao: 'Paulista',
@@ -29,7 +29,7 @@ class CadastroEstoqueRepository implements ICadastroEstoqueRepository {
         espessura: 3.12,
         custo: 3.8),
     ItensEstoqueModel(
-        idEstoque: 1,
+        idEstoque: 3,
         descricao: 'Ferramentas',
         tipoItem: TipoItemEnum.CHAPARIA,
         localizacao: 'Paulista',
@@ -40,7 +40,7 @@ class CadastroEstoqueRepository implements ICadastroEstoqueRepository {
         espessura: 3.12,
         custo: 3.8),
     ItensEstoqueModel(
-        idEstoque: 1,
+        idEstoque: 4,
         descricao: 'Ferramentas',
         tipoItem: TipoItemEnum.CHAPARIA,
         localizacao: 'Paulista',
@@ -51,7 +51,7 @@ class CadastroEstoqueRepository implements ICadastroEstoqueRepository {
         espessura: 3.12,
         custo: 3.8),
     ItensEstoqueModel(
-        idEstoque: 1,
+        idEstoque: 5,
         descricao: 'Ferramentas',
         tipoItem: TipoItemEnum.CHAPARIA,
         localizacao: 'Paulista',
@@ -62,7 +62,7 @@ class CadastroEstoqueRepository implements ICadastroEstoqueRepository {
         espessura: 3.12,
         custo: 3.8),
     ItensEstoqueModel(
-        idEstoque: 1,
+        idEstoque: 6,
         descricao: 'Ferramentas',
         tipoItem: TipoItemEnum.CHAPARIA,
         localizacao: 'Paulista',
@@ -73,7 +73,7 @@ class CadastroEstoqueRepository implements ICadastroEstoqueRepository {
         espessura: 3.12,
         custo: 3.8),
     ItensEstoqueModel(
-        idEstoque: 1,
+        idEstoque: 7,
         descricao: 'Ferramentas',
         tipoItem: TipoItemEnum.CHAPARIA,
         localizacao: 'Paulista',

@@ -80,6 +80,7 @@ class _CadastroEstoquePageState
                         TextFormFieldPadraoWidget(
                           titulo: 'Localizacao',
                           onChanged: controller.setLocalizacao,
+                          value: controller.itensEstoque.localizacao,
                         ),
                       ],
                     ),
@@ -101,6 +102,7 @@ class _CadastroEstoquePageState
                             controller.setQuantidade(valor);
                           },
                           isNumber: true,
+                          value: controller.itensEstoque.quantidade.toString(),
                         ),
                         TextFormFieldPequenoWidget(
                           titulo: 'Estoque Mínimo *',
@@ -110,6 +112,8 @@ class _CadastroEstoquePageState
                           },
                           isRequired: true,
                           isNumber: true,
+                          value:
+                              controller.itensEstoque.estoqueMinimo.toString(),
                         ),
                         TextFormFieldPequenoWidget(
                           titulo: 'Estoque Máximo *',
@@ -119,6 +123,8 @@ class _CadastroEstoquePageState
                           },
                           isRequired: true,
                           isNumber: true,
+                          value:
+                              controller.itensEstoque.estoqueMaximo.toString(),
                         ),
                         TextFormFieldPequenoWidget(
                           titulo: 'Custo',
@@ -126,6 +132,7 @@ class _CadastroEstoquePageState
                             var valor = double.parse(value);
                             controller.setCusto(valor);
                           },
+                          value: controller.itensEstoque.custo.toString(),
                         ),
                       ],
                     ),

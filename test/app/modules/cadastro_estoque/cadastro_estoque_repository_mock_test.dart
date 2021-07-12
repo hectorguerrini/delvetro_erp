@@ -21,12 +21,17 @@ void main() {
 
   test('[TEST] - salvarItem', () async {
     await cadastroEstoqueRepository.salvarItem(itemAdicional);
-    expect(cadastroEstoqueRepository.listaItensEstoque.length, 2);
+    var teste = cadastroEstoqueRepository.listaItensEstoque
+        .where((element) => element == itemAdicional)
+        .isNotEmpty;
+    expect(teste, true);
   });
 
   test('[TEST] - atualizarItem', () async {
     await cadastroEstoqueRepository.atualizarItem(itemAdicional);
-    expect(cadastroEstoqueRepository.listaItensEstoque[0].custo, 10.9);
-    expect(cadastroEstoqueRepository.listaItensEstoque.length, 1);
+    var value = cadastroEstoqueRepository.listaItensEstoque
+        .where((element) => element.idEstoque == itemAdicional.idEstoque)
+        .single;
+    expect(value.custo, 10.9);
   });
 }

@@ -3,21 +3,22 @@ import 'package:flutter/services.dart';
 
 class TextFormFieldPequenoWidget extends StatelessWidget {
   final String titulo;
-  final TextEditingController? controller;
   final void Function(String value)? onChanged;
   final bool isRequired;
   final bool isNumber;
+  final String? value;
   const TextFormFieldPequenoWidget(
       {Key? key,
       required this.titulo,
-      this.controller,
       this.onChanged,
       this.isRequired = false,
-      this.isNumber = false})
+      this.isNumber = false,
+      this.value})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var controller = TextEditingController(text: value);
     return Container(
       width: MediaQuery.of(context).size.width * 0.13,
       child: TextFormField(
