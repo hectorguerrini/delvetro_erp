@@ -1,1 +1,1 @@
-enum LojistaEnum { Sim, Nao }
+enum LojistaEnum { SIM, NAO }

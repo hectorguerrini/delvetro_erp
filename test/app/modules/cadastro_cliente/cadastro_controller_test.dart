@@ -20,7 +20,7 @@ void main() {
         cpf: 'cpf',
         nomeContato: 'nomeContato',
         rgContato: 'rgContato',
-        lojista: LojistaEnum.Sim,
+        lojista: LojistaEnum.SIM,
         cep: 'cep',
         endereco: 'endereco',
         numero: 'numero',
@@ -28,7 +28,8 @@ void main() {
         bairro: 'bairro',
         cidade: 'cidade',
         estado: 'estado',
-        idCliente: null);
+        idCliente: null,
+        email: '');
     controller.cliente = clienteTeste;
     when(repository.salvarCliente(clienteTeste)).thenAnswer((_) async {});
     await controller.salvarCliente();
@@ -43,7 +44,7 @@ void main() {
         cpf: 'cpf',
         nomeContato: 'nomeContato',
         rgContato: 'rgContato',
-        lojista: LojistaEnum.Sim,
+        lojista: LojistaEnum.SIM,
         cep: 'cep',
         endereco: 'endereco',
         numero: 'numero',
@@ -51,7 +52,8 @@ void main() {
         bairro: 'bairro',
         cidade: 'cidade',
         estado: 'estado',
-        idCliente: 2);
+        idCliente: 2,
+        email: '');
     controller.cliente = clienteTeste;
     when(repository.alterarCliente(clienteTeste)).thenAnswer((_) async {});
     await controller.salvarCliente();
@@ -66,7 +68,7 @@ void main() {
         cpf: 'cpf',
         nomeContato: 'nomeContato',
         rgContato: 'rgContato',
-        lojista: LojistaEnum.Sim,
+        lojista: LojistaEnum.SIM,
         cep: 'cep',
         endereco: 'endereco',
         numero: 'numero',
@@ -74,7 +76,8 @@ void main() {
         bairro: 'bairro',
         cidade: 'cidade',
         estado: 'estado',
-        idCliente: 2);
+        idCliente: 2,
+        email: '');
     controller.cliente = clienteTeste;
     await controller.limparTexto();
     expect(controller.cliente.idCliente, null);

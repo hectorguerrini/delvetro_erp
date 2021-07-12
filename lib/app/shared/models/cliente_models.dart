@@ -16,6 +16,7 @@ class ClienteModel {
   final String estado;
   final int? idCliente;
   final List<String> telefones;
+  final String email;
 
   ClienteModel({
     required this.telefones,
@@ -24,6 +25,7 @@ class ClienteModel {
     required this.cpf,
     required this.nomeContato,
     required this.rgContato,
+    required this.email,
     this.lojista,
     required this.cep,
     required this.endereco,
@@ -35,22 +37,45 @@ class ClienteModel {
     this.idCliente,
   });
 
-  ClienteModel copyWith(
-      {List<String>? telefones,
-      String? nome,
-      String? razaoSocial,
-      String? cpf,
-      String? nomeContato,
-      String? rgContato,
-      LojistaEnum? lojista,
-      String? cep,
-      String? endereco,
-      String? numero,
-      String? complemento,
-      String? bairro,
-      String? cidade,
-      String? estado,
-      int? idCliente}) {
+  factory ClienteModel.newInstance() {
+    return ClienteModel(
+      telefones: [],
+      nome: '',
+      razaoSocial: '',
+      cpf: '',
+      nomeContato: '',
+      rgContato: '',
+      lojista: null,
+      cep: '',
+      endereco: '',
+      numero: '',
+      complemento: '',
+      bairro: '',
+      cidade: '',
+      estado: '',
+      idCliente: null,
+      email: '',
+    );
+  }
+
+  ClienteModel copyWith({
+    List<String>? telefones,
+    String? nome,
+    String? razaoSocial,
+    String? cpf,
+    String? nomeContato,
+    String? rgContato,
+    LojistaEnum? lojista,
+    String? cep,
+    String? endereco,
+    String? numero,
+    String? complemento,
+    String? bairro,
+    String? cidade,
+    String? estado,
+    int? idCliente,
+    String? email,
+  }) {
     return ClienteModel(
       telefones: telefones ?? this.telefones,
       nome: nome ?? this.nome,
@@ -67,6 +92,7 @@ class ClienteModel {
       cidade: cidade ?? this.cidade,
       estado: estado ?? this.estado,
       idCliente: idCliente ?? this.idCliente,
+      email: email ?? this.email,
     );
   }
 }

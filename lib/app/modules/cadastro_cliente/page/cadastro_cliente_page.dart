@@ -31,13 +31,25 @@ class CadastroClientePageState extends State<CadastroClientePage> {
             ),
             child: Column(
               children: <Widget>[
-                Container(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    'Cadastro de Clientes',
-                    style: TextStyle(fontSize: 36),
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      'Cadastro de Clientes',
+                      style: TextStyle(fontSize: 36),
+                    ),
+                    Text(
+                      '* Campos Obrigatórios',
+                      style: TextStyle(fontSize: 20, color: Colors.red),
+                    ),
+                  ],
                 ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  child: Row(
+                    children: <Widget>[],
+                  ),
+                )
               ],
             ),
           ),

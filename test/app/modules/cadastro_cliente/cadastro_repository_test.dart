@@ -12,7 +12,7 @@ void main() {
         cpf: 'cpf',
         nomeContato: 'nomeContato',
         rgContato: 'rgContato',
-        lojista: LojistaEnum.Sim,
+        lojista: LojistaEnum.SIM,
         cep: 'cep',
         endereco: 'endereco',
         numero: 'numero',
@@ -20,7 +20,8 @@ void main() {
         bairro: 'bairro',
         cidade: 'sp',
         estado: 'estado',
-        idCliente: 1);
+        idCliente: 1,
+        email: '');
 
     var repository = ClienteCadastroRepository();
     await repository.alterarCliente(cliente);
@@ -35,7 +36,7 @@ void main() {
         cpf: 'cpf',
         nomeContato: 'nomeContato',
         rgContato: 'rgContato',
-        lojista: LojistaEnum.Sim,
+        lojista: LojistaEnum.SIM,
         cep: 'cep',
         endereco: 'endereco',
         numero: 'numero',
@@ -43,7 +44,8 @@ void main() {
         bairro: 'bairro',
         cidade: 'sp',
         estado: 'estado',
-        idCliente: 3);
+        idCliente: 3,
+        email: '');
 
     var repository = ClienteCadastroRepository();
     await repository.salvarCliente(cliente);

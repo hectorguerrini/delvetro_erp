@@ -7,6 +7,9 @@ import 'package:delvetro_erp/app/shared/widgets/type_ahead_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import 'enumerate/tipo_item_enum.dart';
+import 'enumerate/unidade_item_enum.dart';
+
 class CadastroEstoquePage extends StatefulWidget {
   const CadastroEstoquePage({Key? key}) : super(key: key);
 
@@ -72,10 +75,16 @@ class _CadastroEstoquePageState
                             controller.setDescricao(value);
                           },
                         ),
-                        DropDownFieldWidget(
+                        DropDownFieldWidget<TipoItemEnum>(
                           titulo: 'Tipo *',
-                          tipoItemOnChanged: controller.setTipoItem,
+                          onChanged: controller.setTipoItem,
                           isRequired: true,
+                          items: TipoItemEnum.values
+                              .map((TipoItemEnum tipoItemEnum) {
+                            return DropdownMenuItem<TipoItemEnum>(
+                                value: tipoItemEnum,
+                                child: Text(tipoItemEnum.name));
+                          }).toList(),
                         ),
                         TextFormFieldPadraoWidget(
                           titulo: 'Localizacao',
@@ -90,10 +99,16 @@ class _CadastroEstoquePageState
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        DropDownFieldWidget(
+                        DropDownFieldWidget<UnidadeItemEnum>(
                           titulo: 'Unidade *',
-                          unidadeItemOnChanged: controller.setUnidade,
+                          onChanged: controller.setUnidade,
                           isRequired: true,
+                          items: UnidadeItemEnum.values
+                              .map((UnidadeItemEnum unidadeItemEnum) {
+                            return DropdownMenuItem<UnidadeItemEnum>(
+                                value: unidadeItemEnum,
+                                child: Text(unidadeItemEnum.name));
+                          }).toList(),
                         ),
                         TextFormFieldPequenoWidget(
                           titulo: 'Quantidade',
