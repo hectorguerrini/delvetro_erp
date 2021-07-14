@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:delvetro_erp/app/modules/cadastro_cliente/enumerates/enum_lojista.dart';
 import 'package:delvetro_erp/app/modules/cadastro_cliente/repositories/cadastro_cliente_repository_interface.dart';
 import 'package:delvetro_erp/app/shared/models/cliente_models.dart';
@@ -19,7 +17,38 @@ abstract class _CadastroStoreBase with Store {
   ClienteModel cliente = ClienteModel.newInstance();
 
   @observable
-  List<ClienteModel> listaClientes = [];
+  List<ClienteModel> listaClientes = [
+    ClienteModel(
+        telefones: [],
+        nome: 'João',
+        razaoSocial: 'razaoSocial',
+        cpf: 'cpf',
+        nomeContato: 'nomeContato',
+        rgContato: 'rgContato',
+        email: 'email',
+        cep: 'cep',
+        endereco: 'endereco',
+        numero: 'numero',
+        complemento: 'complemento',
+        bairro: 'bairro',
+        cidade: 'cidade',
+        estado: 'estado'),
+    ClienteModel(
+        telefones: [],
+        nome: 'Teste',
+        razaoSocial: 'razaoSocial',
+        cpf: 'cpf',
+        nomeContato: 'nomeContato',
+        rgContato: 'rgContato',
+        email: 'email',
+        cep: 'cep',
+        endereco: 'endereco',
+        numero: 'numero',
+        complemento: 'complemento',
+        bairro: 'bairro',
+        cidade: 'cidade',
+        estado: 'estado'),
+  ];
 
   @observable
   List<String> listaNomeCliente = [];
