@@ -3,8 +3,7 @@ import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/tipo_item_en
 import 'package:delvetro_erp/app/shared/enumerate/unidade_item_enum.dart';
 import 'package:delvetro_erp/app/shared/widgets/drop_down_field_widget.dart';
 import 'package:delvetro_erp/app/shared/widgets/elevated_button_padrao_widget.dart';
-import 'package:delvetro_erp/app/shared/widgets/text_form_field_padrao_widget.dart';
-import 'package:delvetro_erp/app/shared/widgets/text_form_field_pequeno_widget.dart';
+import 'package:delvetro_erp/app/shared/widgets/text_form_field_custom_widget.dart';
 import 'package:delvetro_erp/app/shared/widgets/type_ahead_field_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -77,6 +76,7 @@ class _CadastroEstoquePageState
                         ),
                         DropDownFieldWidget(
                           titulo: 'Tipo *',
+                          size: MediaQuery.of(context).size.width * 0.17,
                           items: TipoItemEnum.values.map((TipoItemEnum value) {
                             return DropdownMenuItem<TipoItemEnum>(
                               value: value,
@@ -86,8 +86,9 @@ class _CadastroEstoquePageState
                           isRequired: true,
                           onChanged: controller.setTipoItem,
                         ),
-                        TextFormFieldPadraoWidget(
+                        TextFormFieldCustomWidget(
                           titulo: 'Localizacao',
+                          size: MediaQuery.of(context).size.width * 0.25,
                           onChanged: controller.setLocalizacao,
                           value: controller.itensEstoque.localizacao,
                         ),
@@ -100,6 +101,7 @@ class _CadastroEstoquePageState
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         DropDownFieldWidget(
+                          size: MediaQuery.of(context).size.width * 0.17,
                           titulo: 'Unidade *',
                           isRequired: true,
                           items: UnidadeItemEnum.values
@@ -111,8 +113,9 @@ class _CadastroEstoquePageState
                           }).toList(),
                           onChanged: controller.setUnidade,
                         ),
-                        TextFormFieldPequenoWidget(
+                        TextFormFieldCustomWidget(
                           titulo: 'Quantidade',
+                          size: MediaQuery.of(context).size.width * 0.11,
                           onChanged: (value) {
                             var valor = int.parse(value);
                             controller.setQuantidade(valor);
@@ -120,8 +123,9 @@ class _CadastroEstoquePageState
                           isNumber: true,
                           value: controller.itensEstoque.quantidade.toString(),
                         ),
-                        TextFormFieldPequenoWidget(
+                        TextFormFieldCustomWidget(
                           titulo: 'Estoque Mínimo *',
+                          size: MediaQuery.of(context).size.width * 0.11,
                           onChanged: (value) {
                             var valor = int.parse(value);
                             controller.setEstoqueMinimo(valor);
@@ -131,8 +135,9 @@ class _CadastroEstoquePageState
                           value:
                               controller.itensEstoque.estoqueMinimo.toString(),
                         ),
-                        TextFormFieldPequenoWidget(
+                        TextFormFieldCustomWidget(
                           titulo: 'Estoque Máximo *',
+                          size: MediaQuery.of(context).size.width * 0.11,
                           onChanged: (value) {
                             var valor = int.parse(value);
                             controller.setEstoqueMaximo(valor);
@@ -142,8 +147,9 @@ class _CadastroEstoquePageState
                           value:
                               controller.itensEstoque.estoqueMaximo.toString(),
                         ),
-                        TextFormFieldPequenoWidget(
+                        TextFormFieldCustomWidget(
                           titulo: 'Custo',
+                          size: MediaQuery.of(context).size.width * 0.11,
                           onChanged: (value) {
                             var valor = double.parse(value);
                             controller.setCusto(valor);

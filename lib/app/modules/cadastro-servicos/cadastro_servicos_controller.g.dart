@@ -42,6 +42,22 @@ mixin _$CadastroServicosController on CadastroServicosControllerBase, Store {
     });
   }
 
+  final _$listaDescricaoAtom =
+      Atom(name: 'CadastroServicosControllerBase.listaDescricao');
+
+  @override
+  List<String> get listaDescricao {
+    _$listaDescricaoAtom.reportRead();
+    return super.listaDescricao;
+  }
+
+  @override
+  set listaDescricao(List<String> value) {
+    _$listaDescricaoAtom.reportWrite(value, super.listaDescricao, () {
+      super.listaDescricao = value;
+    });
+  }
+
   final _$getListaServicosAsyncAction =
       AsyncAction('CadastroServicosControllerBase.getListaServicos');
 
@@ -70,7 +86,18 @@ mixin _$CadastroServicosController on CadastroServicosControllerBase, Store {
       ActionController(name: 'CadastroServicosControllerBase');
 
   @override
-  void setTipoServicoEnum(TipoServicoEnum value) {
+  List<String> getListaDescricao() {
+    final _$actionInfo = _$CadastroServicosControllerBaseActionController
+        .startAction(name: 'CadastroServicosControllerBase.getListaDescricao');
+    try {
+      return super.getListaDescricao();
+    } finally {
+      _$CadastroServicosControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setTipoServicoEnum(TipoServicoEnum? value) {
     final _$actionInfo = _$CadastroServicosControllerBaseActionController
         .startAction(name: 'CadastroServicosControllerBase.setTipoServicoEnum');
     try {
@@ -81,7 +108,7 @@ mixin _$CadastroServicosController on CadastroServicosControllerBase, Store {
   }
 
   @override
-  void setUnidadeCusto(UnidadeItemEnum value) {
+  void setUnidadeCusto(UnidadeItemEnum? value) {
     final _$actionInfo = _$CadastroServicosControllerBaseActionController
         .startAction(name: 'CadastroServicosControllerBase.setUnidadeCusto');
     try {
@@ -136,7 +163,7 @@ mixin _$CadastroServicosController on CadastroServicosControllerBase, Store {
   }
 
   @override
-  void setExterno(String value) {
+  void setExterno(TipoExternoEnum? value) {
     final _$actionInfo = _$CadastroServicosControllerBaseActionController
         .startAction(name: 'CadastroServicosControllerBase.setExterno');
     try {
@@ -150,7 +177,8 @@ mixin _$CadastroServicosController on CadastroServicosControllerBase, Store {
   String toString() {
     return '''
 listaServicosEstoque: ${listaServicosEstoque},
-servicosEstoque: ${servicosEstoque}
+servicosEstoque: ${servicosEstoque},
+listaDescricao: ${listaDescricao}
     ''';
   }
 }

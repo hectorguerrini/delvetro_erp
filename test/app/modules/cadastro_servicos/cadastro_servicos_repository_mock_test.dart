@@ -1,3 +1,4 @@
+import 'package:delvetro_erp/app/modules/cadastro-servicos/enumerate/tipo_externo_enum.dart';
 import 'package:delvetro_erp/app/modules/cadastro-servicos/enumerate/tipo_servico_enum.dart';
 import 'package:delvetro_erp/app/modules/cadastro-servicos/repository/cadastro_servicos_repository.dart';
 import 'package:delvetro_erp/app/modules/cadastro-servicos/models/servicos_model.dart';
@@ -9,13 +10,13 @@ void main() {
   var servicoAdicional = ServicosModel(
       idBeneficiado: 10,
       idServico: 1,
-      observacao: 'Não',
-      prazo: '10',
+      observacao: 'Ocorreu tudo certo',
+      prazo: '10-12-2010',
       tipoServicoEnum: TipoServicoEnum.OUTROS,
       unidadeItemEnum: UnidadeItemEnum.LINEAR,
-      custo: 9.2,
-      descricao: 'sim',
-      externo: 'sim');
+      custo: 25,
+      descricao: 'Tudo certo',
+      externo: TipoExternoEnum.NAO);
 
   setUpAll(() {
     cadastroServicosRepository = CadastroServicosRepository();
@@ -38,6 +39,6 @@ void main() {
     var value = cadastroServicosRepository.listaServicos
         .where((element) => element.idServico == servicoAdicional.idServico)
         .single;
-    expect(value.custo, 9.2);
+    expect(value.custo, 25);
   });
 }

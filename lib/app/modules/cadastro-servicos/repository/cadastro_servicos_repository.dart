@@ -1,3 +1,4 @@
+import 'package:delvetro_erp/app/modules/cadastro-servicos/enumerate/tipo_externo_enum.dart';
 import 'package:delvetro_erp/app/modules/cadastro-servicos/enumerate/tipo_servico_enum.dart';
 import 'package:delvetro_erp/app/modules/cadastro-servicos/models/servicos_model.dart';
 import 'package:delvetro_erp/app/shared/enumerate/unidade_item_enum.dart';
@@ -14,8 +15,8 @@ class CadastroServicosRepository implements ICadastroServicosRepository {
       tipoServicoEnum: TipoServicoEnum.BISOTE,
       unidadeItemEnum: UnidadeItemEnum.LINEAR,
       custo: 10,
-      descricao: 'Sim',
-      externo: 'dale',
+      descricao: 'Teste1',
+      externo: TipoExternoEnum.NAO,
     ),
     ServicosModel(
       idBeneficiado: 2,
@@ -25,8 +26,8 @@ class CadastroServicosRepository implements ICadastroServicosRepository {
       tipoServicoEnum: TipoServicoEnum.CORTE,
       unidadeItemEnum: UnidadeItemEnum.UNITARIO,
       custo: 5,
-      descricao: 'Sim',
-      externo: 'dale',
+      descricao: 'Teste2',
+      externo: TipoExternoEnum.NAO,
     ),
     ServicosModel(
       idBeneficiado: 3,
@@ -36,8 +37,8 @@ class CadastroServicosRepository implements ICadastroServicosRepository {
       tipoServicoEnum: TipoServicoEnum.FURO,
       unidadeItemEnum: UnidadeItemEnum.METROQUADRADO,
       custo: 2,
-      descricao: 'Sim',
-      externo: 'dale',
+      descricao: 'Teste3',
+      externo: TipoExternoEnum.SIM,
     ),
   ];
 

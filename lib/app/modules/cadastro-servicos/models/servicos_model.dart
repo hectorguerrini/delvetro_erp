@@ -1,3 +1,4 @@
+import 'package:delvetro_erp/app/modules/cadastro-servicos/enumerate/tipo_externo_enum.dart';
 import 'package:delvetro_erp/app/modules/cadastro-servicos/enumerate/tipo_servico_enum.dart';
 import 'package:delvetro_erp/app/shared/enumerate/unidade_item_enum.dart';
 
@@ -10,7 +11,7 @@ class ServicosModel {
   final String? observacao;
   final int? idBeneficiado;
   final String descricao;
-  final String externo;
+  final TipoExternoEnum? externo;
 
   ServicosModel(
       {this.idServico,
@@ -21,7 +22,7 @@ class ServicosModel {
       this.observacao,
       this.idBeneficiado,
       required this.descricao,
-      required this.externo});
+      this.externo});
 
   factory ServicosModel.newInstance() {
     return ServicosModel(
@@ -33,7 +34,7 @@ class ServicosModel {
         unidadeItemEnum: null,
         custo: 0,
         descricao: '',
-        externo: '');
+        externo: TipoExternoEnum.NAO);
   }
 
   ServicosModel copyWith({
@@ -45,7 +46,7 @@ class ServicosModel {
     String? observacao,
     int? idBeneficiado,
     String? descricao,
-    String? externo,
+    TipoExternoEnum? externo,
   }) {
     return ServicosModel(
       idServico: idServico ?? this.idServico,

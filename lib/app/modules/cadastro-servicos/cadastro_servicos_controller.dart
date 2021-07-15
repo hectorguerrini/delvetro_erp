@@ -4,6 +4,8 @@ import 'package:delvetro_erp/app/modules/cadastro-servicos/repository/cadastro_s
 import 'package:delvetro_erp/app/shared/enumerate/unidade_item_enum.dart';
 import 'package:mobx/mobx.dart';
 
+import 'enumerate/tipo_externo_enum.dart';
+
 part 'cadastro_servicos_controller.g.dart';
 
 class CadastroServicosController = CadastroServicosControllerBase
@@ -21,6 +23,18 @@ abstract class CadastroServicosControllerBase with Store {
 
   @observable
   ServicosModel servicosEstoque = ServicosModel.newInstance();
+
+  @observable
+  List<String> listaDescricao = [];
+
+  @action
+  List<String> getListaDescricao() {
+    var list = <String>[];
+    for (var i = 0; i < listaServicosEstoque.length; i++) {
+      list.add(listaServicosEstoque[i].descricao);
+    }
+    return list;
+  }
 
   @action
   Future<void> getListaServicos() async {
@@ -42,12 +56,12 @@ abstract class CadastroServicosControllerBase with Store {
   }
 
   @action
-  void setTipoServicoEnum(TipoServicoEnum value) {
+  void setTipoServicoEnum(TipoServicoEnum? value) {
     servicosEstoque = servicosEstoque.copyWith(tipoServicoEnum: value);
   }
 
   @action
-  void setUnidadeCusto(UnidadeItemEnum value) {
+  void setUnidadeCusto(UnidadeItemEnum? value) {
     servicosEstoque = servicosEstoque.copyWith(unidadeItemEnum: value);
   }
 
@@ -72,7 +86,7 @@ abstract class CadastroServicosControllerBase with Store {
   }
 
   @action
-  void setExterno(String value) {
+  void setExterno(TipoExternoEnum? value) {
     servicosEstoque = servicosEstoque.copyWith(externo: value);
   }
 }

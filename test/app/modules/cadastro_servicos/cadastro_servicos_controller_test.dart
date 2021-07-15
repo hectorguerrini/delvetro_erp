@@ -1,4 +1,5 @@
 import 'package:delvetro_erp/app/modules/cadastro-servicos/cadastro_servicos_controller.dart';
+import 'package:delvetro_erp/app/modules/cadastro-servicos/enumerate/tipo_externo_enum.dart';
 import 'package:delvetro_erp/app/modules/cadastro-servicos/enumerate/tipo_servico_enum.dart';
 import 'package:delvetro_erp/app/modules/cadastro-servicos/models/servicos_model.dart';
 import 'package:delvetro_erp/app/modules/cadastro-servicos/repository/cadastro_servicos_repository_interface.dart';
@@ -21,7 +22,7 @@ void main() {
         unidadeItemEnum: UnidadeItemEnum.LINEAR,
         custo: 9.2,
         descricao: 'sim',
-        externo: 'sim')
+        externo: TipoExternoEnum.NAO)
   ];
 
   setUpAll(() {
@@ -66,7 +67,7 @@ void main() {
   });
 
   test('[TEST] - setExterno', () {
-    var teste = 'Externo';
+    var teste = TipoExternoEnum.SIM;
     cadastroServicosController.setExterno(teste);
     expect(cadastroServicosController.servicosEstoque.externo, teste);
   });
@@ -85,7 +86,7 @@ void main() {
         unidadeItemEnum: UnidadeItemEnum.LINEAR,
         custo: 15,
         descricao: 'sim',
-        externo: 'sim');
+        externo: TipoExternoEnum.SIM);
     cadastroServicosController.servicosEstoque = servicoAdicional;
     when(repository.atualizarServico(servicoAdicional))
         .thenAnswer((_) async {});
@@ -103,10 +104,41 @@ void main() {
         unidadeItemEnum: UnidadeItemEnum.LINEAR,
         custo: 20,
         descricao: 'sim',
-        externo: 'sim');
+        externo: TipoExternoEnum.SIM);
     cadastroServicosController.servicosEstoque = servicoAdicional;
     when(repository.salvarServico(servicoAdicional)).thenAnswer((_) async {});
     await cadastroServicosController.salvarServico();
     verify(repository.salvarServico(servicoAdicional)).called(1);
+  });
+
+  test('[TEST] - limparTexto', () async {
+    var servicoAdicional = ServicosModel(
+        idBeneficiado: 10,
+        idServico: 1,
+        observacao: 'Não',
+        prazo: '10',
+        tipoServicoEnum: TipoServicoEnum.OUTROS,
+        unidadeItemEnum: UnidadeItemEnum.LINEAR,
+        custo: 20,
+        descricao: 'sim',
+        externo: TipoExternoEnum.SIM);
+    cadastroServicosController.servicosEstoque = servicoAdicional;
+    await cadastroServicosController.limparTexto();
+    expect(cadastroServicosController.servicosEstoque.descricao, '');
+    expect(cadastroServicosController.servicosEstoque.idServico, null);
+    // expect(
+    //     cadastroEstoqueController.itensEstoque,
+    //     ItensEstoqueModel(
+    //       idEstoque: null,
+    //       descricao: '',
+    //       tipoItem: null,
+    //       localizacao: '',
+    //       unidadeItem: null,
+    //       quantidade: 0,
+    //       estoqueMinimo: 0,
+    //       estoqueMaximo: 0,
+    //       espessura: 0,
+    //       custo: 0,
+    //     ));
   });
 }

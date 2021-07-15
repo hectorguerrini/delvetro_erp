@@ -105,4 +105,31 @@ void main() {
     await cadastroEstoqueController.salvarItem();
     verify(repository.salvarItem(itemAdicional)).called(1);
   });
+
+  test('[TEST] - limparTexto', () async {
+    var itemAdicional = ItensEstoqueModel(
+        descricao: 'Vidro Cortado',
+        estoqueMinimo: 5,
+        estoqueMaximo: 10,
+        idEstoque: 1,
+        localizacao: 'sp');
+    cadastroEstoqueController.itensEstoque = itemAdicional;
+    await cadastroEstoqueController.limparTexto();
+    expect(cadastroEstoqueController.itensEstoque.descricao, '');
+    expect(cadastroEstoqueController.itensEstoque.idEstoque, null);
+    // expect(
+    //     cadastroEstoqueController.itensEstoque,
+    //     ItensEstoqueModel(
+    //       idEstoque: null,
+    //       descricao: '',
+    //       tipoItem: null,
+    //       localizacao: '',
+    //       unidadeItem: null,
+    //       quantidade: 0,
+    //       estoqueMinimo: 0,
+    //       estoqueMaximo: 0,
+    //       espessura: 0,
+    //       custo: 0,
+    //     ));
+  });
 }
