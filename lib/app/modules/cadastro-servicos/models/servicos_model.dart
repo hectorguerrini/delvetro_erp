@@ -1,9 +1,10 @@
 import 'package:delvetro_erp/app/modules/cadastro-servicos/enumerate/tipo_servico_enum.dart';
+import 'package:delvetro_erp/app/shared/enumerate/unidade_item_enum.dart';
 
 class ServicosModel {
   final int? idServico;
   final TipoServicoEnum? tipoServicoEnum;
-  final String unidadeCusto;
+  final UnidadeItemEnum? unidadeItemEnum;
   final double custo;
   final String? prazo;
   final String? observacao;
@@ -14,7 +15,7 @@ class ServicosModel {
   ServicosModel(
       {this.idServico,
       this.tipoServicoEnum,
-      required this.unidadeCusto,
+      required this.unidadeItemEnum,
       required this.custo,
       this.prazo,
       this.observacao,
@@ -29,7 +30,7 @@ class ServicosModel {
         observacao: '',
         prazo: '',
         tipoServicoEnum: null,
-        unidadeCusto: '',
+        unidadeItemEnum: null,
         custo: 0,
         descricao: '',
         externo: '');
@@ -38,7 +39,7 @@ class ServicosModel {
   ServicosModel copyWith({
     int? idServico,
     TipoServicoEnum? tipoServicoEnum,
-    String? unidadeCusto,
+    UnidadeItemEnum? unidadeItemEnum,
     double? custo,
     String? prazo,
     String? observacao,
@@ -50,7 +51,7 @@ class ServicosModel {
       idServico: idServico ?? this.idServico,
       descricao: descricao ?? this.descricao,
       tipoServicoEnum: tipoServicoEnum ?? this.tipoServicoEnum,
-      unidadeCusto: unidadeCusto ?? this.unidadeCusto,
+      unidadeItemEnum: unidadeItemEnum ?? this.unidadeItemEnum,
       prazo: prazo ?? this.prazo,
       observacao: observacao ?? this.observacao,
       idBeneficiado: idBeneficiado ?? this.idBeneficiado,

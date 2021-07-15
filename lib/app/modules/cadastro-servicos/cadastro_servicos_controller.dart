@@ -1,35 +1,39 @@
 import 'package:delvetro_erp/app/modules/cadastro-servicos/enumerate/tipo_servico_enum.dart';
 import 'package:delvetro_erp/app/modules/cadastro-servicos/models/servicos_model.dart';
 import 'package:delvetro_erp/app/modules/cadastro-servicos/repository/cadastro_servicos_repository_interface.dart';
+import 'package:delvetro_erp/app/shared/enumerate/unidade_item_enum.dart';
 import 'package:mobx/mobx.dart';
 
-part 'cadastro_servico_controller.g.dart';
+part 'cadastro_servicos_controller.g.dart';
 
+class CadastroServicosController = CadastroServicosControllerBase
+    with _$CadastroServicosController;
 
-class CadastroServicoController = CadastroServicoControllerBase
-    with _$CadastroServicoController;
-
-abstract class CadastroServicoControllerBase with Store {
+abstract class CadastroServicosControllerBase with Store {
   final ICadastroServicosRepository repository;
 
-  CadastroServicoControllerBase(this.repository) {
+  CadastroServicosControllerBase(this.repository) {
     getListaServicos();
-  };
+  }
 
   @observable
   List<ServicosModel> listaServicosEstoque = [];
 
   @observable
   ServicosModel servicosEstoque = ServicosModel.newInstance();
-  
+
   @action
   Future<void> getListaServicos() async {
     listaServicosEstoque = await repository.getListaServicos();
   }
 
-    @action
-  Future<void> salvarItem() async {
-      await repository.salvarItem(servicosEstoque);
+  @action
+  Future<void> salvarServico() async {
+    if (servicosEstoque.idServico != null) {
+      await repository.atualizarServico(servicosEstoque);
+    } else {
+      await repository.salvarServico(servicosEstoque);
+    }
   }
 
   @action
@@ -37,15 +41,14 @@ abstract class CadastroServicoControllerBase with Store {
     servicosEstoque = ServicosModel.newInstance();
   }
 
-
   @action
-  void tipoServicoEnum(TipoServicoEnum value) {
+  void setTipoServicoEnum(TipoServicoEnum value) {
     servicosEstoque = servicosEstoque.copyWith(tipoServicoEnum: value);
   }
 
   @action
-  void setUnidadeCusto(String value) {
-    servicosEstoque = servicosEstoque.copyWith(unidadeCusto: value);
+  void setUnidadeCusto(UnidadeItemEnum value) {
+    servicosEstoque = servicosEstoque.copyWith(unidadeItemEnum: value);
   }
 
   @action

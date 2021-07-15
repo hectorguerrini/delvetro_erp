@@ -1,5 +1,5 @@
 import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/tipo_item_enum.dart';
-import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/unidade_item_enum.dart';
+import 'package:delvetro_erp/app/shared/enumerate/unidade_item_enum.dart';
 import 'package:delvetro_erp/app/modules/cadastro-estoque/models/itens_estoque_model.dart';
 
 import 'cadastro_estoque_repository_interface.dart';
