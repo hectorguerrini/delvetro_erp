@@ -1,4 +1,5 @@
 import 'package:delvetro_erp/app/modules/cadastro-estoque/cadastro_estoque_controller.dart';
+import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/categorais_estoque_model.dart';
 import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/tipo_item_enum.dart';
 import 'package:delvetro_erp/app/shared/enumerate/unidade_item_enum.dart';
 import 'package:delvetro_erp/app/modules/cadastro-estoque/models/itens_estoque_model.dart';
@@ -74,6 +75,12 @@ void main() {
     var teste = 10.0;
     cadastroEstoqueController.setEspessura(teste);
     expect(cadastroEstoqueController.itensEstoque.espessura, teste);
+  });
+
+  test('[TEST] - setCategorias', () {
+    var teste = CategoriasEstoqueEnum.ALUMINIO;
+    cadastroEstoqueController.setCategorias(teste);
+    expect(cadastroEstoqueController.itensEstoque.categoriasEstoqueEnum, teste);
   });
 
   test('[TEST] - getListaItens', () {

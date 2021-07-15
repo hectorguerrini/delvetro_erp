@@ -1,3 +1,4 @@
+import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/categorais_estoque_model.dart';
 import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/tipo_item_enum.dart';
 import 'package:delvetro_erp/app/shared/enumerate/unidade_item_enum.dart';
 import 'package:delvetro_erp/app/modules/cadastro-estoque/models/itens_estoque_model.dart';
@@ -16,7 +17,8 @@ class CadastroEstoqueRepository implements ICadastroEstoqueRepository {
         estoqueMinimo: 8,
         estoqueMaximo: 200,
         espessura: 3.12,
-        custo: 3.8),
+        custo: 3.8,
+        categoriasEstoqueEnum: CategoriasEstoqueEnum.BOX),
     ItensEstoqueModel(
         idEstoque: 2,
         descricao: 'Painel',
@@ -27,7 +29,8 @@ class CadastroEstoqueRepository implements ICadastroEstoqueRepository {
         estoqueMinimo: 8,
         estoqueMaximo: 200,
         espessura: 3.12,
-        custo: 3.8),
+        custo: 3.8,
+        categoriasEstoqueEnum: CategoriasEstoqueEnum.CHAPARIA),
     ItensEstoqueModel(
         idEstoque: 3,
         descricao: 'Ferramentas',
@@ -38,7 +41,8 @@ class CadastroEstoqueRepository implements ICadastroEstoqueRepository {
         estoqueMinimo: 8,
         estoqueMaximo: 200,
         espessura: 3.12,
-        custo: 3.8),
+        custo: 3.8,
+        categoriasEstoqueEnum: CategoriasEstoqueEnum.EPI),
     ItensEstoqueModel(
         idEstoque: 4,
         descricao: 'Ferramentas',
@@ -49,7 +53,8 @@ class CadastroEstoqueRepository implements ICadastroEstoqueRepository {
         estoqueMinimo: 8,
         estoqueMaximo: 200,
         espessura: 3.12,
-        custo: 3.8),
+        custo: 3.8,
+        categoriasEstoqueEnum: CategoriasEstoqueEnum.ESPELHO),
     ItensEstoqueModel(
         idEstoque: 5,
         descricao: 'Ferramentas',
@@ -60,7 +65,8 @@ class CadastroEstoqueRepository implements ICadastroEstoqueRepository {
         estoqueMinimo: 8,
         estoqueMaximo: 200,
         espessura: 3.12,
-        custo: 3.8),
+        custo: 3.8,
+        categoriasEstoqueEnum: CategoriasEstoqueEnum.MAQUINAS_E_EQUIPAMENTOS),
     ItensEstoqueModel(
         idEstoque: 6,
         descricao: 'Ferramentas',
@@ -71,7 +77,8 @@ class CadastroEstoqueRepository implements ICadastroEstoqueRepository {
         estoqueMinimo: 8,
         estoqueMaximo: 200,
         espessura: 3.12,
-        custo: 3.8),
+        custo: 3.8,
+        categoriasEstoqueEnum: CategoriasEstoqueEnum.ALUMINIO),
     ItensEstoqueModel(
         idEstoque: 7,
         descricao: 'Ferramentas',
@@ -82,7 +89,8 @@ class CadastroEstoqueRepository implements ICadastroEstoqueRepository {
         estoqueMinimo: 8,
         estoqueMaximo: 200,
         espessura: 3.12,
-        custo: 3.8),
+        custo: 3.8,
+        categoriasEstoqueEnum: CategoriasEstoqueEnum.CONCRETO),
   ];
 
   @override

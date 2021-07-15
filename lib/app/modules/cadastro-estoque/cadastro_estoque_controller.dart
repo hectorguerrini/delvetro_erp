@@ -1,3 +1,4 @@
+import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/categorais_estoque_model.dart';
 import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/tipo_item_enum.dart';
 import 'package:delvetro_erp/app/shared/enumerate/unidade_item_enum.dart';
 import 'package:delvetro_erp/app/modules/cadastro-estoque/repositories/cadastro_estoque_repository_interface.dart';
@@ -78,6 +79,11 @@ abstract class CadastroEstoqueControllerBase with Store {
   @action
   void setEspessura(double value) {
     itensEstoque = itensEstoque.copyWith(espessura: value);
+  }
+
+  @action
+  void setCategorias(CategoriasEstoqueEnum? value) {
+    itensEstoque = itensEstoque.copyWith(categoriasEstoqueEnum: value);
   }
 
   @action

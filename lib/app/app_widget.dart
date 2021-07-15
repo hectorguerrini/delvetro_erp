@@ -8,7 +8,7 @@ class AppWidget extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Home Page',
       theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'Lato'),
-      initialRoute: '/cadastroServicos',
+      initialRoute: '/cadastroEstoque',
     ).modular();
   }
 }
