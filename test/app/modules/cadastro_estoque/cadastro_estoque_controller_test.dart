@@ -1,6 +1,7 @@
 import 'package:delvetro_erp/app/modules/cadastro-estoque/cadastro_estoque_controller.dart';
+import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/categorais_estoque_model.dart';
 import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/tipo_item_enum.dart';
-import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/unidade_item_enum.dart';
+import 'package:delvetro_erp/app/shared/enumerate/unidade_item_enum.dart';
 import 'package:delvetro_erp/app/modules/cadastro-estoque/models/itens_estoque_model.dart';
 import 'package:delvetro_erp/app/modules/cadastro-estoque/repositories/cadastro_estoque_repository_interface.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -76,6 +77,12 @@ void main() {
     expect(cadastroEstoqueController.itensEstoque.espessura, teste);
   });
 
+  test('[TEST] - setCategorias', () {
+    var teste = CategoriasEstoqueEnum.ALUMINIO;
+    cadastroEstoqueController.setCategorias(teste);
+    expect(cadastroEstoqueController.itensEstoque.categoriasEstoqueEnum, teste);
+  });
+
   test('[TEST] - getListaItens', () {
     expect(cadastroEstoqueController.listaItensEstoque, array);
   });
@@ -104,5 +111,32 @@ void main() {
     when(repository.salvarItem(itemAdicional)).thenAnswer((_) async {});
     await cadastroEstoqueController.salvarItem();
     verify(repository.salvarItem(itemAdicional)).called(1);
+  });
+
+  test('[TEST] - limparTexto', () async {
+    var itemAdicional = ItensEstoqueModel(
+        descricao: 'Vidro Cortado',
+        estoqueMinimo: 5,
+        estoqueMaximo: 10,
+        idEstoque: 1,
+        localizacao: 'sp');
+    cadastroEstoqueController.itensEstoque = itemAdicional;
+    await cadastroEstoqueController.limparTexto();
+    expect(cadastroEstoqueController.itensEstoque.descricao, '');
+    expect(cadastroEstoqueController.itensEstoque.idEstoque, null);
+    // expect(
+    //     cadastroEstoqueController.itensEstoque,
+    //     ItensEstoqueModel(
+    //       idEstoque: null,
+    //       descricao: '',
+    //       tipoItem: null,
+    //       localizacao: '',
+    //       unidadeItem: null,
+    //       quantidade: 0,
+    //       estoqueMinimo: 0,
+    //       estoqueMaximo: 0,
+    //       espessura: 0,
+    //       custo: 0,
+    //     ));
   });
 }
