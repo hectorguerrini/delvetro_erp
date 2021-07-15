@@ -32,9 +32,18 @@ void main() {
   });
 
   test('[TEST] - atualizarItem', () async {
-    await cadastroEstoqueRepository.atualizarItem(itemAdicional);
+    var itemMock = ItensEstoqueModel(
+        idEstoque: 1,
+        custo: 10.9,
+        descricao: 'Vidro',
+        espessura: 0,
+        estoqueMaximo: 10,
+        estoqueMinimo: 5,
+        localizacao: 'Avenida Padre Arlindo Vieira',
+        quantidade: 10);
+    await cadastroEstoqueRepository.atualizarItem(itemMock);
     var value = cadastroEstoqueRepository.listaItensEstoque
-        .where((element) => element.idEstoque == itemAdicional.idEstoque)
+        .where((element) => element.idEstoque == itemMock.idEstoque)
         .single;
     expect(value.custo, 10.9);
   });

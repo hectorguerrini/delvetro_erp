@@ -8,6 +8,7 @@ import 'package:delvetro_erp/app/shared/widgets/type_ahead_field_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class CadastroEstoquePage extends StatefulWidget {
   const CadastroEstoquePage({Key? key}) : super(key: key);
@@ -88,7 +89,7 @@ class _CadastroEstoquePageState
                         ),
                         TextFormFieldCustomWidget(
                           titulo: 'Localizacao',
-                          size: MediaQuery.of(context).size.width * 0.25,
+                          size: MediaQuery.of(context).size.width * 0.30,
                           onChanged: controller.setLocalizacao,
                           value: controller.itensEstoque.localizacao,
                         ),
@@ -150,6 +151,10 @@ class _CadastroEstoquePageState
                         TextFormFieldCustomWidget(
                           titulo: 'Custo',
                           size: MediaQuery.of(context).size.width * 0.11,
+                          maskFormatter: MaskTextInputFormatter(
+                            mask: 'R\$ ######.##',
+                            filter: {'#': RegExp(r'[0-9]')},
+                          ),
                           onChanged: (value) {
                             var valor = double.parse(value);
                             controller.setCusto(valor);

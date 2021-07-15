@@ -9,7 +9,7 @@ void main() {
   late CadastroServicosRepository cadastroServicosRepository;
   var servicoAdicional = ServicosModel(
       idBeneficiado: 10,
-      idServico: 1,
+      idServico: 10,
       observacao: 'Ocorreu tudo certo',
       prazo: '10-12-2010',
       tipoServicoEnum: TipoServicoEnum.OUTROS,
@@ -35,9 +35,19 @@ void main() {
   });
 
   test('[TEST] - atualizarServico', () async {
-    await cadastroServicosRepository.atualizarServico(servicoAdicional);
+    var servicoMock = ServicosModel(
+        idBeneficiado: 10,
+        idServico: 1,
+        observacao: 'Ocorreu tudo certo',
+        prazo: '10-12-2010',
+        tipoServicoEnum: TipoServicoEnum.OUTROS,
+        unidadeItemEnum: UnidadeItemEnum.LINEAR,
+        custo: 25,
+        descricao: 'Tudo certo',
+        externo: TipoExternoEnum.NAO);
+    await cadastroServicosRepository.atualizarServico(servicoMock);
     var value = cadastroServicosRepository.listaServicos
-        .where((element) => element.idServico == servicoAdicional.idServico)
+        .where((element) => element.idServico == servicoMock.idServico)
         .single;
     expect(value.custo, 25);
   });
