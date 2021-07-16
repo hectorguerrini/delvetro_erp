@@ -5,6 +5,7 @@ class TypeAheadFieldWidget extends StatelessWidget {
   final String titulo;
   final bool isRequired;
   final List<String> list;
+  final int flex;
 
   final void Function(String value) onChanged;
   const TypeAheadFieldWidget(
@@ -12,14 +13,15 @@ class TypeAheadFieldWidget extends StatelessWidget {
       required this.titulo,
       this.isRequired = false,
       required this.list,
-      required this.onChanged})
+      required this.onChanged,
+      required this.flex})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var controller = TextEditingController();
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.25,
+    return Expanded(
+      flex: flex,
       child: TypeAheadField(
         textFieldConfiguration: TextFieldConfiguration(
           controller: controller,
@@ -32,6 +34,8 @@ class TypeAheadFieldWidget extends StatelessWidget {
             labelStyle: TextStyle(
               fontSize: 24,
             ),
+            suffixIcon: IconButton(
+                onPressed: controller.clear, icon: Icon(Icons.close)),
             contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
             border: OutlineInputBorder(),
           ),
