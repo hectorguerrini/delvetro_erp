@@ -195,6 +195,17 @@ mixin _$CadastroEstoqueController on CadastroEstoqueControllerBase, Store {
   }
 
   @override
+  void setCategorias(CategoriasEstoqueEnum? value) {
+    final _$actionInfo = _$CadastroEstoqueControllerBaseActionController
+        .startAction(name: 'CadastroEstoqueControllerBase.setCategorias');
+    try {
+      return super.setCategorias(value);
+    } finally {
+      _$CadastroEstoqueControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 itensEstoque: ${itensEstoque},
