@@ -1,5 +1,6 @@
 import 'package:delvetro_erp/app/modules/cadastro-servicos/enumerate/tipo_externo_enum.dart';
 import 'package:delvetro_erp/app/modules/cadastro-servicos/enumerate/tipo_servico_enum.dart';
+import 'package:delvetro_erp/app/shared/enumerate/tipo_campo_texto_enum.dart';
 import 'package:delvetro_erp/app/shared/enumerate/unidade_item_enum.dart';
 import 'package:delvetro_erp/app/shared/widgets/drop_down_field_widget.dart';
 import 'package:delvetro_erp/app/shared/widgets/elevated_button_padrao_widget.dart';
@@ -7,7 +8,6 @@ import 'package:delvetro_erp/app/shared/widgets/text_form_field_custom_widget.da
 import 'package:delvetro_erp/app/shared/widgets/type_ahead_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 import 'cadastro_servicos_controller.dart';
 
@@ -68,6 +68,7 @@ class _CadastroServicosPageState
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TypeAheadFieldWidget(
+                        flex: 2,
                         titulo: 'Descricao *',
                         list: controller.getListaDescricao(),
                         isRequired: true,
@@ -75,9 +76,12 @@ class _CadastroServicosPageState
                           controller.setDescricao(value);
                         },
                       ),
+                      SizedBox(
+                        width: 8,
+                      ),
                       DropDownFieldWidget(
+                        flex: 1,
                         titulo: 'Tipo *',
-                        size: MediaQuery.of(context).size.width * 0.15,
                         items:
                             TipoServicoEnum.values.map((TipoServicoEnum value) {
                           return DropdownMenuItem<TipoServicoEnum>(
@@ -88,9 +92,12 @@ class _CadastroServicosPageState
                         isRequired: true,
                         onChanged: controller.setTipoServicoEnum,
                       ),
+                      SizedBox(
+                        width: 8,
+                      ),
                       DropDownFieldWidget(
+                        flex: 1,
                         titulo: 'Externo *',
-                        size: MediaQuery.of(context).size.width * 0.09,
                         items:
                             TipoExternoEnum.values.map((TipoExternoEnum value) {
                           return DropdownMenuItem<TipoExternoEnum>(
@@ -110,17 +117,17 @@ class _CadastroServicosPageState
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TextFormFieldCustomWidget(
+                        flex: 1,
                         titulo: 'Prazo',
-                        maskFormatter: MaskTextInputFormatter(
-                            mask: '##/##/####',
-                            filter: {'#': RegExp(r'[0-9]')}),
-                        size: MediaQuery.of(context).size.width * 0.11,
                         onChanged: controller.setPrazo,
                         value: controller.servicosEstoque.prazo,
                       ),
+                      SizedBox(
+                        width: 8,
+                      ),
                       DropDownFieldWidget(
+                        flex: 2,
                         titulo: 'Beneficiário *',
-                        size: MediaQuery.of(context).size.width * 0.17,
                         items:
                             UnidadeItemEnum.values.map((UnidadeItemEnum value) {
                           return DropdownMenuItem<UnidadeItemEnum>(
@@ -131,9 +138,12 @@ class _CadastroServicosPageState
                         isRequired: true,
                         onChanged: controller.setUnidadeCusto,
                       ),
+                      SizedBox(
+                        width: 8,
+                      ),
                       DropDownFieldWidget(
+                        flex: 2,
                         titulo: 'Unidade Cobrança *',
-                        size: MediaQuery.of(context).size.width * 0.17,
                         items:
                             UnidadeItemEnum.values.map((UnidadeItemEnum value) {
                           return DropdownMenuItem<UnidadeItemEnum>(
@@ -143,14 +153,15 @@ class _CadastroServicosPageState
                         }).toList(),
                         isRequired: true,
                         onChanged: controller.setUnidadeCusto,
+                      ),
+                      SizedBox(
+                        width: 8,
                       ),
                       TextFormFieldCustomWidget(
+                        tipoCampoTextoEnum: TipoCampoTextoEnum.VALOR,
+                        flex: 1,
                         titulo: 'Custo *',
-                        maskFormatter: MaskTextInputFormatter(
-                          mask: 'R\$ ######.##',
-                          filter: {'#': RegExp(r'[0-9]')},
-                        ),
-                        size: MediaQuery.of(context).size.width * 0.11,
+                        isNumber: true,
                         onChanged: (value) {
                           var valor = double.parse(value);
                           controller.setCusto(valor);
@@ -168,9 +179,9 @@ class _CadastroServicosPageState
                     children: [
                       TextFormFieldCustomWidget(
                         titulo: 'Observação',
-                        size: MediaQuery.of(context).size.width * 0.766,
                         onChanged: controller.setObservacao,
                         value: controller.servicosEstoque.observacao,
+                        flex: 3,
                       ),
                     ],
                   ),

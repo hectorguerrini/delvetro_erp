@@ -5,20 +5,21 @@ class DropDownFieldWidget<T> extends StatelessWidget {
   final void Function(T? value)? onChanged;
   final List<DropdownMenuItem<T>> items;
   final bool isRequired;
-  final double size;
-  const DropDownFieldWidget(
-      {Key? key,
-      required this.titulo,
-      this.isRequired = false,
-      this.onChanged,
-      required this.items,
-      required this.size})
-      : super(key: key);
+  final int flex;
+
+  const DropDownFieldWidget({
+    Key? key,
+    required this.titulo,
+    this.isRequired = false,
+    this.onChanged,
+    required this.items,
+    required this.flex,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: size,
+    return Expanded(
+      flex: flex,
       child: DropdownButtonHideUnderline(
         child: DropdownButtonFormField<T>(
           validator: (value) {
@@ -27,6 +28,7 @@ class DropDownFieldWidget<T> extends StatelessWidget {
             }
             return null;
           },
+          isExpanded: true,
           onChanged: onChanged,
           items: items,
           style: TextStyle(
