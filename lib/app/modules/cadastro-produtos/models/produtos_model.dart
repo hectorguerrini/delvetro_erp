@@ -3,7 +3,7 @@ import 'package:delvetro_erp/app/modules/cadastro-produtos/models/listagem_compo
 import 'package:delvetro_erp/app/shared/enumerate/unidade_item_enum.dart';
 
 class ProdutosModel {
-  final int? idEstoque;
+  final int? idProduto;
   final String descricao;
   final TipoItemEnum? tipoItem;
   final UnidadeItemEnum? unidadeItem;
@@ -13,7 +13,7 @@ class ProdutosModel {
   final List<ListagemComposicaoModel>? listaComposicao;
 
   ProdutosModel(
-      {this.idEstoque,
+      {this.idProduto,
       this.custo,
       this.listaComposicao,
       required this.descricao,
@@ -26,7 +26,7 @@ class ProdutosModel {
     return ProdutosModel(
         descricao: '',
         custo: 0,
-        idEstoque: null,
+        idProduto: null,
         listaComposicao: null,
         prazo: '',
         precoUnitario: 0,
@@ -35,7 +35,7 @@ class ProdutosModel {
   }
 
   ProdutosModel copyWith(
-      {int? idEstoque,
+      {int? idProduto,
       String? descricao,
       TipoItemEnum? tipoItem,
       UnidadeItemEnum? unidadeItem,
@@ -45,7 +45,7 @@ class ProdutosModel {
       List<ListagemComposicaoModel>? listaComposicao}) {
     return ProdutosModel(
         descricao: descricao ?? this.descricao,
-        idEstoque: idEstoque ?? this.idEstoque,
+        idProduto: idProduto ?? this.idProduto,
         tipoItem: tipoItem ?? this.tipoItem,
         unidadeItem: unidadeItem ?? this.unidadeItem,
         precoUnitario: precoUnitario ?? this.precoUnitario,

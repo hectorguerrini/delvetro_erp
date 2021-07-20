@@ -121,7 +121,7 @@ void main() {
         idEstoque: 1,
         localizacao: 'sp');
     cadastroEstoqueController.itensEstoque = itemAdicional;
-    await cadastroEstoqueController.limparTexto();
+    cadastroEstoqueController.limparTexto();
     expect(cadastroEstoqueController.itensEstoque.descricao, '');
     expect(cadastroEstoqueController.itensEstoque.idEstoque, null);
     // expect(

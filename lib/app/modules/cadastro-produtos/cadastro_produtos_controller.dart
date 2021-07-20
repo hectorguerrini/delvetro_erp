@@ -12,7 +12,9 @@ class CadastroProdutosController = _CadastroProdutosControllerBase
 abstract class _CadastroProdutosControllerBase with Store {
   final ICadastroProdutosRepository repository;
 
-  _CadastroProdutosControllerBase(this.repository);
+  _CadastroProdutosControllerBase(this.repository) {
+    getListaProdutos();
+  }
 
   @observable
   ProdutosModel produtosEstoque = ProdutosModel.newInstance();
@@ -22,22 +24,22 @@ abstract class _CadastroProdutosControllerBase with Store {
 
   @action
   Future<void> getListaProdutos() async {
-    listaProdutosEstoque = await repository.getListaProdutosEstoque();
+    listaProdutosEstoque = await repository.getListaProdutos();
   }
 
   void adicionarComposicao(ListagemComposicaoModel listagemComposicaoModel) {
     produtosEstoque.listaComposicao!.add(listagemComposicaoModel);
   }
 
-  Future<void> removerComposicao(
+  void removerComposicao(
       ListagemComposicaoModel listagemComposicaoModel) async {
     produtosEstoque.listaComposicao!
         .removeWhere((element) => listagemComposicaoModel == element);
   }
 
   @action
-  Future<void> salvarItem() async {
-    if (produtosEstoque.idEstoque != null) {
+  Future<void> salvarProduto() async {
+    if (produtosEstoque.idProduto != null) {
       await repository.atualizarProduto(produtosEstoque);
     } else {
       await repository.salvarProduto(produtosEstoque);
@@ -45,7 +47,7 @@ abstract class _CadastroProdutosControllerBase with Store {
   }
 
   @action
-  Future<void> limparTexto() async {
+  void limparTexto() {
     produtosEstoque = ProdutosModel.newInstance();
   }
 }

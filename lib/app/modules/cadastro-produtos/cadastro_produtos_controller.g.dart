@@ -50,20 +50,26 @@ mixin _$CadastroProdutosController on _CadastroProdutosControllerBase, Store {
     return _$getListaProdutosAsyncAction.run(() => super.getListaProdutos());
   }
 
-  final _$salvarItemAsyncAction =
-      AsyncAction('_CadastroProdutosControllerBase.salvarItem');
+  final _$salvarProdutoAsyncAction =
+      AsyncAction('_CadastroProdutosControllerBase.salvarProduto');
 
   @override
-  Future<void> salvarItem() {
-    return _$salvarItemAsyncAction.run(() => super.salvarItem());
+  Future<void> salvarProduto() {
+    return _$salvarProdutoAsyncAction.run(() => super.salvarProduto());
   }
 
-  final _$limparTextoAsyncAction =
-      AsyncAction('_CadastroProdutosControllerBase.limparTexto');
+  final _$_CadastroProdutosControllerBaseActionController =
+      ActionController(name: '_CadastroProdutosControllerBase');
 
   @override
-  Future<void> limparTexto() {
-    return _$limparTextoAsyncAction.run(() => super.limparTexto());
+  void limparTexto() {
+    final _$actionInfo = _$_CadastroProdutosControllerBaseActionController
+        .startAction(name: '_CadastroProdutosControllerBase.limparTexto');
+    try {
+      return super.limparTexto();
+    } finally {
+      _$_CadastroProdutosControllerBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override

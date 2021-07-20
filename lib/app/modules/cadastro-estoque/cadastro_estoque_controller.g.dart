@@ -82,14 +82,6 @@ mixin _$CadastroEstoqueController on CadastroEstoqueControllerBase, Store {
     return _$salvarItemAsyncAction.run(() => super.salvarItem());
   }
 
-  final _$limparTextoAsyncAction =
-      AsyncAction('CadastroEstoqueControllerBase.limparTexto');
-
-  @override
-  Future<void> limparTexto() {
-    return _$limparTextoAsyncAction.run(() => super.limparTexto());
-  }
-
   final _$CadastroEstoqueControllerBaseActionController =
       ActionController(name: 'CadastroEstoqueControllerBase');
 
@@ -209,6 +201,17 @@ mixin _$CadastroEstoqueController on CadastroEstoqueControllerBase, Store {
         .startAction(name: 'CadastroEstoqueControllerBase.setEstoque');
     try {
       return super.setEstoque(id);
+    } finally {
+      _$CadastroEstoqueControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void limparTexto() {
+    final _$actionInfo = _$CadastroEstoqueControllerBaseActionController
+        .startAction(name: 'CadastroEstoqueControllerBase.limparTexto');
+    try {
+      return super.limparTexto();
     } finally {
       _$CadastroEstoqueControllerBaseActionController.endAction(_$actionInfo);
     }

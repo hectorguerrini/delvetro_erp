@@ -102,19 +102,7 @@ abstract class CadastroEstoqueControllerBase with Store {
   }
 
   @action
-  Future<void> limparTexto() async {
+  void limparTexto() {
     itensEstoque = ItensEstoqueModel.newInstance();
   }
-
-  // @action
-  // bool validaTexto() {
-  //   var validacao = (itensEstoque.tipoItem == null ||
-  //           itensEstoque.unidadeItem == null ||
-  //           itensEstoque.estoqueMinimo == 0 ||
-  //           itensEstoque.estoqueMaximo == 0 ||
-  //           itensEstoque.estoqueMaximo <= itensEstoque.estoqueMinimo)
-  //       ? false
-  //       : true;
-  //   return validacao;
-  // }
 }

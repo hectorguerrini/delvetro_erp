@@ -130,19 +130,5 @@ void main() {
     cadastroServicosController.limparTexto();
     expect(cadastroServicosController.servicosEstoque.descricao, '');
     expect(cadastroServicosController.servicosEstoque.idServico, null);
-    // expect(
-    //     cadastroEstoqueController.itensEstoque,
-    //     ItensEstoqueModel(
-    //       idEstoque: null,
-    //       descricao: '',
-    //       tipoItem: null,
-    //       localizacao: '',
-    //       unidadeItem: null,
-    //       quantidade: 0,
-    //       estoqueMinimo: 0,
-    //       estoqueMaximo: 0,
-    //       espessura: 0,
-    //       custo: 0,
-    //     ));
   });
 }

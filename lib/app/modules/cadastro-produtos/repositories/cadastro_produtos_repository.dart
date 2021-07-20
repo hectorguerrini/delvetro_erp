@@ -7,7 +7,7 @@ import 'cadastro_produtos_repository_interface.dart';
 class CadastroProdutosRepository implements ICadastroProdutosRepository {
   List<ProdutosModel> listaProdutosEstoque = [
     ProdutosModel(
-      idEstoque: 1,
+      idProduto: 1,
       descricao: 'Vidro',
       tipoItem: TipoItemEnum.ESCRITORIO,
       precoUnitario: 10,
@@ -29,15 +29,15 @@ class CadastroProdutosRepository implements ICadastroProdutosRepository {
   Future<void> atualizarProduto(ProdutosModel produtosEstoque) async {
     var produtosEstoqueAlterado = produtosEstoque;
     for (var i = 0; i < listaProdutosEstoque.length; i++) {
-      if (produtosEstoqueAlterado.idEstoque ==
-          listaProdutosEstoque[i].idEstoque) {
+      if (produtosEstoqueAlterado.idProduto ==
+          listaProdutosEstoque[i].idProduto) {
         listaProdutosEstoque[i] = produtosEstoqueAlterado;
       }
     }
   }
 
   @override
-  Future<List<ProdutosModel>> getListaProdutosEstoque() {
+  Future<List<ProdutosModel>> getListaProdutos() {
     return Future.value(listaProdutosEstoque);
   }
 
