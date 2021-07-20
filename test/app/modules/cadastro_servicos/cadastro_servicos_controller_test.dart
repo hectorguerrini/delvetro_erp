@@ -4,6 +4,7 @@ import 'package:delvetro_erp/app/modules/cadastro-servicos/enumerate/tipo_servic
 import 'package:delvetro_erp/app/modules/cadastro-servicos/models/servicos_model.dart';
 import 'package:delvetro_erp/app/modules/cadastro-servicos/repository/cadastro_servicos_repository_interface.dart';
 import 'package:delvetro_erp/app/shared/enumerate/unidade_item_enum.dart';
+import 'package:delvetro_erp/app/shared/models/generic_fields_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -24,9 +25,12 @@ void main() {
         descricao: 'sim',
         externo: TipoExternoEnum.NAO)
   ];
+  var arrayBeneficiados = [GenericFieldsModel(caption: 'Delvetro', id: 1)];
 
   setUpAll(() {
     when(repository.getListaServicos()).thenAnswer((_) async => array);
+    when(repository.getListaBeneficiados())
+        .thenAnswer((_) async => arrayBeneficiados);
     cadastroServicosController = CadastroServicosController(repository);
   });
 
