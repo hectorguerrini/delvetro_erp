@@ -1,7 +1,7 @@
-import 'package:delvetro_erp/app/modules/cadastro-produtos/cadastroProdutos_Page.dart';
 import 'package:delvetro_erp/app/modules/cadastro-produtos/cadastro_produtos_controller.dart';
 import 'package:delvetro_erp/app/modules/cadastro-produtos/repositories/cadastro_produtos_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'cadastro_produtos_page.dart';
 
 class CadastroProdutosModule extends Module {
   @override

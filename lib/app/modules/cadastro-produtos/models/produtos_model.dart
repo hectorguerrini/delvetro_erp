@@ -1,68 +1,56 @@
 import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/tipo_item_enum.dart';
-import 'package:delvetro_erp/app/modules/cadastro-produtos/enumerate/tipo_trabalho_enum.dart';
+import 'package:delvetro_erp/app/modules/cadastro-produtos/models/listagem_composicao_model.dart';
 import 'package:delvetro_erp/app/shared/enumerate/unidade_item_enum.dart';
 
 class ProdutosModel {
-  final int? idProduto;
+  final int? idEstoque;
   final String descricao;
   final TipoItemEnum? tipoItem;
   final UnidadeItemEnum? unidadeItem;
-  final double precoUnitario;
+  final double? custo;
+  final double? precoUnitario;
   final String? prazo;
-  final TipoTrabalhoEnum? tipoTrabalho;
-  final int quantidade;
-  final double custo;
-  final double? total;
+  final List<ListagemComposicaoModel>? listaComposicao;
 
   ProdutosModel(
-      {this.idProduto,
+      {this.idEstoque,
+      this.custo,
+      this.listaComposicao,
       required this.descricao,
-      required this.tipoItem,
+      this.tipoItem,
       this.unidadeItem,
-      required this.precoUnitario,
-      this.prazo,
-      this.tipoTrabalho,
-      required this.quantidade,
-      required this.custo,
-      this.total});
+      this.precoUnitario,
+      this.prazo});
 
   factory ProdutosModel.newInstance() {
     return ProdutosModel(
-        idProduto: null,
         descricao: '',
-        tipoItem: null,
-        unidadeItem: null,
-        precoUnitario: 0,
-        prazo: '',
-        tipoTrabalho: null,
-        quantidade: 0,
         custo: 0,
-        total: 0);
+        idEstoque: null,
+        listaComposicao: null,
+        prazo: '',
+        precoUnitario: 0,
+        tipoItem: null,
+        unidadeItem: null);
   }
 
-  ProdutosModel copyWith({
-    int? idProduto,
-    String? descricao,
-    TipoItemEnum? tipoItem,
-    UnidadeItemEnum? unidadeItem,
-    double? precoUnitario,
-    String? prazo,
-    TipoTrabalhoEnum? tipoTrabalho,
-    int? quantidade,
-    double? custo,
-    double? total,
-  }) {
+  ProdutosModel copyWith(
+      {int? idEstoque,
+      String? descricao,
+      TipoItemEnum? tipoItem,
+      UnidadeItemEnum? unidadeItem,
+      double? custo,
+      double? precoUnitario,
+      String? prazo,
+      List<ListagemComposicaoModel>? listaComposicao}) {
     return ProdutosModel(
-      idProduto: idProduto ?? this.idProduto,
-      descricao: descricao ?? this.descricao,
-      tipoItem: tipoItem ?? this.tipoItem,
-      unidadeItem: unidadeItem ?? this.unidadeItem,
-      prazo: prazo ?? this.prazo,
-      precoUnitario: precoUnitario ?? this.precoUnitario,
-      tipoTrabalho: tipoTrabalho ?? this.tipoTrabalho,
-      quantidade: quantidade ?? this.quantidade,
-      custo: custo ?? this.custo,
-      total: total ?? this.total,
-    );
+        descricao: descricao ?? this.descricao,
+        idEstoque: idEstoque ?? this.idEstoque,
+        tipoItem: tipoItem ?? this.tipoItem,
+        unidadeItem: unidadeItem ?? this.unidadeItem,
+        precoUnitario: precoUnitario ?? this.precoUnitario,
+        prazo: prazo ?? this.prazo,
+        listaComposicao: listaComposicao ?? this.listaComposicao,
+        custo: custo ?? this.custo);
   }
 }

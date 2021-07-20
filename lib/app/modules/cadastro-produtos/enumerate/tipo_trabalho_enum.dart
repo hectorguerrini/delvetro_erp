@@ -1,12 +1,12 @@
-enum TipoTrabalhoEnum { SERVICO, ITEM }
+enum TipoComposicaoEnum { SERVICO, ESTOQUE }
 
-extension TipoTrabalhoEnumExtension on TipoTrabalhoEnum {
+extension TipoComposicaoEnumExtension on TipoComposicaoEnum {
   String get name {
     switch (this) {
-      case TipoTrabalhoEnum.SERVICO:
+      case TipoComposicaoEnum.SERVICO:
         return 'Serviço';
-      case TipoTrabalhoEnum.ITEM:
-        return 'item';
+      case TipoComposicaoEnum.ESTOQUE:
+        return 'Estoque';
     }
   }
 }
