@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'cadastro_servicos_controller.dart';
-import 'models/servicos_model.dart';
 
 class CadastroServicosPage extends StatefulWidget {
   CadastroServicosPage({Key? key}) : super(key: key);
