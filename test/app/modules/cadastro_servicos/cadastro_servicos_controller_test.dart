@@ -65,7 +65,7 @@ void main() {
   });
 
   test('[TEST] - setDescricao', () {
-    var teste = 'Muito bom';
+    var teste = 'teste1';
     cadastroServicosController.setDescricao(teste);
     expect(cadastroServicosController.servicosEstoque.descricao, teste);
   });

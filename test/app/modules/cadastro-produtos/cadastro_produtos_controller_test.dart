@@ -1,5 +1,6 @@
 import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/tipo_item_enum.dart';
 import 'package:delvetro_erp/app/modules/cadastro-produtos/cadastro_produtos_controller.dart';
+import 'package:delvetro_erp/app/modules/cadastro-produtos/enumerate/tipo_trabalho_enum.dart';
 import 'package:delvetro_erp/app/modules/cadastro-produtos/models/listagem_composicao_model.dart';
 import 'package:delvetro_erp/app/modules/cadastro-produtos/models/produtos_model.dart';
 import 'package:delvetro_erp/app/modules/cadastro-produtos/repositories/cadastro_produtos_repository_interface.dart';
@@ -36,6 +37,59 @@ void main() {
   setUpAll(() {
     when(repository.getListaProdutos()).thenAnswer((_) async => array);
     cadastroProdutosController = CadastroProdutosController(repository);
+  });
+
+  test('[TEST] - setDescricao', () {
+    var teste = 'teste1';
+    cadastroProdutosController.setDescricao(teste);
+    expect(cadastroProdutosController.produtosEstoque.descricao, teste);
+  });
+
+  test('[TEST] - setTipoItem', () {
+    var teste = TipoItemEnum.ESCRITORIO;
+    cadastroProdutosController.setTipoItem(teste);
+    expect(cadastroProdutosController.produtosEstoque.tipoItem, teste);
+  });
+
+  test('[TEST] - setUnidadeItem', () {
+    var teste = UnidadeItemEnum.METROQUADRADO;
+    cadastroProdutosController.setUnidadeItem(teste);
+    expect(cadastroProdutosController.produtosEstoque.unidadeItem, teste);
+  });
+
+  test('[TEST] - setCusto', () {
+    var teste = 10.2;
+    cadastroProdutosController.setCusto(teste);
+    expect(cadastroProdutosController.produtosEstoque.custo, teste);
+  });
+
+  test('[TEST] - setPrecoUnitario', () {
+    var teste = 10.2;
+    cadastroProdutosController.setPrecoUnitario(teste);
+    expect(cadastroProdutosController.produtosEstoque.precoUnitario, teste);
+  });
+
+  test('[TEST] - setPrazo', () {
+    var teste = '10.2';
+    cadastroProdutosController.setPrazo(teste);
+    expect(cadastroProdutosController.produtosEstoque.prazo, teste);
+  });
+
+  test('[TEST] - adicionarComposicao e removerComposicao', () {
+    var teste = ListagemComposicaoModel(
+        nome: 'teste01',
+        quantidade: 12,
+        custo: 12.1,
+        tipoComposicao: TipoComposicaoEnum.SERVICO,
+        idListagemComposicao: 1);
+    cadastroProdutosController.adicionarComposicao(teste);
+    expect(
+        cadastroProdutosController.produtosEstoque.listaComposicao.isNotEmpty,
+        true);
+    cadastroProdutosController.removerComposicao(teste);
+    expect(
+        cadastroProdutosController.produtosEstoque.listaComposicao.isNotEmpty,
+        false);
   });
 
   test('[TEST] - getListaProdutosEstoque', () {

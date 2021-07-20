@@ -9,14 +9,13 @@ part of 'cadastro_estoque_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$CadastroEstoqueController on CadastroEstoqueControllerBase, Store {
-  Computed<List<GenericFieldsModel>>? _$getListaDescricaoComputed;
+  Computed<List<GenericFieldsModel>>? _$listaDescricaoComputed;
 
   @override
-  List<GenericFieldsModel> get getListaDescricao =>
-      (_$getListaDescricaoComputed ??= Computed<List<GenericFieldsModel>>(
-              () => super.getListaDescricao,
-              name: 'CadastroEstoqueControllerBase.getListaDescricao'))
-          .value;
+  List<GenericFieldsModel> get listaDescricao => (_$listaDescricaoComputed ??=
+          Computed<List<GenericFieldsModel>>(() => super.listaDescricao,
+              name: 'CadastroEstoqueControllerBase.listaDescricao'))
+      .value;
 
   final _$itensEstoqueAtom =
       Atom(name: 'CadastroEstoqueControllerBase.itensEstoque');
@@ -47,22 +46,6 @@ mixin _$CadastroEstoqueController on CadastroEstoqueControllerBase, Store {
   set listaItensEstoque(List<ItensEstoqueModel> value) {
     _$listaItensEstoqueAtom.reportWrite(value, super.listaItensEstoque, () {
       super.listaItensEstoque = value;
-    });
-  }
-
-  final _$listaDescricaoAtom =
-      Atom(name: 'CadastroEstoqueControllerBase.listaDescricao');
-
-  @override
-  List<String> get listaDescricao {
-    _$listaDescricaoAtom.reportRead();
-    return super.listaDescricao;
-  }
-
-  @override
-  set listaDescricao(List<String> value) {
-    _$listaDescricaoAtom.reportWrite(value, super.listaDescricao, () {
-      super.listaDescricao = value;
     });
   }
 
@@ -218,12 +201,22 @@ mixin _$CadastroEstoqueController on CadastroEstoqueControllerBase, Store {
   }
 
   @override
+  void selectProduto(int id) {
+    final _$actionInfo = _$CadastroEstoqueControllerBaseActionController
+        .startAction(name: 'CadastroEstoqueControllerBase.selectProduto');
+    try {
+      return super.selectProduto(id);
+    } finally {
+      _$CadastroEstoqueControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 itensEstoque: ${itensEstoque},
 listaItensEstoque: ${listaItensEstoque},
-listaDescricao: ${listaDescricao},
-getListaDescricao: ${getListaDescricao}
+listaDescricao: ${listaDescricao}
     ''';
   }
 }

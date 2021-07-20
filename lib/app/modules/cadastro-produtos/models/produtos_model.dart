@@ -10,12 +10,12 @@ class ProdutosModel {
   final double? custo;
   final double? precoUnitario;
   final String? prazo;
-  final List<ListagemComposicaoModel>? listaComposicao;
+  final List<ListagemComposicaoModel> listaComposicao;
 
   ProdutosModel(
       {this.idProduto,
       this.custo,
-      this.listaComposicao,
+      required this.listaComposicao,
       required this.descricao,
       this.tipoItem,
       this.unidadeItem,
@@ -27,7 +27,7 @@ class ProdutosModel {
         descricao: '',
         custo: 0,
         idProduto: null,
-        listaComposicao: null,
+        listaComposicao: [],
         prazo: '',
         precoUnitario: 0,
         tipoItem: null,

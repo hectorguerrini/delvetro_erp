@@ -69,15 +69,16 @@ class _CadastroEstoquePageState
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         TypeAheadFieldWidget(
-                          flex: 2,
-                          titulo: 'Descricao *',
-                          onSuggestionSelected: controller.setEstoque,
-                          list: controller.getListaDescricao,
-                          isRequired: true,
-                          onChanged: (value) {
-                            controller.setDescricao(value);
-                          },
-                        ),
+                            flex: 2,
+                            titulo: 'Descricao *',
+                            value: controller.itensEstoque.descricao,
+                            onSuggestionSelected: (value) {
+                              controller.selectProduto(value);
+                              setState(() {});
+                            },
+                            isRequired: true,
+                            onChanged: controller.setDescricao,
+                            list: controller.listaDescricao),
                         SizedBox(
                           width: 8,
                         ),

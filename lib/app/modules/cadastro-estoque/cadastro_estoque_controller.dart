@@ -24,11 +24,8 @@ abstract class CadastroEstoqueControllerBase with Store {
   @observable
   List<ItensEstoqueModel> listaItensEstoque = [];
 
-  @observable
-  List<String> listaDescricao = [];
-
   @computed
-  List<GenericFieldsModel> get getListaDescricao => listaItensEstoque
+  List<GenericFieldsModel> get listaDescricao => listaItensEstoque
       .map((e) => GenericFieldsModel(caption: e.descricao, id: e.idEstoque))
       .toList();
   @action
@@ -104,5 +101,10 @@ abstract class CadastroEstoqueControllerBase with Store {
   @action
   void limparTexto() {
     itensEstoque = ItensEstoqueModel.newInstance();
+  }
+  @action
+  void selectProduto(int id) {
+    itensEstoque =
+        listaItensEstoque.firstWhere((element) => element.idEstoque == id);
   }
 }
