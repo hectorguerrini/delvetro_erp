@@ -2,6 +2,7 @@ import 'package:delvetro_erp/app/modules/cadastro-servicos/enumerate/tipo_servic
 import 'package:delvetro_erp/app/modules/cadastro-servicos/models/servicos_model.dart';
 import 'package:delvetro_erp/app/modules/cadastro-servicos/repository/cadastro_servicos_repository_interface.dart';
 import 'package:delvetro_erp/app/shared/enumerate/unidade_item_enum.dart';
+import 'package:delvetro_erp/app/shared/models/generic_fields_model.dart';
 import 'package:mobx/mobx.dart';
 
 import 'enumerate/tipo_externo_enum.dart';
@@ -16,29 +17,31 @@ abstract class CadastroServicosControllerBase with Store {
 
   CadastroServicosControllerBase(this.repository) {
     getListaServicos();
+    getListaBeneficiados();
   }
 
   @observable
   List<ServicosModel> listaServicosEstoque = [];
 
   @observable
-  ServicosModel servicosEstoque = ServicosModel.newInstance();
+  List<GenericFieldsModel> listaBeneficiados = [];
 
   @observable
-  List<String> listaDescricao = [];
+  ServicosModel servicosEstoque = ServicosModel.newInstance();
 
-  @action
-  List<String> getListaDescricao() {
-    var list = <String>[];
-    for (var i = 0; i < listaServicosEstoque.length; i++) {
-      list.add(listaServicosEstoque[i].descricao);
-    }
-    return list;
-  }
+  @computed
+  List<GenericFieldsModel> get listaDescricao => listaServicosEstoque
+      .map((e) => GenericFieldsModel(caption: e.descricao, id: e.idServico))
+      .toList();
 
   @action
   Future<void> getListaServicos() async {
     listaServicosEstoque = await repository.getListaServicos();
+  }
+
+  @action
+  Future<void> getListaBeneficiados() async {
+    listaBeneficiados = await repository.getListaBeneficiados();
   }
 
   @action
@@ -48,10 +51,11 @@ abstract class CadastroServicosControllerBase with Store {
     } else {
       await repository.salvarServico(servicosEstoque);
     }
+    limparTexto();
   }
 
   @action
-  Future<void> limparTexto() async {
+  void limparTexto() {
     servicosEstoque = ServicosModel.newInstance();
   }
 
@@ -88,5 +92,18 @@ abstract class CadastroServicosControllerBase with Store {
   @action
   void setExterno(TipoExternoEnum? value) {
     servicosEstoque = servicosEstoque.copyWith(externo: value);
+  }
+
+  @action
+  void setBeneficiado(int? value) {
+    if (value != null) {
+      servicosEstoque = servicosEstoque.copyWith(idBeneficiado: value);
+    }
+  }
+
+  @action
+  void selectServico(int id) {
+    servicosEstoque =
+        listaServicosEstoque.firstWhere((element) => element.idServico == id);
   }
 }

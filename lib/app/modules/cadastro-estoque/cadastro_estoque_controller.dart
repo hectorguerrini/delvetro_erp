@@ -3,6 +3,7 @@ import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/tipo_item_en
 import 'package:delvetro_erp/app/shared/enumerate/unidade_item_enum.dart';
 import 'package:delvetro_erp/app/modules/cadastro-estoque/repositories/cadastro_estoque_repository_interface.dart';
 import 'package:delvetro_erp/app/modules/cadastro-estoque/models/itens_estoque_model.dart';
+import 'package:delvetro_erp/app/shared/models/generic_fields_model.dart';
 import 'package:mobx/mobx.dart';
 
 part 'cadastro_estoque_controller.g.dart';
@@ -15,7 +16,6 @@ abstract class CadastroEstoqueControllerBase with Store {
 
   CadastroEstoqueControllerBase(this.repository) {
     getListaItens();
-    getListaDescricao();
   }
 
   @observable
@@ -27,15 +27,10 @@ abstract class CadastroEstoqueControllerBase with Store {
   @observable
   List<String> listaDescricao = [];
 
-  @action
-  List<String> getListaDescricao() {
-    var list = <String>[];
-    for (var i = 0; i < listaItensEstoque.length; i++) {
-      list.add(listaItensEstoque[i].descricao);
-    }
-    return list;
-  }
-
+  @computed
+  List<GenericFieldsModel> get getListaDescricao => listaItensEstoque
+      .map((e) => GenericFieldsModel(caption: e.descricao, id: e.idEstoque))
+      .toList();
   @action
   void setDescricao(String value) {
     itensEstoque = itensEstoque.copyWith(descricao: value);
@@ -84,6 +79,12 @@ abstract class CadastroEstoqueControllerBase with Store {
   @action
   void setCategorias(CategoriasEstoqueEnum? value) {
     itensEstoque = itensEstoque.copyWith(categoriasEstoqueEnum: value);
+  }
+
+  @action
+  void setEstoque(int id) {
+    itensEstoque =
+        listaItensEstoque.firstWhere((element) => element.idEstoque == id);
   }
 
   @action

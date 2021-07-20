@@ -2,6 +2,7 @@ import 'package:delvetro_erp/app/modules/cadastro-servicos/enumerate/tipo_extern
 import 'package:delvetro_erp/app/modules/cadastro-servicos/enumerate/tipo_servico_enum.dart';
 import 'package:delvetro_erp/app/modules/cadastro-servicos/models/servicos_model.dart';
 import 'package:delvetro_erp/app/shared/enumerate/unidade_item_enum.dart';
+import 'package:delvetro_erp/app/shared/models/generic_fields_model.dart';
 
 import 'cadastro_servicos_repository_interface.dart';
 
@@ -42,6 +43,10 @@ class CadastroServicosRepository implements ICadastroServicosRepository {
     ),
   ];
 
+  final List<GenericFieldsModel> listaBeneficiados = [
+    GenericFieldsModel(caption: 'Delvetro', id: 1)
+  ];
+
   @override
   Future salvarServico(ServicosModel servicosModel) async {
     listaServicos.add(servicosModel);
@@ -60,5 +65,10 @@ class CadastroServicosRepository implements ICadastroServicosRepository {
         listaServicos[i] = servicosEstoqueAlterado;
       }
     }
+  }
+
+  @override
+  Future<List<GenericFieldsModel>> getListaBeneficiados() async {
+    return Future.value(listaBeneficiados);
   }
 }

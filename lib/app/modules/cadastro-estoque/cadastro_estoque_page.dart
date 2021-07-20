@@ -71,7 +71,8 @@ class _CadastroEstoquePageState
                         TypeAheadFieldWidget(
                           flex: 2,
                           titulo: 'Descricao *',
-                          list: controller.getListaDescricao(),
+                          onSuggestionSelected: controller.setEstoque,
+                          list: controller.getListaDescricao,
                           isRequired: true,
                           onChanged: (value) {
                             controller.setDescricao(value);
@@ -80,9 +81,10 @@ class _CadastroEstoquePageState
                         SizedBox(
                           width: 8,
                         ),
-                        DropDownFieldWidget(
+                        DropDownFieldWidget<TipoItemEnum>(
                           flex: 2,
                           titulo: 'Tipo *',
+                          value: controller.itensEstoque.tipoItem,
                           items: TipoItemEnum.values.map((TipoItemEnum value) {
                             return DropdownMenuItem<TipoItemEnum>(
                               value: value,
@@ -95,10 +97,11 @@ class _CadastroEstoquePageState
                         SizedBox(
                           width: 8,
                         ),
-                        DropDownFieldWidget(
+                        DropDownFieldWidget<CategoriasEstoqueEnum>(
                           flex: 2,
                           titulo: 'Categorias *',
                           isRequired: true,
+                          value: controller.itensEstoque.categoriasEstoqueEnum,
                           items: CategoriasEstoqueEnum.values
                               .map((CategoriasEstoqueEnum value) {
                             return DropdownMenuItem<CategoriasEstoqueEnum>(
@@ -162,10 +165,11 @@ class _CadastroEstoquePageState
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        DropDownFieldWidget(
+                        DropDownFieldWidget<UnidadeItemEnum>(
                           flex: 2,
                           titulo: 'Unidade *',
                           isRequired: true,
+                          value: controller.itensEstoque.unidadeItem,
                           items: UnidadeItemEnum.values
                               .map((UnidadeItemEnum value) {
                             return DropdownMenuItem<UnidadeItemEnum>(

@@ -28,11 +28,20 @@ class TextFormFieldCustomWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var controller = tipoCampoTextoEnum == TipoCampoTextoEnum.VALOR
         ? MoneyMaskedTextController(
-            decimalSeparator: ',', precision: 2, leftSymbol: 'R\$')
+            decimalSeparator: ',',
+            precision: 2,
+            leftSymbol: 'R\$',
+            initialValue: double.tryParse(value ?? ''))
         : tipoCampoTextoEnum == TipoCampoTextoEnum.NUMERO
-            ? MoneyMaskedTextController(precision: 0, decimalSeparator: '')
+            ? MoneyMaskedTextController(
+                precision: 0,
+                decimalSeparator: '',
+                initialValue: double.tryParse(value ?? ''))
             : tipoCampoTextoEnum == TipoCampoTextoEnum.DOUBLE
-                ? MoneyMaskedTextController(decimalSeparator: ',', precision: 2)
+                ? MoneyMaskedTextController(
+                    decimalSeparator: ',',
+                    precision: 2,
+                    initialValue: double.tryParse(value ?? ''))
                 : TextEditingController(text: value);
 
     return Expanded(
