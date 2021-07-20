@@ -123,7 +123,7 @@ void main() {
         descricao: 'sim',
         externo: TipoExternoEnum.SIM);
     cadastroServicosController.servicosEstoque = servicoAdicional;
-    await cadastroServicosController.limparTexto();
+    cadastroServicosController.limparTexto();
     expect(cadastroServicosController.servicosEstoque.descricao, '');
     expect(cadastroServicosController.servicosEstoque.idServico, null);
     // expect(

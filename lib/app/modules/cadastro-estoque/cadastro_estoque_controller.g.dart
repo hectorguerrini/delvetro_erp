@@ -9,6 +9,15 @@ part of 'cadastro_estoque_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$CadastroEstoqueController on CadastroEstoqueControllerBase, Store {
+  Computed<List<GenericFieldsModel>>? _$getListaDescricaoComputed;
+
+  @override
+  List<GenericFieldsModel> get getListaDescricao =>
+      (_$getListaDescricaoComputed ??= Computed<List<GenericFieldsModel>>(
+              () => super.getListaDescricao,
+              name: 'CadastroEstoqueControllerBase.getListaDescricao'))
+          .value;
+
   final _$itensEstoqueAtom =
       Atom(name: 'CadastroEstoqueControllerBase.itensEstoque');
 
@@ -83,17 +92,6 @@ mixin _$CadastroEstoqueController on CadastroEstoqueControllerBase, Store {
 
   final _$CadastroEstoqueControllerBaseActionController =
       ActionController(name: 'CadastroEstoqueControllerBase');
-
-  @override
-  List<String> getListaDescricao() {
-    final _$actionInfo = _$CadastroEstoqueControllerBaseActionController
-        .startAction(name: 'CadastroEstoqueControllerBase.getListaDescricao');
-    try {
-      return super.getListaDescricao();
-    } finally {
-      _$CadastroEstoqueControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
 
   @override
   void setDescricao(String value) {
@@ -195,11 +193,34 @@ mixin _$CadastroEstoqueController on CadastroEstoqueControllerBase, Store {
   }
 
   @override
+  void setCategorias(CategoriasEstoqueEnum? value) {
+    final _$actionInfo = _$CadastroEstoqueControllerBaseActionController
+        .startAction(name: 'CadastroEstoqueControllerBase.setCategorias');
+    try {
+      return super.setCategorias(value);
+    } finally {
+      _$CadastroEstoqueControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setEstoque(int id) {
+    final _$actionInfo = _$CadastroEstoqueControllerBaseActionController
+        .startAction(name: 'CadastroEstoqueControllerBase.setEstoque');
+    try {
+      return super.setEstoque(id);
+    } finally {
+      _$CadastroEstoqueControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 itensEstoque: ${itensEstoque},
 listaItensEstoque: ${listaItensEstoque},
-listaDescricao: ${listaDescricao}
+listaDescricao: ${listaDescricao},
+getListaDescricao: ${getListaDescricao}
     ''';
   }
 }

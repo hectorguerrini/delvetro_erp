@@ -8,6 +8,8 @@ import 'package:delvetro_erp/app/modules/cadastro-servicos/models/servicos_model
     as _i4;
 import 'package:delvetro_erp/app/modules/cadastro-servicos/repository/cadastro_servicos_repository_interface.dart'
     as _i2;
+import 'package:delvetro_erp/app/shared/models/generic_fields_model.dart'
+    as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: avoid_redundant_argument_values
@@ -40,4 +42,10 @@ class MockICadastroServicosRepository extends _i1.Mock
               returnValue:
                   Future<List<_i4.ServicosModel>>.value(<_i4.ServicosModel>[]))
           as _i3.Future<List<_i4.ServicosModel>>);
+  @override
+  _i3.Future<List<_i5.GenericFieldsModel>> getListaBeneficiados() =>
+      (super.noSuchMethod(Invocation.method(#getListaBeneficiados, []),
+              returnValue: Future<List<_i5.GenericFieldsModel>>.value(
+                  <_i5.GenericFieldsModel>[]))
+          as _i3.Future<List<_i5.GenericFieldsModel>>);
 }

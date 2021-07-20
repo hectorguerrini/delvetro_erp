@@ -1,6 +1,7 @@
 class GenericFieldsModel {
-  final String? caption;
+  final int? id;
+  final String caption;
   final String? value;
 
-  GenericFieldsModel({this.caption, this.value});
+  GenericFieldsModel({required this.caption, this.value, this.id});
 }
