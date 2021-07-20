@@ -2,6 +2,7 @@ import 'package:delvetro_erp/app/modules/cadastro-servicos/enumerate/tipo_extern
 import 'package:delvetro_erp/app/modules/cadastro-servicos/enumerate/tipo_servico_enum.dart';
 import 'package:delvetro_erp/app/shared/enumerate/tipo_campo_texto_enum.dart';
 import 'package:delvetro_erp/app/shared/enumerate/unidade_item_enum.dart';
+import 'package:delvetro_erp/app/shared/models/generic_fields_model.dart';
 import 'package:delvetro_erp/app/shared/widgets/drop_down_field_widget.dart';
 import 'package:delvetro_erp/app/shared/widgets/elevated_button_padrao_widget.dart';
 import 'package:delvetro_erp/app/shared/widgets/text_form_field_custom_widget.dart';
@@ -68,20 +69,23 @@ class _CadastroServicosPageState
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TypeAheadFieldWidget(
-                        flex: 2,
-                        titulo: 'Descricao *',
-                        list: controller.getListaDescricao(),
-                        isRequired: true,
-                        onChanged: (value) {
-                          controller.setDescricao(value);
-                        },
-                      ),
+                          flex: 2,
+                          titulo: 'Descricao *',
+                          value: controller.servicosEstoque.descricao,
+                          onSuggestionSelected: (value) {
+                            controller.selectServico(value);
+                            setState(() {});
+                          },
+                          isRequired: true,
+                          onChanged: controller.setDescricao,
+                          list: controller.listaDescricao),
                       SizedBox(
                         width: 8,
                       ),
-                      DropDownFieldWidget(
+                      DropDownFieldWidget<TipoServicoEnum>(
                         flex: 1,
                         titulo: 'Tipo *',
+                        value: controller.servicosEstoque.tipoServicoEnum,
                         items:
                             TipoServicoEnum.values.map((TipoServicoEnum value) {
                           return DropdownMenuItem<TipoServicoEnum>(
@@ -95,9 +99,10 @@ class _CadastroServicosPageState
                       SizedBox(
                         width: 8,
                       ),
-                      DropDownFieldWidget(
+                      DropDownFieldWidget<TipoExternoEnum>(
                         flex: 1,
                         titulo: 'Externo *',
+                        value: controller.servicosEstoque.externo,
                         items:
                             TipoExternoEnum.values.map((TipoExternoEnum value) {
                           return DropdownMenuItem<TipoExternoEnum>(
@@ -125,25 +130,26 @@ class _CadastroServicosPageState
                       SizedBox(
                         width: 8,
                       ),
-                      DropDownFieldWidget(
+                      DropDownFieldWidget<int>(
                         flex: 2,
                         titulo: 'Beneficiário *',
-                        items:
-                            UnidadeItemEnum.values.map((UnidadeItemEnum value) {
-                          return DropdownMenuItem<UnidadeItemEnum>(
-                            value: value,
-                            child: Text(value.name),
+                        items: controller.listaBeneficiados
+                            .map((GenericFieldsModel value) {
+                          return DropdownMenuItem<int>(
+                            value: value.id,
+                            child: Text(value.caption),
                           );
                         }).toList(),
                         isRequired: true,
-                        onChanged: controller.setUnidadeCusto,
+                        onChanged: controller.setBeneficiado,
                       ),
                       SizedBox(
                         width: 8,
                       ),
-                      DropDownFieldWidget(
+                      DropDownFieldWidget<UnidadeItemEnum>(
                         flex: 2,
                         titulo: 'Unidade Cobrança *',
+                        value: controller.servicosEstoque.unidadeItemEnum,
                         items:
                             UnidadeItemEnum.values.map((UnidadeItemEnum value) {
                           return DropdownMenuItem<UnidadeItemEnum>(
@@ -163,8 +169,8 @@ class _CadastroServicosPageState
                         titulo: 'Custo *',
                         isNumber: true,
                         onChanged: (value) {
-                          var valor = double.parse(value);
-                          controller.setCusto(valor);
+                          var valor = double.tryParse(value);
+                          controller.setCusto(valor ?? 0);
                         },
                         isRequired: true,
                         value: controller.servicosEstoque.custo.toString(),
@@ -195,8 +201,9 @@ class _CadastroServicosPageState
                         child: ElevatedButtonPadraoWidget(
                           icon: Icons.check,
                           titulo: 'Salvar',
-                          onPressed: () {
-                            controller.salvarServico();
+                          onPressed: () async {
+                            await controller.salvarServico();
+                            setState(() {});
                           },
                         ),
                       ),
@@ -205,6 +212,7 @@ class _CadastroServicosPageState
                         titulo: 'Limpar',
                         onPressed: () {
                           controller.limparTexto();
+                          setState(() {});
                         },
                       ),
                     ],

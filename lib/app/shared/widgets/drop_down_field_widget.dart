@@ -6,10 +6,11 @@ class DropDownFieldWidget<T> extends StatelessWidget {
   final List<DropdownMenuItem<T>> items;
   final bool isRequired;
   final int flex;
-
+  final T? value;
   const DropDownFieldWidget({
     Key? key,
     required this.titulo,
+    this.value,
     this.isRequired = false,
     this.onChanged,
     required this.items,
@@ -28,6 +29,7 @@ class DropDownFieldWidget<T> extends StatelessWidget {
             }
             return null;
           },
+          value: value,
           isExpanded: true,
           onChanged: onChanged,
           items: items,
