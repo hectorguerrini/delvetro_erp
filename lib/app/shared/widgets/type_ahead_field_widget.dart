@@ -3,20 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 class TypeAheadFieldWidget extends StatelessWidget {
-  final String titulo;
+  final String? titulo;
   final bool isRequired;
   final List<GenericFieldsModel> list;
   final int flex;
   final String? value;
-  final void Function(String value) onChanged;
+  final void Function(String value)? onChanged;
   final void Function(int value)? onSuggestionSelected;
   const TypeAheadFieldWidget(
       {Key? key,
-      required this.titulo,
+      this.titulo,
       this.value,
       this.isRequired = false,
       required this.list,
-      required this.onChanged,
+      this.onChanged,
       required this.flex,
       this.onSuggestionSelected})
       : super(key: key);

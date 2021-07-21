@@ -1,8 +1,8 @@
-import 'package:delvetro_erp/app/modules/cadastro-produtos/enumerate/tipo_trabalho_enum.dart';
+import 'package:delvetro_erp/app/modules/cadastro-produtos/enumerate/tipo_composicao_enum.dart';
 
 class ListagemComposicaoModel {
   final int? idListagemComposicao;
-  final String nome;
+  final String descricao;
   final int? quantidade;
   final TipoComposicaoEnum tipoComposicao;
   final double? custo;
@@ -11,13 +11,13 @@ class ListagemComposicaoModel {
       {this.tipoComposicao = TipoComposicaoEnum.ESTOQUE,
       this.custo,
       this.idListagemComposicao,
-      required this.nome,
+      required this.descricao,
       required this.quantidade});
 
   factory ListagemComposicaoModel.newInstance() {
     return ListagemComposicaoModel(
       idListagemComposicao: null,
-      nome: '',
+      descricao: '',
       quantidade: 0,
       custo: 0,
     );
@@ -25,13 +25,13 @@ class ListagemComposicaoModel {
 
   ListagemComposicaoModel copyWith(
       {int? idListagemComposicao,
-      String? nome,
+      String? descricao,
       int? quantidade,
       double? custo,
       TipoComposicaoEnum? tipoComposicao}) {
     return ListagemComposicaoModel(
         idListagemComposicao: idListagemComposicao ?? this.idListagemComposicao,
-        nome: nome ?? this.nome,
+        descricao: descricao ?? this.descricao,
         quantidade: quantidade ?? this.quantidade,
         tipoComposicao: tipoComposicao ?? this.tipoComposicao,
         custo: custo ?? this.custo);

@@ -1,14 +1,18 @@
 import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/tipo_item_enum.dart';
-import 'package:delvetro_erp/app/modules/cadastro-servicos/enumerate/tipo_servico_enum.dart';
 import 'package:delvetro_erp/app/shared/enumerate/tipo_campo_texto_enum.dart';
 import 'package:delvetro_erp/app/shared/enumerate/unidade_item_enum.dart';
 import 'package:delvetro_erp/app/shared/widgets/drop_down_field_widget.dart';
 import 'package:delvetro_erp/app/shared/widgets/elevated_button_padrao_widget.dart';
+import 'package:delvetro_erp/app/shared/widgets/row_editavel_widget.dart';
+import 'package:delvetro_erp/app/shared/widgets/row_estatica_widget.dart';
 import 'package:delvetro_erp/app/shared/widgets/text_form_field_custom_widget.dart';
 import 'package:delvetro_erp/app/shared/widgets/type_ahead_field_widget.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:delvetro_erp/app/modules/cadastro-produtos/cadastro_produtos_controller.dart';
 import 'package:flutter/material.dart';
+
+import 'enumerate/tipo_composicao_enum.dart';
 
 class CadastroProdutosPage extends StatefulWidget {
   const CadastroProdutosPage({Key? key}) : super(key: key);
@@ -37,7 +41,7 @@ class CadastroProdutosPageState
               ),
             ],
           ),
-          height: MediaQuery.of(context).size.height * 0.5,
+          height: MediaQuery.of(context).size.height * 0.7,
           width: MediaQuery.of(context).size.width * 0.8,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
@@ -141,6 +145,131 @@ class CadastroProdutosPageState
                       ),
                     ],
                   ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 8,
+                  ),
+                  child: Container(
+                    height: 48,
+                    decoration: BoxDecoration(
+                        border: Border(
+                            bottom: BorderSide(color: Colors.grey, width: 1))),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Text(
+                              'Tipo',
+                              style: TextStyle(
+                                  fontSize: 22, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                              'Descrição',
+                              style: TextStyle(
+                                  fontSize: 22, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Text(
+                              'Quantidade',
+                              style: TextStyle(
+                                  fontSize: 22, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Text(
+                              'Custo',
+                              style: TextStyle(
+                                  fontSize: 22, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 4,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  height: 278,
+                  child: Observer(builder: (_) {
+                    return ListView.builder(
+                        itemCount:
+                            controller.produtosEstoque.listaComposicao.length +
+                                1,
+                        itemBuilder: (context, index) => Container(
+                              child: Container(
+                                height: 90,
+                                decoration: BoxDecoration(
+                                    border: Border(
+                                        bottom: BorderSide(
+                                            color: Colors.grey, width: 1))),
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 8),
+                                  child: index ==
+                                          controller.produtosEstoque
+                                              .listaComposicao.length
+                                      ? RowEditavelWidget(
+                                          tipoComposicaoEnum: controller
+                                              .listagemComposicaoEstoque
+                                              .tipoComposicao,
+                                          onChangedTipoComposicao:
+                                              controller.setTipoComposicao,
+                                          descricao: controller
+                                              .listagemComposicaoEstoque
+                                              .descricao,
+                                          onChangedDescricao:
+                                              controller.setDescricaoComposicao,
+                                          listDescricao:
+                                              controller.listaServicos,
+                                          addRow: () {
+                                            controller.adicionarComposicao();
+                                            setState(() {});
+                                          },
+                                          onSuggestionSelected: (value) {
+                                            controller.selectComposicao(value);
+                                            setState(() {});
+                                          },
+                                        )
+                                      : RowEstaticaWidget(
+                                          custo: controller.produtosEstoque
+                                              .listaComposicao[index].custo!,
+                                          descricao: controller.produtosEstoque
+                                              .listaComposicao[index].descricao,
+                                          tipoComposicao: controller
+                                              .produtosEstoque
+                                              .listaComposicao[index]
+                                              .tipoComposicao,
+                                          removeRow: () {
+                                            controller.removerComposicao(index);
+                                            setState(() {});
+                                          },
+                                        ),
+                                ),
+                              ),
+                            ));
+                  }),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16),

@@ -1,5 +1,7 @@
 import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/tipo_item_enum.dart';
+import 'package:delvetro_erp/app/modules/cadastro-produtos/enumerate/tipo_composicao_enum.dart';
 import 'package:delvetro_erp/app/modules/cadastro-produtos/models/listagem_composicao_model.dart';
+import 'package:delvetro_erp/app/modules/cadastro-produtos/models/tipo_servico_estoque_model.dart';
 import 'package:delvetro_erp/app/modules/cadastro-produtos/repositories/cadastro_produtos_repository_interface.dart';
 import 'package:delvetro_erp/app/shared/enumerate/unidade_item_enum.dart';
 import 'package:delvetro_erp/app/shared/models/generic_fields_model.dart';
@@ -17,17 +19,58 @@ abstract class _CadastroProdutosControllerBase with Store {
 
   _CadastroProdutosControllerBase(this.repository) {
     getListaProdutos();
+    getListaServicos();
   }
 
   @observable
   ProdutosModel produtosEstoque = ProdutosModel.newInstance();
 
   @observable
+  ListagemComposicaoModel listagemComposicaoEstoque =
+      ListagemComposicaoModel.newInstance();
+
+  @observable
+  TipoServicoEstoqueModel tipoServicoEstoque =
+      TipoServicoEstoqueModel.newInstance();
+
+  @observable
   List<ProdutosModel> listaProdutosEstoque = [];
+
+  @observable
+  List<TipoServicoEstoqueModel> listaServicosEstoque = [];
+
+  @action
+  void setDescricaoComposicao(String value) {
+    listagemComposicaoEstoque =
+        listagemComposicaoEstoque.copyWith(descricao: value);
+  }
+
+  @action
+  void setTipoComposicao(TipoComposicaoEnum? value) {
+    listagemComposicaoEstoque =
+        listagemComposicaoEstoque.copyWith(tipoComposicao: value);
+  }
+
+  @action
+  void setCustoComposicao(double value) {
+    listagemComposicaoEstoque =
+        listagemComposicaoEstoque.copyWith(custo: value);
+  }
+
+  @action
+  void setQuantidadeComposicao(int value) {
+    listagemComposicaoEstoque =
+        listagemComposicaoEstoque.copyWith(quantidade: value);
+  }
 
   @computed
   List<GenericFieldsModel> get listaDescricao => listaProdutosEstoque
       .map((e) => GenericFieldsModel(caption: e.descricao, id: e.idProduto))
+      .toList();
+
+  @computed
+  List<GenericFieldsModel> get listaServicos => listaServicosEstoque
+      .map((e) => GenericFieldsModel(caption: e.descricao, id: e.id))
       .toList();
 
   @action
@@ -60,19 +103,22 @@ abstract class _CadastroProdutosControllerBase with Store {
     produtosEstoque = produtosEstoque.copyWith(prazo: value);
   }
 
-  void adicionarComposicao(ListagemComposicaoModel listagemComposicaoModel) {
-    produtosEstoque.listaComposicao.add(listagemComposicaoModel);
+  void adicionarComposicao() {
+    produtosEstoque.listaComposicao.add(listagemComposicaoEstoque);
   }
 
-  void removerComposicao(
-      ListagemComposicaoModel listagemComposicaoModel) async {
-    produtosEstoque.listaComposicao
-        .removeWhere((element) => listagemComposicaoModel == element);
+  void removerComposicao(int index) async {
+    produtosEstoque.listaComposicao.removeAt(index);
   }
 
   @action
   Future<void> getListaProdutos() async {
     listaProdutosEstoque = await repository.getListaProdutos();
+  }
+
+  @action
+  Future<void> getListaServicos() async {
+    listaServicosEstoque = await repository.getListaServicos();
   }
 
   @action
@@ -87,11 +133,22 @@ abstract class _CadastroProdutosControllerBase with Store {
   @action
   void limparTexto() {
     produtosEstoque = ProdutosModel.newInstance();
+    listagemComposicaoEstoque = ListagemComposicaoModel.newInstance();
   }
 
   @action
   void selectProduto(int id) {
     produtosEstoque =
         listaProdutosEstoque.firstWhere((element) => element.idProduto == id);
+  }
+
+  @action
+  void selectComposicao(int id) {
+    tipoServicoEstoque =
+        listaServicosEstoque.firstWhere((element) => element.id == id);
+    listagemComposicaoEstoque = listagemComposicaoEstoque.copyWith(
+        tipoComposicao: tipoServicoEstoque.tipoComposicaoEnum,
+        custo: tipoServicoEstoque.custo,
+        descricao: tipoServicoEstoque.descricao);
   }
 }

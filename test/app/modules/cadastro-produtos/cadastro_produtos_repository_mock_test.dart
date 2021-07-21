@@ -16,11 +16,11 @@ void main() {
     prazo: '12/01/1222',
     listaComposicao: [
       ListagemComposicaoModel(
-          nome: 'Teste Nome1', quantidade: 5, idListagemComposicao: 1),
+          descricao: 'Teste Nome1', quantidade: 5, idListagemComposicao: 1),
       ListagemComposicaoModel(
-          nome: 'Teste Nome2', quantidade: 15, idListagemComposicao: 2),
+          descricao: 'Teste Nome2', quantidade: 15, idListagemComposicao: 2),
       ListagemComposicaoModel(
-          nome: 'Teste Nome3', quantidade: 25, idListagemComposicao: 3),
+          descricao: 'Teste Nome3', quantidade: 25, idListagemComposicao: 3),
     ],
     unidadeItem: UnidadeItemEnum.METROQUADRADO,
   );
@@ -51,11 +51,11 @@ void main() {
       prazo: '12/01/1222',
       listaComposicao: [
         ListagemComposicaoModel(
-            nome: 'Teste Nome1', quantidade: 5, idListagemComposicao: 1),
+            descricao: 'Teste Nome1', quantidade: 5, idListagemComposicao: 1),
         ListagemComposicaoModel(
-            nome: 'Teste Nome2', quantidade: 15, idListagemComposicao: 2),
+            descricao: 'Teste Nome2', quantidade: 15, idListagemComposicao: 2),
         ListagemComposicaoModel(
-            nome: 'Teste Nome3', quantidade: 25, idListagemComposicao: 3),
+            descricao: 'Teste Nome3', quantidade: 25, idListagemComposicao: 3),
       ],
       unidadeItem: UnidadeItemEnum.METROQUADRADO,
     );

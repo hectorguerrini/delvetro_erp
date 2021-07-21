@@ -1,6 +1,6 @@
 import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/tipo_item_enum.dart';
 import 'package:delvetro_erp/app/modules/cadastro-produtos/cadastro_produtos_controller.dart';
-import 'package:delvetro_erp/app/modules/cadastro-produtos/enumerate/tipo_trabalho_enum.dart';
+import 'package:delvetro_erp/app/modules/cadastro-produtos/enumerate/tipo_composicao_enum.dart';
 import 'package:delvetro_erp/app/modules/cadastro-produtos/models/listagem_composicao_model.dart';
 import 'package:delvetro_erp/app/modules/cadastro-produtos/models/produtos_model.dart';
 import 'package:delvetro_erp/app/modules/cadastro-produtos/repositories/cadastro_produtos_repository_interface.dart';
@@ -25,11 +25,11 @@ void main() {
       prazo: '12/01/1222',
       listaComposicao: [
         ListagemComposicaoModel(
-            nome: 'Teste Nome1', quantidade: 5, idListagemComposicao: 1),
+            descricao: 'Teste Nome1', quantidade: 5, idListagemComposicao: 1),
         ListagemComposicaoModel(
-            nome: 'Teste Nome2', quantidade: 15, idListagemComposicao: 2),
+            descricao: 'Teste Nome2', quantidade: 15, idListagemComposicao: 2),
         ListagemComposicaoModel(
-            nome: 'Teste Nome3', quantidade: 25, idListagemComposicao: 3),
+            descricao: 'Teste Nome3', quantidade: 25, idListagemComposicao: 3),
       ],
       unidadeItem: UnidadeItemEnum.METROQUADRADO,
     )
@@ -77,16 +77,16 @@ void main() {
 
   test('[TEST] - adicionarComposicao e removerComposicao', () {
     var teste = ListagemComposicaoModel(
-        nome: 'teste01',
+        descricao: 'teste01',
         quantidade: 12,
         custo: 12.1,
         tipoComposicao: TipoComposicaoEnum.SERVICO,
         idListagemComposicao: 1);
-    cadastroProdutosController.adicionarComposicao(teste);
+    cadastroProdutosController.adicionarComposicao();
     expect(
         cadastroProdutosController.produtosEstoque.listaComposicao.isNotEmpty,
         true);
-    cadastroProdutosController.removerComposicao(teste);
+    cadastroProdutosController.removerComposicao(0);
     expect(
         cadastroProdutosController.produtosEstoque.listaComposicao.isNotEmpty,
         false);
@@ -106,11 +106,11 @@ void main() {
       prazo: '12/01/1222',
       listaComposicao: [
         ListagemComposicaoModel(
-            nome: 'Teste Nome1', quantidade: 5, idListagemComposicao: 1),
+            descricao: 'Teste Nome1', quantidade: 5, idListagemComposicao: 1),
         ListagemComposicaoModel(
-            nome: 'Teste Nome2', quantidade: 15, idListagemComposicao: 2),
+            descricao: 'Teste Nome2', quantidade: 15, idListagemComposicao: 2),
         ListagemComposicaoModel(
-            nome: 'Teste Nome3', quantidade: 25, idListagemComposicao: 3),
+            descricao: 'Teste Nome3', quantidade: 25, idListagemComposicao: 3),
       ],
       unidadeItem: UnidadeItemEnum.METROQUADRADO,
     );
@@ -131,11 +131,11 @@ void main() {
       prazo: '12/01/1222',
       listaComposicao: [
         ListagemComposicaoModel(
-            nome: 'Teste Nome1', quantidade: 5, idListagemComposicao: 1),
+            descricao: 'Teste Nome1', quantidade: 5, idListagemComposicao: 1),
         ListagemComposicaoModel(
-            nome: 'Teste Nome2', quantidade: 15, idListagemComposicao: 2),
+            descricao: 'Teste Nome2', quantidade: 15, idListagemComposicao: 2),
         ListagemComposicaoModel(
-            nome: 'Teste Nome3', quantidade: 25, idListagemComposicao: 3),
+            descricao: 'Teste Nome3', quantidade: 25, idListagemComposicao: 3),
       ],
       unidadeItem: UnidadeItemEnum.METROQUADRADO,
     );
@@ -155,11 +155,11 @@ void main() {
       prazo: '12/01/1222',
       listaComposicao: [
         ListagemComposicaoModel(
-            nome: 'Teste Nome1', quantidade: 5, idListagemComposicao: 1),
+            descricao: 'Teste Nome1', quantidade: 5, idListagemComposicao: 1),
         ListagemComposicaoModel(
-            nome: 'Teste Nome2', quantidade: 15, idListagemComposicao: 2),
+            descricao: 'Teste Nome2', quantidade: 15, idListagemComposicao: 2),
         ListagemComposicaoModel(
-            nome: 'Teste Nome3', quantidade: 25, idListagemComposicao: 3),
+            descricao: 'Teste Nome3', quantidade: 25, idListagemComposicao: 3),
       ],
       unidadeItem: UnidadeItemEnum.METROQUADRADO,
     );

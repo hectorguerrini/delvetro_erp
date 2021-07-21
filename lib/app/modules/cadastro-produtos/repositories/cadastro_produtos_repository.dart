@@ -1,6 +1,8 @@
 import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/tipo_item_enum.dart';
+import 'package:delvetro_erp/app/modules/cadastro-produtos/enumerate/tipo_composicao_enum.dart';
 import 'package:delvetro_erp/app/modules/cadastro-produtos/models/listagem_composicao_model.dart';
 import 'package:delvetro_erp/app/modules/cadastro-produtos/models/produtos_model.dart';
+import 'package:delvetro_erp/app/modules/cadastro-produtos/models/tipo_servico_estoque_model.dart';
 import 'package:delvetro_erp/app/shared/enumerate/unidade_item_enum.dart';
 import 'cadastro_produtos_repository_interface.dart';
 
@@ -15,14 +17,44 @@ class CadastroProdutosRepository implements ICadastroProdutosRepository {
       prazo: '12/01/1222',
       listaComposicao: [
         ListagemComposicaoModel(
-            nome: 'Teste Nome1', quantidade: 5, idListagemComposicao: 1),
+            descricao: 'Teste Nome1',
+            quantidade: 5,
+            idListagemComposicao: 1,
+            tipoComposicao: TipoComposicaoEnum.SERVICO,
+            custo: 10),
         ListagemComposicaoModel(
-            nome: 'Teste Nome2', quantidade: 15, idListagemComposicao: 2),
+            descricao: 'Teste Nome2',
+            quantidade: 15,
+            idListagemComposicao: 2,
+            tipoComposicao: TipoComposicaoEnum.ESTOQUE,
+            custo: 20),
         ListagemComposicaoModel(
-            nome: 'Teste Nome3', quantidade: 25, idListagemComposicao: 3),
+            descricao: 'Teste Nome3',
+            quantidade: 25,
+            idListagemComposicao: 3,
+            tipoComposicao: TipoComposicaoEnum.SERVICO,
+            custo: 30),
       ],
       unidadeItem: UnidadeItemEnum.METROQUADRADO,
     )
+  ];
+
+  List<TipoServicoEstoqueModel> listaTipoServicoEstoque = [
+    TipoServicoEstoqueModel(
+        id: 1,
+        tipoComposicaoEnum: TipoComposicaoEnum.SERVICO,
+        descricao: 'teste1',
+        custo: 10),
+    TipoServicoEstoqueModel(
+        id: 2,
+        tipoComposicaoEnum: TipoComposicaoEnum.SERVICO,
+        descricao: 'teste2',
+        custo: 20),
+    TipoServicoEstoqueModel(
+        id: 3,
+        tipoComposicaoEnum: TipoComposicaoEnum.ESTOQUE,
+        descricao: 'teste3',
+        custo: 30),
   ];
 
   @override
@@ -39,6 +71,11 @@ class CadastroProdutosRepository implements ICadastroProdutosRepository {
   @override
   Future<List<ProdutosModel>> getListaProdutos() {
     return Future.value(listaProdutosEstoque);
+  }
+
+  @override
+  Future<List<TipoServicoEstoqueModel>> getListaServicos() {
+    return Future.value(listaTipoServicoEstoque);
   }
 
   @override

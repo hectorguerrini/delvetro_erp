@@ -6,6 +6,8 @@ import 'dart:async' as _i3;
 
 import 'package:delvetro_erp/app/modules/cadastro-produtos/models/produtos_model.dart'
     as _i4;
+import 'package:delvetro_erp/app/modules/cadastro-produtos/models/tipo_servico_estoque_model.dart'
+    as _i5;
 import 'package:delvetro_erp/app/modules/cadastro-produtos/repositories/cadastro_produtos_repository_interface.dart'
     as _i2;
 import 'package:mockito/mockito.dart' as _i1;
@@ -41,4 +43,10 @@ class MockICadastroProdutosRepository extends _i1.Mock
               returnValue:
                   Future<List<_i4.ProdutosModel>>.value(<_i4.ProdutosModel>[]))
           as _i3.Future<List<_i4.ProdutosModel>>);
+  @override
+  _i3.Future<List<_i5.TipoServicoEstoqueModel>> getListaServicos() =>
+      (super.noSuchMethod(Invocation.method(#getListaServicos, []),
+              returnValue: Future<List<_i5.TipoServicoEstoqueModel>>.value(
+                  <_i5.TipoServicoEstoqueModel>[]))
+          as _i3.Future<List<_i5.TipoServicoEstoqueModel>>);
 }
