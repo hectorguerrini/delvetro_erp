@@ -12,8 +12,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:delvetro_erp/app/modules/cadastro-produtos/cadastro_produtos_controller.dart';
 import 'package:flutter/material.dart';
 
-import 'enumerate/tipo_composicao_enum.dart';
-
 class CadastroProdutosPage extends StatefulWidget {
   const CadastroProdutosPage({Key? key}) : super(key: key);
   @override
@@ -261,6 +259,10 @@ class CadastroProdutosPageState
                                               .produtosEstoque
                                               .listaComposicao[index]
                                               .tipoComposicao,
+                                          quantidade: controller
+                                              .produtosEstoque
+                                              .listaComposicao[index]
+                                              .quantidade,
                                           removeRow: () {
                                             controller.removerComposicao(index);
                                             setState(() {});
