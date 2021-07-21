@@ -44,7 +44,10 @@ class RowEstaticaWidget extends StatelessWidget {
         Expanded(
             flex: 1,
             child: Center(
-                child: Text(quantidade != null ? quantidade.toString() : '',
+                child: Text(
+                    (quantidade != null || quantidade == 0)
+                        ? quantidade.toString()
+                        : '',
                     style: TextStyle(
                       fontSize: 24,
                     )))),

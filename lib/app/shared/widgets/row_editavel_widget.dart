@@ -1,5 +1,7 @@
 import 'package:delvetro_erp/app/modules/cadastro-produtos/enumerate/tipo_composicao_enum.dart';
+import 'package:delvetro_erp/app/shared/enumerate/tipo_campo_texto_enum.dart';
 import 'package:delvetro_erp/app/shared/models/generic_fields_model.dart';
+import 'package:delvetro_erp/app/shared/widgets/text_form_field_custom_widget.dart';
 import 'package:delvetro_erp/app/shared/widgets/type_ahead_field_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +17,8 @@ class RowEditavelWidget extends StatelessWidget {
   final void Function()? addRow;
   final int? quantidade;
   final double? custo;
+  final void Function(String)? onChangedQuantidade;
+
   const RowEditavelWidget(
       {Key? key,
       this.tipoComposicaoEnum,
@@ -25,7 +29,8 @@ class RowEditavelWidget extends StatelessWidget {
       required this.onChangedDescricao,
       this.addRow,
       this.quantidade,
-      required this.custo})
+      required this.custo,
+      this.onChangedQuantidade})
       : super(key: key);
 
   @override
@@ -57,13 +62,14 @@ class RowEditavelWidget extends StatelessWidget {
         SizedBox(
           width: 8,
         ),
-        Expanded(
-            flex: 1,
-            child: Center(
-                child: Text(quantidade != null ? quantidade.toString() : '',
-                    style: TextStyle(
-                      fontSize: 24,
-                    )))),
+        TextFormFieldCustomWidget(
+          tipoCampoTextoEnum: TipoCampoTextoEnum.NUMERO,
+          flex: 1,
+          isNumber: true,
+          onChanged: onChangedQuantidade,
+          isRequired: true,
+          value: quantidade.toString(),
+        ),
         SizedBox(
           width: 8,
         ),

@@ -229,6 +229,11 @@ class CadastroProdutosPageState
                                           controller.produtosEstoque
                                               .listaComposicao.length
                                       ? RowEditavelWidget(
+                                          onChangedQuantidade: (value) {
+                                            var valor = int.tryParse(value);
+                                            controller.setQuantidadeComposicao(
+                                                valor ?? 0);
+                                          },
                                           custo: controller
                                               .listagemComposicaoEstoque.custo,
                                           quantidade: controller
