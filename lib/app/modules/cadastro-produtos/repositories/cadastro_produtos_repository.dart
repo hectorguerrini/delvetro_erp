@@ -18,7 +18,6 @@ class CadastroProdutosRepository implements ICadastroProdutosRepository {
       listaComposicao: [
         ListagemComposicaoModel(
             descricao: 'Teste Nome1',
-            quantidade: 5,
             idListagemComposicao: 1,
             tipoComposicao: TipoComposicaoEnum.SERVICO,
             custo: 10),
@@ -30,9 +29,14 @@ class CadastroProdutosRepository implements ICadastroProdutosRepository {
             custo: 20),
         ListagemComposicaoModel(
             descricao: 'Teste Nome3',
-            quantidade: 25,
             idListagemComposicao: 3,
             tipoComposicao: TipoComposicaoEnum.SERVICO,
+            custo: 30),
+        ListagemComposicaoModel(
+            descricao: 'Teste Nome4',
+            quantidade: 25,
+            idListagemComposicao: 3,
+            tipoComposicao: TipoComposicaoEnum.ESTOQUE,
             custo: 30),
       ],
       unidadeItem: UnidadeItemEnum.METROQUADRADO,

@@ -12,7 +12,7 @@ class ListagemComposicaoModel {
       this.custo,
       this.idListagemComposicao,
       required this.descricao,
-      required this.quantidade});
+      this.quantidade});
 
   factory ListagemComposicaoModel.newInstance() {
     return ListagemComposicaoModel(

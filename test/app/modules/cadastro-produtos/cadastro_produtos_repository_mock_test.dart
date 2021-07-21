@@ -33,6 +33,10 @@ void main() {
     expect(cadastroProdutosRepository.listaProdutosEstoque.isNotEmpty, true);
   });
 
+  test('[TEST] - getListaServicos', () {
+    expect(cadastroProdutosRepository.listaTipoServicoEstoque.isNotEmpty, true);
+  });
+
   test('[TEST] - salvarProduto', () async {
     await cadastroProdutosRepository.salvarProduto(produtoAdicional);
     var teste = cadastroProdutosRepository.listaProdutosEstoque

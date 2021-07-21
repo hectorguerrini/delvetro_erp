@@ -229,6 +229,11 @@ class CadastroProdutosPageState
                                           controller.produtosEstoque
                                               .listaComposicao.length
                                       ? RowEditavelWidget(
+                                          custo: controller
+                                              .listagemComposicaoEstoque.custo,
+                                          quantidade: controller
+                                              .listagemComposicaoEstoque
+                                              .quantidade,
                                           tipoComposicaoEnum: controller
                                               .listagemComposicaoEstoque
                                               .tipoComposicao,
@@ -296,6 +301,14 @@ class CadastroProdutosPageState
                           setState(() {});
                         },
                       ),
+                      Spacer(),
+                      Observer(builder: (_) {
+                        return Text(
+                          'Total: ',
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
+                        );
+                      })
                     ],
                   ),
                 )

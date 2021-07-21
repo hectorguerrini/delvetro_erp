@@ -13,6 +13,8 @@ class RowEditavelWidget extends StatelessWidget {
   final List<GenericFieldsModel> listDescricao;
   final void Function(String) onChangedDescricao;
   final void Function()? addRow;
+  final int? quantidade;
+  final double? custo;
   const RowEditavelWidget(
       {Key? key,
       this.tipoComposicaoEnum,
@@ -21,7 +23,9 @@ class RowEditavelWidget extends StatelessWidget {
       this.onSuggestionSelected,
       required this.listDescricao,
       required this.onChangedDescricao,
-      this.addRow})
+      this.addRow,
+      this.quantidade,
+      required this.custo})
       : super(key: key);
 
   @override
@@ -53,11 +57,23 @@ class RowEditavelWidget extends StatelessWidget {
         SizedBox(
           width: 8,
         ),
-        Expanded(flex: 1, child: Center(child: Text('Aqui vai a quantidade'))),
+        Expanded(
+            flex: 1,
+            child: Center(
+                child: Text(quantidade != null ? quantidade.toString() : '',
+                    style: TextStyle(
+                      fontSize: 24,
+                    )))),
         SizedBox(
           width: 8,
         ),
-        Expanded(flex: 1, child: Center(child: Text('Aqui vai o custo'))),
+        Expanded(
+            flex: 1,
+            child: Center(
+                child: Text('R\$ ' + custo.toString(),
+                    style: TextStyle(
+                      fontSize: 24,
+                    )))),
         SizedBox(
           width: 8,
         ),

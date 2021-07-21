@@ -21,19 +21,43 @@ class RowEstaticaWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(flex: 1, child: Center(child: Text(tipoComposicao!.name))),
+        Expanded(
+            flex: 1,
+            child: Center(
+                child: Text(tipoComposicao!.name,
+                    style: TextStyle(
+                      fontSize: 24,
+                    )))),
         SizedBox(
           width: 8,
         ),
-        Expanded(flex: 2, child: Center(child: Text(descricao))),
+        Expanded(
+            flex: 2,
+            child: Center(
+                child: Text(descricao,
+                    style: TextStyle(
+                      fontSize: 24,
+                    )))),
         SizedBox(
           width: 8,
         ),
-        Expanded(flex: 1, child: Center(child: Text(quantidade.toString()))),
+        Expanded(
+            flex: 1,
+            child: Center(
+                child: Text(quantidade != null ? quantidade.toString() : '',
+                    style: TextStyle(
+                      fontSize: 24,
+                    )))),
         SizedBox(
           width: 8,
         ),
-        Expanded(flex: 1, child: Center(child: Text(custo.toString()))),
+        Expanded(
+            flex: 1,
+            child: Center(
+                child: Text('R\$ ' + custo.toString(),
+                    style: TextStyle(
+                      fontSize: 24,
+                    )))),
         SizedBox(
           width: 8,
         ),

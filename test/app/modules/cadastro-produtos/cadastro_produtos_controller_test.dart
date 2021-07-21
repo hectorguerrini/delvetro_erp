@@ -3,6 +3,7 @@ import 'package:delvetro_erp/app/modules/cadastro-produtos/cadastro_produtos_con
 import 'package:delvetro_erp/app/modules/cadastro-produtos/enumerate/tipo_composicao_enum.dart';
 import 'package:delvetro_erp/app/modules/cadastro-produtos/models/listagem_composicao_model.dart';
 import 'package:delvetro_erp/app/modules/cadastro-produtos/models/produtos_model.dart';
+import 'package:delvetro_erp/app/modules/cadastro-produtos/models/tipo_servico_estoque_model.dart';
 import 'package:delvetro_erp/app/modules/cadastro-produtos/repositories/cadastro_produtos_repository_interface.dart';
 import 'package:delvetro_erp/app/shared/enumerate/unidade_item_enum.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,7 +16,7 @@ import 'cadastro_produtos_controller_test.mocks.dart';
 void main() {
   ICadastroProdutosRepository repository = MockICadastroProdutosRepository();
   late CadastroProdutosController cadastroProdutosController;
-  var array = [
+  var mockProdutos = [
     ProdutosModel(
       idProduto: 10,
       descricao: 'Vidro',
@@ -34,9 +35,55 @@ void main() {
       unidadeItem: UnidadeItemEnum.METROQUADRADO,
     )
   ];
+
+  var mockServicos = [
+    TipoServicoEstoqueModel(
+        id: 1,
+        tipoComposicaoEnum: TipoComposicaoEnum.SERVICO,
+        descricao: 'teste1',
+        custo: 10),
+    TipoServicoEstoqueModel(
+        id: 2,
+        tipoComposicaoEnum: TipoComposicaoEnum.SERVICO,
+        descricao: 'teste2',
+        custo: 20),
+    TipoServicoEstoqueModel(
+        id: 3,
+        tipoComposicaoEnum: TipoComposicaoEnum.ESTOQUE,
+        descricao: 'teste3',
+        custo: 30),
+  ];
   setUpAll(() {
-    when(repository.getListaProdutos()).thenAnswer((_) async => array);
+    when(repository.getListaProdutos()).thenAnswer((_) async => mockProdutos);
+    when(repository.getListaServicos()).thenAnswer((_) async => mockServicos);
     cadastroProdutosController = CadastroProdutosController(repository);
+  });
+
+  test('[TEST] - setDescricaoComposicao', () {
+    var teste = 'teste1';
+    cadastroProdutosController.setDescricaoComposicao(teste);
+    expect(
+        cadastroProdutosController.listagemComposicaoEstoque.descricao, teste);
+  });
+
+  test('[TEST] - setTipoComposicao', () {
+    var teste = TipoComposicaoEnum.ESTOQUE;
+    cadastroProdutosController.setTipoComposicao(teste);
+    expect(cadastroProdutosController.listagemComposicaoEstoque.tipoComposicao,
+        teste);
+  });
+
+  test('[TEST] - setCustoComposicao', () {
+    var teste = 10.0;
+    cadastroProdutosController.setCustoComposicao(teste);
+    expect(cadastroProdutosController.listagemComposicaoEstoque.custo, teste);
+  });
+
+  test('[TEST] - setQuantidadeComposicao', () {
+    var teste = 10;
+    cadastroProdutosController.setQuantidadeComposicao(teste);
+    expect(
+        cadastroProdutosController.listagemComposicaoEstoque.quantidade, teste);
   });
 
   test('[TEST] - setDescricao', () {
@@ -76,12 +123,6 @@ void main() {
   });
 
   test('[TEST] - adicionarComposicao e removerComposicao', () {
-    var teste = ListagemComposicaoModel(
-        descricao: 'teste01',
-        quantidade: 12,
-        custo: 12.1,
-        tipoComposicao: TipoComposicaoEnum.SERVICO,
-        idListagemComposicao: 1);
     cadastroProdutosController.adicionarComposicao();
     expect(
         cadastroProdutosController.produtosEstoque.listaComposicao.isNotEmpty,
@@ -92,8 +133,12 @@ void main() {
         false);
   });
 
-  test('[TEST] - getListaProdutosEstoque', () {
-    expect(cadastroProdutosController.listaProdutosEstoque, array);
+  test('[TEST] - getListaProdutos', () {
+    expect(cadastroProdutosController.listaProdutosEstoque, mockProdutos);
+  });
+
+  test('[TEST] - getListaServicos', () {
+    expect(cadastroProdutosController.listaServicosEstoque, mockServicos);
   });
 
   test('[TEST] - salvarProduto args idProduto diferente null', () async {
