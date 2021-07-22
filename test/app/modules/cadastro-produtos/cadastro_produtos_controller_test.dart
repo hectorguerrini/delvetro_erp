@@ -168,6 +168,7 @@ void main() {
   });
 
   test('[TEST] - adicionarComposicao e removerComposicao', () {
+    cadastroProdutosController.produtosEstoque.listaComposicao.clear();
     cadastroProdutosController.adicionarComposicao();
     expect(
         cadastroProdutosController.produtosEstoque.listaComposicao.isNotEmpty,
