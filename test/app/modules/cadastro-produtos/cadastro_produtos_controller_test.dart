@@ -17,7 +17,7 @@ void main() {
   ICadastroProdutosRepository repository = MockICadastroProdutosRepository();
   late CadastroProdutosController cadastroProdutosController;
   var mockProdutos = [
-    ProdutosModel(
+    ProdutosModel.newInstance().copyWith(
       idProduto: 10,
       descricao: 'Vidro',
       tipoItem: TipoItemEnum.ESCRITORIO,
@@ -26,11 +26,20 @@ void main() {
       prazo: '12/01/1222',
       listaComposicao: [
         ListagemComposicaoModel(
-            descricao: 'Teste Nome1', quantidade: 5, idListagemComposicao: 1),
+            descricao: 'Teste Nome1',
+            quantidade: 5,
+            idListagemComposicao: 1,
+            custo: 10),
         ListagemComposicaoModel(
-            descricao: 'Teste Nome2', quantidade: 15, idListagemComposicao: 2),
+            descricao: 'Teste Nome2',
+            quantidade: 15,
+            idListagemComposicao: 2,
+            custo: 20),
         ListagemComposicaoModel(
-            descricao: 'Teste Nome3', quantidade: 25, idListagemComposicao: 3),
+            descricao: 'Teste Nome3',
+            quantidade: 25,
+            idListagemComposicao: 3,
+            custo: 30),
       ],
       unidadeItem: UnidadeItemEnum.METROQUADRADO,
     )
@@ -53,10 +62,36 @@ void main() {
         descricao: 'teste3',
         custo: 30),
   ];
+
   setUpAll(() {
     when(repository.getListaProdutos()).thenAnswer((_) async => mockProdutos);
     when(repository.getListaServicos()).thenAnswer((_) async => mockServicos);
     cadastroProdutosController = CadastroProdutosController(repository);
+  });
+
+  test('[TEST] - setTotal', () {
+    cadastroProdutosController.produtosEstoque =
+        ProdutosModel.newInstance().copyWith(
+      idProduto: 10,
+      descricao: 'Vidro',
+      tipoItem: TipoItemEnum.ESCRITORIO,
+      precoUnitario: 10,
+      custo: 12.5,
+      prazo: '12/01/1222',
+      listaComposicao: [
+        ListagemComposicaoModel(
+            descricao: 'Teste Nome1',
+            quantidade: 5,
+            idListagemComposicao: 1,
+            custo: 10),
+        ListagemComposicaoModel(
+            descricao: 'Teste Nome2', idListagemComposicao: 2, custo: 20),
+        ListagemComposicaoModel(
+            descricao: 'Teste Nome3', idListagemComposicao: 3, custo: 30),
+      ],
+      unidadeItem: UnidadeItemEnum.METROQUADRADO,
+    );
+    expect(cadastroProdutosController.getTotal, 100);
   });
 
   test('[TEST] - setDescricaoComposicao', () {
@@ -152,7 +187,7 @@ void main() {
   });
 
   test('[TEST] - salvarProduto args idProduto diferente null', () async {
-    var produtoAdicional = ProdutosModel(
+    var produtoAdicional = ProdutosModel.newInstance().copyWith(
       idProduto: 1,
       descricao: 'Vidro',
       tipoItem: TipoItemEnum.ESCRITORIO,
@@ -177,7 +212,7 @@ void main() {
   });
 
   test('[TEST] - salvarProduto args idProduto igual null', () async {
-    var produtoAdicional = ProdutosModel(
+    var produtoAdicional = ProdutosModel.newInstance().copyWith(
       idProduto: null,
       descricao: 'Madeira',
       tipoItem: TipoItemEnum.ESCRITORIO,
@@ -201,7 +236,7 @@ void main() {
   });
 
   test('[TEST] - limparTexto', () async {
-    var produtoAdicional = ProdutosModel(
+    var produtoAdicional = ProdutosModel.newInstance().copyWith(
       idProduto: 1,
       descricao: 'Vidro',
       tipoItem: TipoItemEnum.ESCRITORIO,

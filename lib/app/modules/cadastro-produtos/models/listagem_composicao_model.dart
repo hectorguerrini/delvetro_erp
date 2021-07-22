@@ -18,7 +18,7 @@ class ListagemComposicaoModel {
     return ListagemComposicaoModel(
       idListagemComposicao: null,
       descricao: '',
-      quantidade: 0,
+      quantidade: null,
       custo: 0,
     );
   }

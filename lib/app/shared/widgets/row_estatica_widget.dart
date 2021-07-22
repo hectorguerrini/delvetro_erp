@@ -56,10 +56,11 @@ class RowEstaticaWidget extends StatelessWidget {
         ),
         Expanded(
             flex: 1,
-            child: Text('R\$ ' + custo.toString(),
-                style: TextStyle(
-                  fontSize: 24,
-                ))),
+            child:
+                Text('R\$ ' + custo.toStringAsFixed(2).replaceFirst('.', ','),
+                    style: TextStyle(
+                      fontSize: 24,
+                    ))),
         SizedBox(
           width: 16,
         ),
@@ -67,6 +68,7 @@ class RowEstaticaWidget extends StatelessWidget {
             height: 50,
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
+                  primary: Colors.red.shade700,
                   textStyle: TextStyle(fontSize: 24),
                   elevation: 10,
                 ),

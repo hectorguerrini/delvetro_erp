@@ -4,11 +4,12 @@ import 'package:delvetro_erp/app/modules/cadastro-produtos/models/listagem_compo
 import 'package:delvetro_erp/app/modules/cadastro-produtos/models/produtos_model.dart';
 import 'package:delvetro_erp/app/modules/cadastro-produtos/models/tipo_servico_estoque_model.dart';
 import 'package:delvetro_erp/app/shared/enumerate/unidade_item_enum.dart';
+
 import 'cadastro_produtos_repository_interface.dart';
 
 class CadastroProdutosRepository implements ICadastroProdutosRepository {
   List<ProdutosModel> listaProdutosEstoque = [
-    ProdutosModel(
+    ProdutosModel.newInstance().copyWith(
       idProduto: 1,
       descricao: 'Vidro',
       tipoItem: TipoItemEnum.ESCRITORIO,
@@ -20,24 +21,24 @@ class CadastroProdutosRepository implements ICadastroProdutosRepository {
             descricao: 'Teste Nome1',
             idListagemComposicao: 1,
             tipoComposicao: TipoComposicaoEnum.SERVICO,
-            custo: 10),
+            custo: 10.2),
         ListagemComposicaoModel(
             descricao: 'Teste Nome2',
             quantidade: 15,
             idListagemComposicao: 2,
             tipoComposicao: TipoComposicaoEnum.ESTOQUE,
-            custo: 20),
+            custo: 20.6),
         ListagemComposicaoModel(
             descricao: 'Teste Nome3',
             idListagemComposicao: 3,
             tipoComposicao: TipoComposicaoEnum.SERVICO,
-            custo: 30),
+            custo: 30.8),
         ListagemComposicaoModel(
             descricao: 'Teste Nome4',
             quantidade: 25,
             idListagemComposicao: 3,
             tipoComposicao: TipoComposicaoEnum.ESTOQUE,
-            custo: 30),
+            custo: 40.7),
       ],
       unidadeItem: UnidadeItemEnum.METROQUADRADO,
     )
@@ -48,17 +49,17 @@ class CadastroProdutosRepository implements ICadastroProdutosRepository {
         id: 1,
         tipoComposicaoEnum: TipoComposicaoEnum.SERVICO,
         descricao: 'teste1',
-        custo: 10),
+        custo: 10.3),
     TipoServicoEstoqueModel(
         id: 2,
         tipoComposicaoEnum: TipoComposicaoEnum.SERVICO,
         descricao: 'teste2',
-        custo: 20),
+        custo: 20.4),
     TipoServicoEstoqueModel(
         id: 3,
         tipoComposicaoEnum: TipoComposicaoEnum.ESTOQUE,
         descricao: 'teste3',
-        custo: 30),
+        custo: 30.5),
   ];
 
   @override

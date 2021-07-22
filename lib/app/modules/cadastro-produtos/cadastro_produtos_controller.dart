@@ -39,6 +39,19 @@ abstract class _CadastroProdutosControllerBase with Store {
   @observable
   List<TipoServicoEstoqueModel> listaServicosEstoque = [];
 
+  @computed
+  double get getTotal => produtosEstoque.listaComposicao.isEmpty
+      ? 0
+      : produtosEstoque.listaComposicao
+          .map((e) =>
+              e.custo! *
+              (e.quantidade == null || e.quantidade == 0 ? 1 : e.quantidade!))
+          .reduce((value, element) => value + element.toDouble());
+
+  @computed
+  String get getTotalFormated =>
+      'Total: R\$ ' + getTotal.toStringAsFixed(2).replaceAll('.', ',');
+
   @action
   void setDescricaoComposicao(String value) {
     listagemComposicaoEstoque =
@@ -103,12 +116,20 @@ abstract class _CadastroProdutosControllerBase with Store {
     produtosEstoque = produtosEstoque.copyWith(prazo: value);
   }
 
+  @action
   void adicionarComposicao() {
-    produtosEstoque.listaComposicao.add(listagemComposicaoEstoque);
+    var lista =
+        List<ListagemComposicaoModel>.from(produtosEstoque.listaComposicao);
+    lista.add(listagemComposicaoEstoque);
+    produtosEstoque = produtosEstoque.copyWith(listaComposicao: lista);
   }
 
-  void removerComposicao(int index) async {
-    produtosEstoque.listaComposicao.removeAt(index);
+  @action
+  void removerComposicao(int index) {
+    var lista =
+        List<ListagemComposicaoModel>.from(produtosEstoque.listaComposicao);
+    lista.removeAt(index);
+    produtosEstoque = produtosEstoque.copyWith(listaComposicao: lista);
   }
 
   @action

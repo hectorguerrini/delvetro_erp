@@ -7,7 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   late CadastroProdutosRepository cadastroProdutosRepository;
-  var produtoAdicional = ProdutosModel(
+  var produtoAdicional = ProdutosModel.newInstance().copyWith(
     idProduto: 10,
     descricao: 'Vidro',
     tipoItem: TipoItemEnum.ESCRITORIO,
@@ -46,7 +46,7 @@ void main() {
   });
 
   test('[TEST] - atualizarProduto', () async {
-    var produtoMock = ProdutosModel(
+    var produtoMock = ProdutosModel.newInstance().copyWith(
       idProduto: 1,
       descricao: 'Vidro',
       tipoItem: TipoItemEnum.ESCRITORIO,

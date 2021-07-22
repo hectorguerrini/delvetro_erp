@@ -9,6 +9,20 @@ part of 'cadastro_produtos_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$CadastroProdutosController on _CadastroProdutosControllerBase, Store {
+  Computed<double>? _$getTotalComputed;
+
+  @override
+  double get getTotal =>
+      (_$getTotalComputed ??= Computed<double>(() => super.getTotal,
+              name: '_CadastroProdutosControllerBase.getTotal'))
+          .value;
+  Computed<String>? _$getTotalFormatedComputed;
+
+  @override
+  String get getTotalFormated => (_$getTotalFormatedComputed ??=
+          Computed<String>(() => super.getTotalFormated,
+              name: '_CadastroProdutosControllerBase.getTotalFormated'))
+      .value;
   Computed<List<GenericFieldsModel>>? _$listaDescricaoComputed;
 
   @override
@@ -248,6 +262,29 @@ mixin _$CadastroProdutosController on _CadastroProdutosControllerBase, Store {
   }
 
   @override
+  void adicionarComposicao() {
+    final _$actionInfo =
+        _$_CadastroProdutosControllerBaseActionController.startAction(
+            name: '_CadastroProdutosControllerBase.adicionarComposicao');
+    try {
+      return super.adicionarComposicao();
+    } finally {
+      _$_CadastroProdutosControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void removerComposicao(int index) {
+    final _$actionInfo = _$_CadastroProdutosControllerBaseActionController
+        .startAction(name: '_CadastroProdutosControllerBase.removerComposicao');
+    try {
+      return super.removerComposicao(index);
+    } finally {
+      _$_CadastroProdutosControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void limparTexto() {
     final _$actionInfo = _$_CadastroProdutosControllerBaseActionController
         .startAction(name: '_CadastroProdutosControllerBase.limparTexto');
@@ -288,6 +325,8 @@ listagemComposicaoEstoque: ${listagemComposicaoEstoque},
 tipoServicoEstoque: ${tipoServicoEstoque},
 listaProdutosEstoque: ${listaProdutosEstoque},
 listaServicosEstoque: ${listaServicosEstoque},
+getTotal: ${getTotal},
+getTotalFormated: ${getTotalFormated},
 listaDescricao: ${listaDescricao},
 listaServicos: ${listaServicos}
     ''';

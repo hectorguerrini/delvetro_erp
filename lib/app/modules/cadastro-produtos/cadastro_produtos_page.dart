@@ -69,7 +69,7 @@ class CadastroProdutosPageState
                     children: [
                       TypeAheadFieldWidget(
                           flex: 2,
-                          titulo: 'Descricao *',
+                          titulo: 'Descrição *',
                           value: controller.produtosEstoque.descricao,
                           onSuggestionSelected: (value) {
                             controller.selectProduto(value);
@@ -145,8 +145,8 @@ class CadastroProdutosPageState
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 8,
+                  padding: const EdgeInsets.only(
+                    top: 8,
                   ),
                   child: Container(
                     height: 48,
@@ -203,7 +203,7 @@ class CadastroProdutosPageState
                   ),
                 ),
                 Container(
-                  height: MediaQuery.of(context).size.height * 0.25,
+                  height: MediaQuery.of(context).size.height * 0.28,
                   child: Observer(builder: (_) {
                     return ListView.builder(
                         itemCount:
@@ -233,8 +233,10 @@ class CadastroProdutosPageState
                                         tipoComposicaoEnum: controller
                                             .listagemComposicaoEstoque
                                             .tipoComposicao,
-                                        onChangedTipoComposicao:
-                                            controller.setTipoComposicao,
+                                        onChangedTipoComposicao: (value) {
+                                          controller.setTipoComposicao(value);
+                                          setState(() {});
+                                        },
                                         descricao: controller
                                             .listagemComposicaoEstoque
                                             .descricao,
@@ -293,12 +295,16 @@ class CadastroProdutosPageState
                           setState(() {});
                         },
                       ),
-                      Spacer(),
                       Observer(builder: (_) {
-                        return Text(
-                          'Total: ',
-                          style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.bold),
+                        return Expanded(
+                          child: Container(
+                            padding: EdgeInsets.only(right: 140),
+                            alignment: Alignment.centerRight,
+                            child: Text(
+                              controller.getTotalFormated,
+                              style: TextStyle(fontSize: 24),
+                            ),
+                          ),
                         );
                       })
                     ],

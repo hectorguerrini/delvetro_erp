@@ -62,23 +62,30 @@ class RowEditavelWidget extends StatelessWidget {
         SizedBox(
           width: 8,
         ),
-        TextFormFieldCustomWidget(
-          tipoCampoTextoEnum: TipoCampoTextoEnum.NUMERO,
-          flex: 1,
-          isNumber: true,
-          onChanged: onChangedQuantidade,
-          isRequired: true,
-          value: quantidade.toString(),
-        ),
+        tipoComposicaoEnum == TipoComposicaoEnum.SERVICO
+            ? Expanded(
+                flex: 1,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16),
+                ))
+            : TextFormFieldCustomWidget(
+                tipoCampoTextoEnum: TipoCampoTextoEnum.NUMERO,
+                flex: 1,
+                isNumber: true,
+                onChanged: onChangedQuantidade,
+                isRequired: true,
+                value: quantidade.toString(),
+              ),
         SizedBox(
           width: 8,
         ),
         Expanded(
             flex: 1,
-            child: Text('R\$ ' + custo.toString(),
-                style: TextStyle(
-                  fontSize: 24,
-                ))),
+            child:
+                Text('R\$ ' + custo!.toStringAsFixed(2).replaceFirst('.', ','),
+                    style: TextStyle(
+                      fontSize: 24,
+                    ))),
         SizedBox(
           width: 16,
         ),

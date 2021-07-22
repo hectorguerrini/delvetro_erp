@@ -12,7 +12,7 @@ class ProdutosModel {
   final String? prazo;
   final List<ListagemComposicaoModel> listaComposicao;
 
-  ProdutosModel(
+  ProdutosModel._(
       {this.idProduto,
       this.custo,
       required this.listaComposicao,
@@ -23,7 +23,7 @@ class ProdutosModel {
       this.prazo});
 
   factory ProdutosModel.newInstance() {
-    return ProdutosModel(
+    return ProdutosModel._(
         descricao: '',
         custo: 0,
         idProduto: null,
@@ -43,7 +43,7 @@ class ProdutosModel {
       double? precoUnitario,
       String? prazo,
       List<ListagemComposicaoModel>? listaComposicao}) {
-    return ProdutosModel(
+    return ProdutosModel._(
         descricao: descricao ?? this.descricao,
         idProduto: idProduto ?? this.idProduto,
         tipoItem: tipoItem ?? this.tipoItem,
