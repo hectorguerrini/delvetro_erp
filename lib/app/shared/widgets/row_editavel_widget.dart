@@ -75,13 +75,12 @@ class RowEditavelWidget extends StatelessWidget {
         ),
         Expanded(
             flex: 1,
-            child: Center(
-                child: Text('R\$ ' + custo.toString(),
-                    style: TextStyle(
-                      fontSize: 24,
-                    )))),
+            child: Text('R\$ ' + custo.toString(),
+                style: TextStyle(
+                  fontSize: 24,
+                ))),
         SizedBox(
-          width: 8,
+          width: 16,
         ),
         SizedBox(
             height: 50,

@@ -23,46 +23,45 @@ class RowEstaticaWidget extends StatelessWidget {
       children: [
         Expanded(
             flex: 1,
-            child: Center(
-                child: Text(tipoComposicao!.name,
-                    style: TextStyle(
-                      fontSize: 24,
-                    )))),
+            child: Text(tipoComposicao!.name,
+                style: TextStyle(
+                  fontSize: 24,
+                ))),
         SizedBox(
           width: 8,
         ),
         Expanded(
             flex: 2,
-            child: Center(
-                child: Text(descricao,
-                    style: TextStyle(
-                      fontSize: 24,
-                    )))),
+            child: Text(descricao,
+                style: TextStyle(
+                  fontSize: 24,
+                ))),
         SizedBox(
           width: 8,
         ),
         Expanded(
             flex: 1,
-            child: Center(
-                child: Text(
-                    (quantidade != null || quantidade == 0)
-                        ? quantidade.toString()
-                        : '',
-                    style: TextStyle(
-                      fontSize: 24,
-                    )))),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16),
+              child: Text(
+                  (quantidade != null || quantidade == 0)
+                      ? quantidade.toString()
+                      : '',
+                  style: TextStyle(
+                    fontSize: 24,
+                  )),
+            )),
         SizedBox(
           width: 8,
         ),
         Expanded(
             flex: 1,
-            child: Center(
-                child: Text('R\$ ' + custo.toString(),
-                    style: TextStyle(
-                      fontSize: 24,
-                    )))),
+            child: Text('R\$ ' + custo.toString(),
+                style: TextStyle(
+                  fontSize: 24,
+                ))),
         SizedBox(
-          width: 8,
+          width: 16,
         ),
         SizedBox(
             height: 50,

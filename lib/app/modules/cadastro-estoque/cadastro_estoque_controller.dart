@@ -28,6 +28,7 @@ abstract class CadastroEstoqueControllerBase with Store {
   List<GenericFieldsModel> get listaDescricao => listaItensEstoque
       .map((e) => GenericFieldsModel(caption: e.descricao, id: e.idEstoque))
       .toList();
+
   @action
   void setDescricao(String value) {
     itensEstoque = itensEstoque.copyWith(descricao: value);
@@ -102,6 +103,7 @@ abstract class CadastroEstoqueControllerBase with Store {
   void limparTexto() {
     itensEstoque = ItensEstoqueModel.newInstance();
   }
+
   @action
   void selectProduto(int id) {
     itensEstoque =

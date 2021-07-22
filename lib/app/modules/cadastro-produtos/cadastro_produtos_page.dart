@@ -139,7 +139,7 @@ class CadastroProdutosPageState
                     children: [
                       Text(
                         'Composição',
-                        style: TextStyle(fontSize: 24),
+                        style: TextStyle(fontSize: 26),
                       ),
                     ],
                   ),
@@ -153,63 +153,57 @@ class CadastroProdutosPageState
                     decoration: BoxDecoration(
                         border: Border(
                             bottom: BorderSide(color: Colors.grey, width: 1))),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: Text(
-                              'Tipo',
-                              style: TextStyle(
-                                  fontSize: 22, fontWeight: FontWeight.bold),
-                            ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Text(
+                            'Tipo',
+                            style: TextStyle(
+                                fontSize: 24, fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(
-                            width: 8,
+                        ),
+                        Expanded(
+                          flex: 2,
+                          child: Text(
+                            'Descrição',
+                            style: TextStyle(
+                                fontSize: 24, fontWeight: FontWeight.bold),
                           ),
-                          Expanded(
-                            flex: 2,
-                            child: Text(
-                              'Descrição',
-                              style: TextStyle(
-                                  fontSize: 22, fontWeight: FontWeight.bold),
-                            ),
+                        ),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Text(
+                            'Quantidade',
+                            style: TextStyle(
+                                fontSize: 24, fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(
-                            width: 8,
+                        ),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Text(
+                            'Custo',
+                            style: TextStyle(
+                                fontSize: 24, fontWeight: FontWeight.bold),
                           ),
-                          Expanded(
-                            flex: 1,
-                            child: Text(
-                              'Quantidade',
-                              style: TextStyle(
-                                  fontSize: 22, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 8,
-                          ),
-                          Expanded(
-                            flex: 1,
-                            child: Text(
-                              'Custo',
-                              style: TextStyle(
-                                  fontSize: 22, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 4,
-                          ),
-                        ],
-                      ),
+                        ),
+                        SizedBox(
+                          width: 60,
+                        ),
+                      ],
                     ),
                   ),
                 ),
                 Container(
-                  height: 278,
+                  height: MediaQuery.of(context).size.height * 0.25,
                   child: Observer(builder: (_) {
                     return ListView.builder(
                         itemCount:
@@ -222,63 +216,56 @@ class CadastroProdutosPageState
                                     border: Border(
                                         bottom: BorderSide(
                                             color: Colors.grey, width: 1))),
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 8),
-                                  child: index ==
-                                          controller.produtosEstoque
-                                              .listaComposicao.length
-                                      ? RowEditavelWidget(
-                                          onChangedQuantidade: (value) {
-                                            var valor = int.tryParse(value);
-                                            controller.setQuantidadeComposicao(
-                                                valor ?? 0);
-                                          },
-                                          custo: controller
-                                              .listagemComposicaoEstoque.custo,
-                                          quantidade: controller
-                                              .listagemComposicaoEstoque
-                                              .quantidade,
-                                          tipoComposicaoEnum: controller
-                                              .listagemComposicaoEstoque
-                                              .tipoComposicao,
-                                          onChangedTipoComposicao:
-                                              controller.setTipoComposicao,
-                                          descricao: controller
-                                              .listagemComposicaoEstoque
-                                              .descricao,
-                                          onChangedDescricao:
-                                              controller.setDescricaoComposicao,
-                                          listDescricao:
-                                              controller.listaServicos,
-                                          addRow: () {
-                                            controller.adicionarComposicao();
-                                            setState(() {});
-                                          },
-                                          onSuggestionSelected: (value) {
-                                            controller.selectComposicao(value);
-                                            setState(() {});
-                                          },
-                                        )
-                                      : RowEstaticaWidget(
-                                          custo: controller.produtosEstoque
-                                              .listaComposicao[index].custo!,
-                                          descricao: controller.produtosEstoque
-                                              .listaComposicao[index].descricao,
-                                          tipoComposicao: controller
-                                              .produtosEstoque
-                                              .listaComposicao[index]
-                                              .tipoComposicao,
-                                          quantidade: controller
-                                              .produtosEstoque
-                                              .listaComposicao[index]
-                                              .quantidade,
-                                          removeRow: () {
-                                            controller.removerComposicao(index);
-                                            setState(() {});
-                                          },
-                                        ),
-                                ),
+                                child: index ==
+                                        controller.produtosEstoque
+                                            .listaComposicao.length
+                                    ? RowEditavelWidget(
+                                        onChangedQuantidade: (value) {
+                                          var valor = int.tryParse(value);
+                                          controller.setQuantidadeComposicao(
+                                              valor ?? 0);
+                                        },
+                                        custo: controller
+                                            .listagemComposicaoEstoque.custo,
+                                        quantidade: controller
+                                            .listagemComposicaoEstoque
+                                            .quantidade,
+                                        tipoComposicaoEnum: controller
+                                            .listagemComposicaoEstoque
+                                            .tipoComposicao,
+                                        onChangedTipoComposicao:
+                                            controller.setTipoComposicao,
+                                        descricao: controller
+                                            .listagemComposicaoEstoque
+                                            .descricao,
+                                        onChangedDescricao:
+                                            controller.setDescricaoComposicao,
+                                        listDescricao: controller.listaServicos,
+                                        addRow: () {
+                                          controller.adicionarComposicao();
+                                          setState(() {});
+                                        },
+                                        onSuggestionSelected: (value) {
+                                          controller.selectComposicao(value);
+                                          setState(() {});
+                                        },
+                                      )
+                                    : RowEstaticaWidget(
+                                        custo: controller.produtosEstoque
+                                            .listaComposicao[index].custo!,
+                                        descricao: controller.produtosEstoque
+                                            .listaComposicao[index].descricao,
+                                        tipoComposicao: controller
+                                            .produtosEstoque
+                                            .listaComposicao[index]
+                                            .tipoComposicao,
+                                        quantidade: controller.produtosEstoque
+                                            .listaComposicao[index].quantidade,
+                                        removeRow: () {
+                                          controller.removerComposicao(index);
+                                          setState(() {});
+                                        },
+                                      ),
                               ),
                             ));
                   }),

@@ -14,13 +14,22 @@ import 'cadastro_estoque_controller_test.mocks.dart';
 void main() {
   ICadastroEstoqueRepository repository = MockICadastroEstoqueRepository();
   late CadastroEstoqueController cadastroEstoqueController;
-  var array = [
-    ItensEstoqueModel(descricao: '', estoqueMinimo: 5, estoqueMaximo: 10)
+  var mockItens = [
+    ItensEstoqueModel(
+        descricao: 'Item Teste',
+        estoqueMinimo: 5,
+        estoqueMaximo: 10,
+        idEstoque: 10)
   ];
 
   setUpAll(() {
-    when(repository.getListaItensEstoque()).thenAnswer((_) async => array);
+    when(repository.getListaItensEstoque()).thenAnswer((_) async => mockItens);
     cadastroEstoqueController = CadastroEstoqueController(repository);
+  });
+
+  test('[TEST] - get listaDescricao', () {
+    var mockListaItens = cadastroEstoqueController.listaDescricao;
+    expect(mockListaItens.isNotEmpty, true);
   });
 
   test('[TEST] - setDescricao', () {
@@ -84,7 +93,7 @@ void main() {
   });
 
   test('[TEST] - getListaItens', () {
-    expect(cadastroEstoqueController.listaItensEstoque, array);
+    expect(cadastroEstoqueController.listaItensEstoque, mockItens);
   });
 
   test('[TEST] - salvarItem args idEstoque diferente null', () async {
@@ -124,19 +133,10 @@ void main() {
     cadastroEstoqueController.limparTexto();
     expect(cadastroEstoqueController.itensEstoque.descricao, '');
     expect(cadastroEstoqueController.itensEstoque.idEstoque, null);
-    // expect(
-    //     cadastroEstoqueController.itensEstoque,
-    //     ItensEstoqueModel(
-    //       idEstoque: null,
-    //       descricao: '',
-    //       tipoItem: null,
-    //       localizacao: '',
-    //       unidadeItem: null,
-    //       quantidade: 0,
-    //       estoqueMinimo: 0,
-    //       estoqueMaximo: 0,
-    //       espessura: 0,
-    //       custo: 0,
-    //     ));
+  });
+
+  test('[TEST] - selectProduto', () {
+    cadastroEstoqueController.selectProduto(10);
+    expect(cadastroEstoqueController.itensEstoque.descricao.isNotEmpty, true);
   });
 }

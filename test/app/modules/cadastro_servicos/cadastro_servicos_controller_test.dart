@@ -15,7 +15,7 @@ import 'cadastro_servicos_controller_test.mocks.dart';
 void main() {
   ICadastroServicosRepository repository = MockICadastroServicosRepository();
   late CadastroServicosController cadastroServicosController;
-  var array = [
+  var mockListaServicos = [
     ServicosModel(
         observacao: 'Não',
         prazo: '10',
@@ -25,13 +25,19 @@ void main() {
         descricao: 'sim',
         externo: TipoExternoEnum.NAO)
   ];
-  var arrayBeneficiados = [GenericFieldsModel(caption: 'Delvetro', id: 1)];
+  var mockListaBeneficiados = [GenericFieldsModel(caption: 'Delvetro', id: 1)];
 
   setUpAll(() {
-    when(repository.getListaServicos()).thenAnswer((_) async => array);
+    when(repository.getListaServicos())
+        .thenAnswer((_) async => mockListaServicos);
     when(repository.getListaBeneficiados())
-        .thenAnswer((_) async => arrayBeneficiados);
+        .thenAnswer((_) async => mockListaBeneficiados);
     cadastroServicosController = CadastroServicosController(repository);
+  });
+
+  test('[TEST] - get listaDescricao', () {
+    var mockListaDescricao = cadastroServicosController.listaDescricao;
+    expect(mockListaDescricao.isNotEmpty, true);
   });
 
   test('[TEST] - setTipoServicoEnum', () {
@@ -77,7 +83,11 @@ void main() {
   });
 
   test('[TEST] - getListaServicos', () {
-    expect(cadastroServicosController.listaServicosEstoque, array);
+    expect(cadastroServicosController.listaServicosEstoque, mockListaServicos);
+  });
+
+  test('[TEST] - getListaBeneficiados', () {
+    expect(cadastroServicosController.listaBeneficiados, mockListaBeneficiados);
   });
 
   test('[TEST] - salvarServico args idServico diferente null', () async {
