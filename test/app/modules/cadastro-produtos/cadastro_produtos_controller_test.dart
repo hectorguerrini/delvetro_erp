@@ -86,6 +86,16 @@ void main() {
         cadastroProdutosController.listagemComposicaoEstoque.quantidade, teste);
   });
 
+  test('[TEST] - get listaDescricao', () {
+    var mockListaDescricao = cadastroProdutosController.listaDescricao;
+    expect(mockListaDescricao.isNotEmpty, true);
+  });
+
+  test('[TEST] - get listaServicos', () {
+    var mockListaServicos = cadastroProdutosController.listaServicos;
+    expect(mockListaServicos.isNotEmpty, true);
+  });
+
   test('[TEST] - setDescricao', () {
     var teste = 'teste1';
     cadastroProdutosController.setDescricao(teste);
@@ -212,5 +222,21 @@ void main() {
     cadastroProdutosController.limparTexto();
     expect(cadastroProdutosController.produtosEstoque.descricao, '');
     expect(cadastroProdutosController.produtosEstoque.idProduto, null);
+  });
+
+  test('[TEST] - selectProduto', () {
+    cadastroProdutosController.selectProduto(10);
+    expect(
+        cadastroProdutosController.produtosEstoque.descricao.isNotEmpty, true);
+  });
+
+  test('[TEST] - selectComposicao', () {
+    cadastroProdutosController.selectComposicao(1);
+    expect(cadastroProdutosController.tipoServicoEstoque.descricao.isNotEmpty,
+        true);
+    expect(
+        cadastroProdutosController
+            .listagemComposicaoEstoque.descricao.isNotEmpty,
+        true);
   });
 }
