@@ -238,6 +238,7 @@ class _CadastroEstoquePageState
                             titulo: 'Salvar',
                             onPressed: () {
                               controller.salvarItem();
+                              setState(() {});
                             },
                           ),
                         ),
@@ -246,6 +247,7 @@ class _CadastroEstoquePageState
                           titulo: 'Limpar',
                           onPressed: () {
                             controller.limparTexto();
+                            setState(() {});
                           },
                         ),
                       ],

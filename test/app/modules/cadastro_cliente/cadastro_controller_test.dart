@@ -1,5 +1,6 @@
 import 'package:delvetro_erp/app/modules/cadastro-cliente/cadastro_cliente_controller.dart';
 import 'package:delvetro_erp/app/modules/cadastro-cliente/enumerates/enum_lojista.dart';
+import 'package:delvetro_erp/app/modules/cadastro-cliente/models/endereco_model.dart';
 import 'package:delvetro_erp/app/modules/cadastro-cliente/repositories/cadastro_cliente_repository_interface.dart';
 import 'package:delvetro_erp/app/modules/cadastro-cliente/models/cliente_model.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -21,13 +22,14 @@ void main() {
         nomeContato: 'nomeContato',
         rgContato: 'rgContato',
         lojista: LojistaEnum.SIM,
-        cep: 'cep',
-        endereco: 'endereco',
-        numero: 'numero',
-        complemento: 'complemento',
-        bairro: 'bairro',
-        cidade: 'cidade',
-        estado: 'estado',
+        enderecoModel: EnderecoModel(
+            bairro: 'Vila Vermelha',
+            cep: '04297000',
+            cidade: 'São Paulo',
+            complemento: 'não',
+            endereco: 'teste',
+            estado: 'SP',
+            numero: 400),
         idCliente: 10,
         email: '')
   ];
@@ -87,43 +89,43 @@ void main() {
   test('[TEST] - setCep', () {
     var teste = 'teste10';
     cadastroClienteController.setCep(teste);
-    expect(cadastroClienteController.cliente.cep, teste);
+    expect(cadastroClienteController.enderecoCliente.cep, teste);
   });
 
   test('[TEST] - setEndereco', () {
     var teste = 'teste10';
     cadastroClienteController.setEndereco(teste);
-    expect(cadastroClienteController.cliente.endereco, teste);
+    expect(cadastroClienteController.enderecoCliente.endereco, teste);
   });
 
   test('[TEST] - setNumero', () {
-    var teste = 'teste10';
+    var teste = 10;
     cadastroClienteController.setNumero(teste);
-    expect(cadastroClienteController.cliente.numero, teste);
+    expect(cadastroClienteController.enderecoCliente.numero, teste);
   });
 
   test('[TEST] - setComplemento', () {
     var teste = 'teste10';
     cadastroClienteController.setComplemento(teste);
-    expect(cadastroClienteController.cliente.complemento, teste);
+    expect(cadastroClienteController.enderecoCliente.complemento, teste);
   });
 
   test('[TEST] - setBairro', () {
     var teste = 'teste10';
     cadastroClienteController.setBairro(teste);
-    expect(cadastroClienteController.cliente.bairro, teste);
+    expect(cadastroClienteController.enderecoCliente.bairro, teste);
   });
 
   test('[TEST] - setCidade', () {
     var teste = 'teste10';
     cadastroClienteController.setCidade(teste);
-    expect(cadastroClienteController.cliente.cidade, teste);
+    expect(cadastroClienteController.enderecoCliente.cidade, teste);
   });
 
   test('[TEST] - setEstado', () {
     var teste = 'teste10';
     cadastroClienteController.setEstado(teste);
-    expect(cadastroClienteController.cliente.estado, teste);
+    expect(cadastroClienteController.enderecoCliente.estado, teste);
   });
 
   test('[TEST] - getListaClientes', () {
@@ -139,13 +141,14 @@ void main() {
         nomeContato: 'nomeContato',
         rgContato: 'rgContato',
         lojista: LojistaEnum.SIM,
-        cep: 'cep',
-        endereco: 'endereco',
-        numero: 'numero',
-        complemento: 'complemento',
-        bairro: 'bairro',
-        cidade: 'cidade',
-        estado: 'estado',
+        enderecoModel: EnderecoModel(
+            bairro: 'Vila Vermelha',
+            cep: '04297000',
+            cidade: 'São Paulo',
+            complemento: 'não',
+            endereco: 'teste',
+            estado: 'SP',
+            numero: 400),
         idCliente: 1,
         email: '');
     cadastroClienteController.cliente = clienteAdicional;
@@ -164,13 +167,14 @@ void main() {
         nomeContato: 'nomeContato',
         rgContato: 'rgContato',
         lojista: LojistaEnum.SIM,
-        cep: 'cep',
-        endereco: 'endereco',
-        numero: 'numero',
-        complemento: 'complemento',
-        bairro: 'bairro',
-        cidade: 'cidade',
-        estado: 'estado',
+        enderecoModel: EnderecoModel(
+            bairro: 'Vila Vermelha',
+            cep: '04297000',
+            cidade: 'São Paulo',
+            complemento: 'não',
+            endereco: 'teste',
+            estado: 'SP',
+            numero: 400),
         idCliente: null,
         email: '');
     cadastroClienteController.cliente = clienteAdicional;
@@ -188,13 +192,14 @@ void main() {
         nomeContato: 'nomeContato',
         rgContato: 'rgContato',
         lojista: LojistaEnum.SIM,
-        cep: 'cep',
-        endereco: 'endereco',
-        numero: 'numero',
-        complemento: 'complemento',
-        bairro: 'bairro',
-        cidade: 'cidade',
-        estado: 'estado',
+        enderecoModel: EnderecoModel(
+            bairro: 'Vila Vermelha',
+            cep: '04297000',
+            cidade: 'São Paulo',
+            complemento: 'não',
+            endereco: 'teste',
+            estado: 'SP',
+            numero: 400),
         idCliente: 1,
         email: '');
     cadastroClienteController.cliente = clienteAdicional;

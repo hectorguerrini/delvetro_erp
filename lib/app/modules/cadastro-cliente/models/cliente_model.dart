@@ -1,4 +1,5 @@
 import 'package:delvetro_erp/app/modules/cadastro-cliente/enumerates/enum_lojista.dart';
+import 'package:delvetro_erp/app/modules/cadastro-cliente/models/endereco_model.dart';
 
 class ClienteModel {
   final String nome;
@@ -7,13 +8,7 @@ class ClienteModel {
   final String nomeContato;
   final String rgContato;
   final LojistaEnum? lojista;
-  final String cep;
-  final String endereco;
-  final String numero;
-  final String complemento;
-  final String bairro;
-  final String cidade;
-  final String estado;
+  final EnderecoModel enderecoModel;
   final int? idCliente;
   final List<String> telefones;
   final String email;
@@ -26,14 +21,8 @@ class ClienteModel {
     required this.nomeContato,
     required this.rgContato,
     required this.email,
+    required this.enderecoModel,
     this.lojista,
-    required this.cep,
-    required this.endereco,
-    required this.numero,
-    required this.complemento,
-    required this.bairro,
-    required this.cidade,
-    required this.estado,
     this.idCliente,
   });
 
@@ -46,13 +35,14 @@ class ClienteModel {
       nomeContato: '',
       rgContato: '',
       lojista: null,
-      cep: '',
-      endereco: '',
-      numero: '',
-      complemento: '',
-      bairro: '',
-      cidade: '',
-      estado: '',
+      enderecoModel: EnderecoModel(
+          cep: '',
+          bairro: '',
+          cidade: '',
+          complemento: '',
+          endereco: '',
+          estado: '',
+          numero: null),
       idCliente: null,
       email: '',
     );
@@ -66,13 +56,7 @@ class ClienteModel {
     String? nomeContato,
     String? rgContato,
     LojistaEnum? lojista,
-    String? cep,
-    String? endereco,
-    String? numero,
-    String? complemento,
-    String? bairro,
-    String? cidade,
-    String? estado,
+    EnderecoModel? enderecoModel,
     int? idCliente,
     String? email,
   }) {
@@ -84,13 +68,7 @@ class ClienteModel {
       nomeContato: nomeContato ?? this.nomeContato,
       rgContato: rgContato ?? this.rgContato,
       lojista: lojista ?? this.lojista,
-      cep: cep ?? this.cep,
-      endereco: endereco ?? this.endereco,
-      numero: numero ?? this.numero,
-      complemento: complemento ?? this.complemento,
-      bairro: bairro ?? this.bairro,
-      cidade: cidade ?? this.cidade,
-      estado: estado ?? this.estado,
+      enderecoModel: enderecoModel ?? this.enderecoModel,
       idCliente: idCliente ?? this.idCliente,
       email: email ?? this.email,
     );

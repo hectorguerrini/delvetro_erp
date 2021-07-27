@@ -1,4 +1,5 @@
 import 'package:delvetro_erp/app/modules/cadastro-cliente/enumerates/enum_lojista.dart';
+import 'package:delvetro_erp/app/modules/cadastro-cliente/models/endereco_model.dart';
 import 'package:delvetro_erp/app/modules/cadastro-cliente/repositories/cadastro_cliente_repository.dart';
 import 'package:delvetro_erp/app/modules/cadastro-cliente/models/cliente_model.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -13,13 +14,14 @@ void main() {
       nomeContato: 'nomeContato',
       rgContato: 'rgContato',
       lojista: LojistaEnum.SIM,
-      cep: 'cep',
-      endereco: 'endereco',
-      numero: 'numero',
-      complemento: 'complemento',
-      bairro: 'bairro',
-      cidade: 'sp',
-      estado: 'estado',
+      enderecoModel: EnderecoModel(
+          bairro: 'Vila Vermelha',
+          cep: '04297000',
+          cidade: 'São Paulo',
+          complemento: 'não',
+          endereco: 'teste',
+          estado: 'SP',
+          numero: 400),
       idCliente: 10,
       email: '');
   setUpAll(() {
@@ -47,13 +49,14 @@ void main() {
         nomeContato: 'nomeContato',
         rgContato: 'rgContato',
         lojista: LojistaEnum.SIM,
-        cep: 'cep',
-        endereco: 'endereco',
-        numero: 'numero',
-        complemento: 'complemento',
-        bairro: 'bairro',
-        cidade: 'sp',
-        estado: 'estado',
+        enderecoModel: EnderecoModel(
+            bairro: 'Vila Vermelha',
+            cep: '04297000',
+            cidade: 'São Paulo',
+            complemento: 'não',
+            endereco: 'teste',
+            estado: 'SP',
+            numero: 400),
         idCliente: 1,
         email: '');
     await cadastroClienteRepository.atualizarCliente(clienteMock);

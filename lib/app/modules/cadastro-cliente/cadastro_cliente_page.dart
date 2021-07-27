@@ -36,24 +36,28 @@ class CadastroClientePageState
                 ),
               ],
             ),
-            height: MediaQuery.of(context).size.height * 0.5,
+            height: MediaQuery.of(context).size.height * 0.7,
             width: MediaQuery.of(context).size.width * 0.8,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 32, vertical: 20),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Cadastro de Clientes',
-                        style: TextStyle(fontSize: 36),
-                      ),
-                      Text(
-                        '* Campos Obrigatórios',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Cadastro de Clientes',
+                          style: TextStyle(fontSize: 36),
+                        ),
+                        Text(
+                          '* Campos obrigatórios',
+                          style: TextStyle(fontSize: 20),
+                        )
+                      ],
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16),
@@ -72,12 +76,18 @@ class CadastroClientePageState
                           titulo: 'Nome *',
                           isRequired: true,
                         ),
+                        SizedBox(
+                          width: 16,
+                        ),
                         TextFormFieldCustomWidget(
                           flex: 2,
                           titulo: 'Razão Social *',
                           isRequired: true,
                           onChanged: controller.setRazaoSocial,
                           value: controller.cliente.razaoSocial,
+                        ),
+                        SizedBox(
+                          width: 16,
                         ),
                         TextFormFieldCustomWidget(
                           flex: 2,
@@ -93,7 +103,7 @@ class CadastroClientePageState
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
+                      children: [
                         TextFormFieldCustomWidget(
                           flex: 2,
                           titulo: 'Email *',
@@ -101,27 +111,33 @@ class CadastroClientePageState
                           onChanged: controller.setEmail,
                           value: controller.cliente.email,
                         ),
+                        SizedBox(
+                          width: 16,
+                        ),
                         TextFormFieldCustomWidget(
                           flex: 1,
                           titulo: 'Telefone 1 *',
                           isRequired: true,
                           isNumber: true,
                           tipoCampoTextoEnum: TipoCampoTextoEnum.NUMERO,
-                          value: controller.cliente.telefones[0],
+                        ),
+                        SizedBox(
+                          width: 16,
                         ),
                         TextFormFieldCustomWidget(
                           flex: 1,
                           titulo: 'Telefone 2',
                           isNumber: true,
                           tipoCampoTextoEnum: TipoCampoTextoEnum.NUMERO,
-                          value: controller.cliente.telefones[1],
+                        ),
+                        SizedBox(
+                          width: 16,
                         ),
                         TextFormFieldCustomWidget(
                           flex: 1,
                           titulo: 'Telefone 3',
                           isNumber: true,
                           tipoCampoTextoEnum: TipoCampoTextoEnum.NUMERO,
-                          value: controller.cliente.telefones[2],
                         ),
                       ],
                     ),
@@ -138,6 +154,9 @@ class CadastroClientePageState
                           onChanged: controller.setNomeContato,
                           value: controller.cliente.nomeContato,
                         ),
+                        SizedBox(
+                          width: 16,
+                        ),
                         TextFormFieldCustomWidget(
                           flex: 1,
                           titulo: 'RG Contato *',
@@ -145,8 +164,11 @@ class CadastroClientePageState
                           onChanged: controller.setRgContato,
                           value: controller.cliente.rgContato,
                         ),
+                        SizedBox(
+                          width: 16,
+                        ),
                         DropDownFieldWidget<LojistaEnum>(
-                          flex: 2,
+                          flex: 1,
                           titulo: 'Lojista *',
                           items: LojistaEnum.values.map((LojistaEnum value) {
                             return DropdownMenuItem<LojistaEnum>(
@@ -171,22 +193,44 @@ class CadastroClientePageState
                           titulo: 'Cep *',
                           isRequired: true,
                           onChanged: controller.setCep,
+                          value: controller.cliente.enderecoModel!.cep,
+                        ),
+                        SizedBox(
+                          width: 16,
+                        ),
+                        ElevatedButtonPadraoWidget(
+                          icon: Icons.replay_outlined,
+                          titulo: 'Consultar CEP',
+                          onPressed: () {
+                            controller.procuraCEP(
+                                controller.cliente.enderecoModel!.cep);
+                            setState(() {});
+                          },
+                        ),
+                        SizedBox(
+                          width: 16,
                         ),
                         TextFormFieldCustomWidget(
-                          flex: 2,
-                          titulo: 'Endereço *',
-                          isRequired: true,
-                          onChanged: controller.setEndereco,
-                          value: controller.cliente.endereco,
+                            flex: 2,
+                            titulo: 'Endereço *',
+                            isRequired: true,
+                            onChanged: controller.setEndereco,
+                            value: controller.cliente.enderecoModel!.endereco),
+                        SizedBox(
+                          width: 16,
                         ),
                         TextFormFieldCustomWidget(
                           flex: 1,
                           titulo: 'Numero *',
                           isRequired: true,
                           isNumber: true,
-                          onChanged: controller.setNumero,
+                          onChanged: (value) {
+                            var valor = int.parse(value);
+                            controller.setNumero(valor);
+                          },
                           tipoCampoTextoEnum: TipoCampoTextoEnum.NUMERO,
-                          value: controller.cliente.numero,
+                          value: controller.cliente.enderecoModel!.numero
+                              .toString(),
                         ),
                       ],
                     ),
@@ -198,59 +242,69 @@ class CadastroClientePageState
                       children: [
                         TextFormFieldCustomWidget(
                           flex: 1,
-                          titulo: 'Complemento',
-                          onChanged: controller.setComplemento,
-                          value: controller.cliente.complemento,
-                        ),
-                        TextFormFieldCustomWidget(
-                          flex: 1,
                           titulo: 'Bairro *',
                           isRequired: true,
                           onChanged: controller.setBairro,
-                          value: controller.cliente.bairro,
+                          value: controller.cliente.enderecoModel!.bairro,
+                        ),
+                        SizedBox(
+                          width: 16,
                         ),
                         TextFormFieldCustomWidget(
                           flex: 1,
                           titulo: 'Cidade *',
                           isRequired: true,
                           onChanged: controller.setCidade,
-                          value: controller.cliente.cidade,
+                          value: controller.cliente.enderecoModel!.cidade,
+                        ),
+                        SizedBox(
+                          width: 16,
                         ),
                         TextFormFieldCustomWidget(
                           flex: 1,
                           titulo: 'Estado *',
                           isRequired: true,
                           onChanged: controller.setEstado,
-                          value: controller.cliente.estado,
-                        )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 32),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        ElevatedButtonPadraoWidget(
-                          icon: Icons.check,
-                          titulo: 'Salvar',
-                          onPressed: () {
-                            controller.salvarCliente();
-                          },
+                          value: controller.cliente.enderecoModel!.estado,
                         ),
                         SizedBox(
                           width: 16,
                         ),
-                        ElevatedButtonPadraoWidget(
-                          icon: Icons.sync,
-                          titulo: 'Limpar',
-                          onPressed: () {
-                            controller.limparTexto();
-                          },
+                        TextFormFieldCustomWidget(
+                          flex: 1,
+                          titulo: 'Complemento',
+                          onChanged: controller.setComplemento,
+                          value: controller.cliente.enderecoModel!.complemento,
                         ),
                       ],
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 32),
+                          child: ElevatedButtonPadraoWidget(
+                            icon: Icons.check,
+                            titulo: 'Salvar',
+                            onPressed: () {
+                              controller.salvarCliente();
+                              setState(() {});
+                            },
+                          ),
+                        ),
+                        ElevatedButtonPadraoWidget(
+                          icon: Icons.replay_outlined,
+                          titulo: 'Limpar',
+                          onPressed: () {
+                            controller.limparTexto();
+                            setState(() {});
+                          },
+                        ),
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),
