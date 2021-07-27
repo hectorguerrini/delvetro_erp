@@ -1,7 +1,7 @@
-import 'package:delvetro_erp/app/modules/cadastro_cliente/cadastro_cliente_controller.dart';
-import 'package:delvetro_erp/app/modules/cadastro_cliente/enumerates/enum_lojista.dart';
-import 'package:delvetro_erp/app/modules/cadastro_cliente/repositories/cadastro_cliente_repository_interface.dart';
-import 'package:delvetro_erp/app/shared/models/cliente_models.dart';
+import 'package:delvetro_erp/app/modules/cadastro-cliente/cadastro_cliente_controller.dart';
+import 'package:delvetro_erp/app/modules/cadastro-cliente/enumerates/enum_lojista.dart';
+import 'package:delvetro_erp/app/modules/cadastro-cliente/repositories/cadastro_cliente_repository_interface.dart';
+import 'package:delvetro_erp/app/modules/cadastro-cliente/models/cliente_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';

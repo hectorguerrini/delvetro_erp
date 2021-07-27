@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'enumerate/tipo_item_enum.dart';
-import 'enumerate/unidade_item_enum.dart';
 
 class CadastroEstoquePage extends StatefulWidget {
   const CadastroEstoquePage({Key? key}) : super(key: key);

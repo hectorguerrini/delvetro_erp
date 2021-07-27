@@ -1,14 +1,14 @@
-import 'package:delvetro_erp/app/modules/cadastro_cliente/enumerates/enum_lojista.dart';
-import 'package:delvetro_erp/app/shared/models/cliente_models.dart';
+import 'package:delvetro_erp/app/modules/cadastro-cliente/enumerates/enum_lojista.dart';
+import 'package:delvetro_erp/app/modules/cadastro-cliente/models/cliente_model.dart';
 
 import 'cadastro_cliente_repository_interface.dart';
 
 class ClienteCadastroRepository implements ICadastroClienteRepository {
-  var clientes = <ClienteModel>[
+  List<ClienteModel> listaClientes = [
     ClienteModel(
       telefones: [],
       nome: 'Guerreiro',
-      razaoSocial: 'Gay',
+      razaoSocial: 'teste',
       cpf: 'cpf',
       nomeContato: 'nomeContato',
       rgContato: 'rgContato',
@@ -21,12 +21,12 @@ class ClienteCadastroRepository implements ICadastroClienteRepository {
       cidade: 'cidade',
       estado: 'estado',
       idCliente: 1,
-      email: '',
+      email: 'guerreiro@gmail.com',
     ),
     ClienteModel(
         telefones: [],
         nome: 'Ronaldola',
-        razaoSocial: 'Baitola',
+        razaoSocial: 'teste1',
         cpf: 'cpf',
         nomeContato: 'nomeContato',
         rgContato: 'rgContato',
@@ -39,20 +39,25 @@ class ClienteCadastroRepository implements ICadastroClienteRepository {
         cidade: 'cidade',
         estado: 'estado',
         idCliente: 2,
-        email: ''),
+        email: 'ronaldo@hotmail.com'),
   ];
 
   @override
   Future<void> salvarCliente(ClienteModel cliente) async {
-    clientes.add(cliente);
+    listaClientes.add(cliente);
+  }
+
+  @override
+  Future<List<ClienteModel>> getListaClientes() {
+    return Future.value(listaClientes);
   }
 
   @override
   Future<void> alterarCliente(ClienteModel cliente) async {
     var clienteAlterado = cliente;
-    for (var i = 0; i < clientes.length; i++) {
-      if (clienteAlterado.idCliente == clientes[i].idCliente) {
-        clientes[i] = clienteAlterado;
+    for (var i = 0; i < listaClientes.length; i++) {
+      if (clienteAlterado.idCliente == listaClientes[i].idCliente) {
+        listaClientes[i] = clienteAlterado;
       }
     }
   }

@@ -1,4 +1,4 @@
-import 'package:delvetro_erp/app/modules/cadastro_cliente/enumerates/enum_lojista.dart';
+import 'package:delvetro_erp/app/modules/cadastro-cliente/enumerates/enum_lojista.dart';
 
 class ClienteModel {
   final String nome;

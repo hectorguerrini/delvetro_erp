@@ -4,9 +4,10 @@
 
 import 'dart:async' as _i3;
 
-import 'package:delvetro_erp/app/modules/cadastro_cliente/repositories/cadastro_cliente_repository_interface.dart'
+import 'package:delvetro_erp/app/modules/cadastro-cliente/models/cliente_model.dart'
+    as _i4;
+import 'package:delvetro_erp/app/modules/cadastro-cliente/repositories/cadastro_cliente_repository_interface.dart'
     as _i2;
-import 'package:delvetro_erp/app/shared/models/cliente_models.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: avoid_redundant_argument_values
@@ -34,4 +35,10 @@ class MockICadastroClienteRepository extends _i1.Mock
       (super.noSuchMethod(Invocation.method(#alterarCliente, [cliente]),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future.value()) as _i3.Future<void>);
+  @override
+  _i3.Future<List<_i4.ClienteModel>> getListaClientes() =>
+      (super.noSuchMethod(Invocation.method(#getListaClientes, []),
+              returnValue:
+                  Future<List<_i4.ClienteModel>>.value(<_i4.ClienteModel>[]))
+          as _i3.Future<List<_i4.ClienteModel>>);
 }
