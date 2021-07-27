@@ -1,16 +1,19 @@
 import 'package:delvetro_erp/app/modules/cadastro-cliente/cadastro_cliente_controller.dart';
 import 'package:delvetro_erp/app/modules/cadastro-cliente/enumerates/enum_lojista.dart';
 import 'package:delvetro_erp/app/modules/cadastro-cliente/models/endereco_model.dart';
+import 'package:delvetro_erp/app/modules/cadastro-cliente/models/result_cep_model.dart';
 import 'package:delvetro_erp/app/modules/cadastro-cliente/repositories/cadastro_cliente_repository_interface.dart';
 import 'package:delvetro_erp/app/modules/cadastro-cliente/models/cliente_model.dart';
+import 'package:delvetro_erp/app/shared/repositories/repository_external.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'cadastro_controller_test.mocks.dart';
 
-@GenerateMocks([ICadastroClienteRepository])
+@GenerateMocks([ICadastroClienteRepository, RepositoryExternal])
 void main() {
   ICadastroClienteRepository repository = MockICadastroClienteRepository();
+  RepositoryExternal externalRepository = MockRepositoryExternal();
   late CadastroClienteController cadastroClienteController;
 
   var mockClientes = [
@@ -29,14 +32,32 @@ void main() {
             complemento: 'não',
             endereco: 'teste',
             estado: 'SP',
-            numero: 400),
+            numero: '400'),
         idCliente: 10,
         email: '')
   ];
 
+  var mockCep = ResultCepModel(
+      bairro: 'Vila Vermelha',
+      cep: '04297000',
+      localidade: 'São Paulo',
+      logradouro: 'Avenida Paulista',
+      numero: '',
+      uf: 'SP',
+      complemento: '');
+
   setUpAll(() {
     when(repository.getListaClientes()).thenAnswer((_) async => mockClientes);
-    cadastroClienteController = CadastroClienteController(repository);
+    when(externalRepository.getCepExterno(mockCep.cep))
+        .thenAnswer((_) async => mockCep);
+    cadastroClienteController =
+        CadastroClienteController(repository, externalRepository);
+  });
+
+  test('[TEST] - procuraCep', () async {
+    await cadastroClienteController.procuraCep(mockCep.cep);
+    expect(
+        cadastroClienteController.cliente.enderecoModel.bairro, mockCep.bairro);
   });
 
   test('[TEST] - get listaNomes', () {
@@ -95,11 +116,11 @@ void main() {
   test('[TEST] - setEndereco', () {
     var teste = 'teste10';
     cadastroClienteController.setEndereco(teste);
-    expect(cadastroClienteController.enderecoCliente.endereco, teste);
+    expect(cadastroClienteController.enderecoCliente.logradouro, teste);
   });
 
   test('[TEST] - setNumero', () {
-    var teste = 10;
+    var teste = '10';
     cadastroClienteController.setNumero(teste);
     expect(cadastroClienteController.enderecoCliente.numero, teste);
   });
@@ -119,13 +140,13 @@ void main() {
   test('[TEST] - setCidade', () {
     var teste = 'teste10';
     cadastroClienteController.setCidade(teste);
-    expect(cadastroClienteController.enderecoCliente.cidade, teste);
+    expect(cadastroClienteController.enderecoCliente.localidade, teste);
   });
 
   test('[TEST] - setEstado', () {
     var teste = 'teste10';
     cadastroClienteController.setEstado(teste);
-    expect(cadastroClienteController.enderecoCliente.estado, teste);
+    expect(cadastroClienteController.enderecoCliente.uf, teste);
   });
 
   test('[TEST] - getListaClientes', () {
@@ -148,7 +169,7 @@ void main() {
             complemento: 'não',
             endereco: 'teste',
             estado: 'SP',
-            numero: 400),
+            numero: '400'),
         idCliente: 1,
         email: '');
     cadastroClienteController.cliente = clienteAdicional;
@@ -174,7 +195,7 @@ void main() {
             complemento: 'não',
             endereco: 'teste',
             estado: 'SP',
-            numero: 400),
+            numero: '400'),
         idCliente: null,
         email: '');
     cadastroClienteController.cliente = clienteAdicional;
@@ -199,7 +220,7 @@ void main() {
             complemento: 'não',
             endereco: 'teste',
             estado: 'SP',
-            numero: 400),
+            numero: '400'),
         idCliente: 1,
         email: '');
     cadastroClienteController.cliente = clienteAdicional;

@@ -36,13 +36,13 @@ mixin _$CadastroClienteController on _CadastroControllerBase, Store {
       Atom(name: '_CadastroControllerBase.enderecoCliente');
 
   @override
-  EnderecoModel get enderecoCliente {
+  ResultCepModel get enderecoCliente {
     _$enderecoClienteAtom.reportRead();
     return super.enderecoCliente;
   }
 
   @override
-  set enderecoCliente(EnderecoModel value) {
+  set enderecoCliente(ResultCepModel value) {
     _$enderecoClienteAtom.reportWrite(value, super.enderecoCliente, () {
       super.enderecoCliente = value;
     });
@@ -64,12 +64,12 @@ mixin _$CadastroClienteController on _CadastroControllerBase, Store {
     });
   }
 
-  final _$procuraCEPAsyncAction =
-      AsyncAction('_CadastroControllerBase.procuraCEP');
+  final _$procuraCepAsyncAction =
+      AsyncAction('_CadastroControllerBase.procuraCep');
 
   @override
-  Future<void> procuraCEP(String cep) {
-    return _$procuraCEPAsyncAction.run(() => super.procuraCEP(cep));
+  Future<void> procuraCep(String cep) {
+    return _$procuraCepAsyncAction.run(() => super.procuraCep(cep));
   }
 
   final _$getListaClientesAsyncAction =
@@ -191,7 +191,7 @@ mixin _$CadastroClienteController on _CadastroControllerBase, Store {
   }
 
   @override
-  void setNumero(int numero) {
+  void setNumero(String numero) {
     final _$actionInfo = _$_CadastroControllerBaseActionController.startAction(
         name: '_CadastroControllerBase.setNumero');
     try {

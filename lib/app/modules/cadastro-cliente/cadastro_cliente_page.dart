@@ -193,7 +193,7 @@ class CadastroClientePageState
                           titulo: 'Cep *',
                           isRequired: true,
                           onChanged: controller.setCep,
-                          value: controller.cliente.enderecoModel!.cep,
+                          value: controller.enderecoCliente.cep.toString(),
                         ),
                         SizedBox(
                           width: 16,
@@ -201,9 +201,9 @@ class CadastroClientePageState
                         ElevatedButtonPadraoWidget(
                           icon: Icons.replay_outlined,
                           titulo: 'Consultar CEP',
-                          onPressed: () {
-                            controller.procuraCEP(
-                                controller.cliente.enderecoModel!.cep);
+                          onPressed: () async {
+                            await controller.procuraCep(
+                                controller.enderecoCliente.cep.toString());
                             setState(() {});
                           },
                         ),
@@ -215,7 +215,7 @@ class CadastroClientePageState
                             titulo: 'Endereço *',
                             isRequired: true,
                             onChanged: controller.setEndereco,
-                            value: controller.cliente.enderecoModel!.endereco),
+                            value: controller.cliente.enderecoModel.endereco),
                         SizedBox(
                           width: 16,
                         ),
@@ -224,13 +224,9 @@ class CadastroClientePageState
                           titulo: 'Numero *',
                           isRequired: true,
                           isNumber: true,
-                          onChanged: (value) {
-                            var valor = int.parse(value);
-                            controller.setNumero(valor);
-                          },
+                          onChanged: controller.setNumero,
                           tipoCampoTextoEnum: TipoCampoTextoEnum.NUMERO,
-                          value: controller.cliente.enderecoModel!.numero
-                              .toString(),
+                          value: controller.cliente.enderecoModel.endereco,
                         ),
                       ],
                     ),
@@ -245,7 +241,7 @@ class CadastroClientePageState
                           titulo: 'Bairro *',
                           isRequired: true,
                           onChanged: controller.setBairro,
-                          value: controller.cliente.enderecoModel!.bairro,
+                          value: controller.cliente.enderecoModel.bairro,
                         ),
                         SizedBox(
                           width: 16,
@@ -255,7 +251,7 @@ class CadastroClientePageState
                           titulo: 'Cidade *',
                           isRequired: true,
                           onChanged: controller.setCidade,
-                          value: controller.cliente.enderecoModel!.cidade,
+                          value: controller.cliente.enderecoModel.cidade,
                         ),
                         SizedBox(
                           width: 16,
@@ -264,8 +260,8 @@ class CadastroClientePageState
                           flex: 1,
                           titulo: 'Estado *',
                           isRequired: true,
-                          onChanged: controller.setEstado,
-                          value: controller.cliente.enderecoModel!.estado,
+                          // onChanged: controller.setEstado,
+                          value: controller.cliente.enderecoModel.estado,
                         ),
                         SizedBox(
                           width: 16,
@@ -274,7 +270,7 @@ class CadastroClientePageState
                           flex: 1,
                           titulo: 'Complemento',
                           onChanged: controller.setComplemento,
-                          value: controller.cliente.enderecoModel!.complemento,
+                          value: controller.cliente.enderecoModel.complemento,
                         ),
                       ],
                     ),

@@ -42,7 +42,7 @@ class ClienteModel {
           complemento: '',
           endereco: '',
           estado: '',
-          numero: null),
+          numero: ''),
       idCliente: null,
       email: '',
     );

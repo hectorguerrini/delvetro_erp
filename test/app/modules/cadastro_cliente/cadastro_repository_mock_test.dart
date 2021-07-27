@@ -21,7 +21,7 @@ void main() {
           complemento: 'não',
           endereco: 'teste',
           estado: 'SP',
-          numero: 400),
+          numero: '400'),
       idCliente: 10,
       email: '');
   setUpAll(() {
@@ -56,7 +56,7 @@ void main() {
             complemento: 'não',
             endereco: 'teste',
             estado: 'SP',
-            numero: 400),
+            numero: '400'),
         idCliente: 1,
         email: '');
     await cadastroClienteRepository.atualizarCliente(clienteMock);

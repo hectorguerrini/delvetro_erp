@@ -1,7 +1,7 @@
 class EnderecoModel {
   final String cep;
   final String endereco;
-  final int? numero;
+  final String numero;
   final String complemento;
   final String bairro;
   final String cidade;
@@ -10,7 +10,7 @@ class EnderecoModel {
   EnderecoModel(
       {required this.cep,
       required this.endereco,
-      this.numero,
+      required this.numero,
       required this.complemento,
       required this.bairro,
       required this.cidade,
@@ -24,13 +24,13 @@ class EnderecoModel {
         complemento: '',
         endereco: '',
         estado: '',
-        numero: null);
+        numero: '');
   }
 
   EnderecoModel copyWith({
     String? cep,
     String? endereco,
-    int? numero,
+    String? numero,
     String? complemento,
     String? bairro,
     String? cidade,
