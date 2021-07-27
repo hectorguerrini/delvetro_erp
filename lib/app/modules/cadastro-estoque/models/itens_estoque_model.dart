@@ -1,5 +1,6 @@
+import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/categorais_estoque_model.dart';
 import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/tipo_item_enum.dart';
-import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/unidade_item_enum.dart';
+import 'package:delvetro_erp/app/shared/enumerate/unidade_item_enum.dart';
 
 class ItensEstoqueModel {
   final int? idEstoque;
@@ -12,21 +13,25 @@ class ItensEstoqueModel {
   final int estoqueMaximo;
   final double? espessura;
   final double? custo;
+  final CategoriasEstoqueEnum? categoriasEstoqueEnum;
 
-  ItensEstoqueModel(
-      {this.idEstoque,
-      required this.descricao,
-      this.tipoItem,
-      this.localizacao,
-      this.unidadeItem,
-      this.quantidade,
-      required this.estoqueMinimo,
-      required this.estoqueMaximo,
-      this.espessura,
-      this.custo});
+  ItensEstoqueModel({
+    this.idEstoque,
+    required this.descricao,
+    this.tipoItem,
+    this.localizacao,
+    this.unidadeItem,
+    this.quantidade,
+    required this.estoqueMinimo,
+    required this.estoqueMaximo,
+    this.espessura,
+    this.custo,
+    this.categoriasEstoqueEnum,
+  });
 
   factory ItensEstoqueModel.newInstance() {
     return ItensEstoqueModel(
+      categoriasEstoqueEnum: null,
       idEstoque: null,
       descricao: '',
       tipoItem: null,
@@ -50,7 +55,8 @@ class ItensEstoqueModel {
       int? estoqueMinimo,
       int? estoqueMaximo,
       double? espessura,
-      double? custo}) {
+      double? custo,
+      CategoriasEstoqueEnum? categoriasEstoqueEnum}) {
     return ItensEstoqueModel(
       idEstoque: idEstoque ?? this.idEstoque,
       descricao: descricao ?? this.descricao,
@@ -62,6 +68,8 @@ class ItensEstoqueModel {
       estoqueMaximo: estoqueMaximo ?? this.estoqueMaximo,
       espessura: espessura ?? this.espessura,
       custo: custo ?? this.custo,
+      categoriasEstoqueEnum:
+          categoriasEstoqueEnum ?? this.categoriasEstoqueEnum,
     );
   }
 }

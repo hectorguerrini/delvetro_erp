@@ -1,7 +1,9 @@
+import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/categorais_estoque_model.dart';
 import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/tipo_item_enum.dart';
-import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/unidade_item_enum.dart';
+import 'package:delvetro_erp/app/shared/enumerate/unidade_item_enum.dart';
 import 'package:delvetro_erp/app/modules/cadastro-estoque/repositories/cadastro_estoque_repository_interface.dart';
 import 'package:delvetro_erp/app/modules/cadastro-estoque/models/itens_estoque_model.dart';
+import 'package:delvetro_erp/app/shared/models/generic_fields_model.dart';
 import 'package:mobx/mobx.dart';
 
 part 'cadastro_estoque_controller.g.dart';
@@ -14,7 +16,6 @@ abstract class CadastroEstoqueControllerBase with Store {
 
   CadastroEstoqueControllerBase(this.repository) {
     getListaItens();
-    getListaDescricao();
   }
 
   @observable
@@ -23,17 +24,10 @@ abstract class CadastroEstoqueControllerBase with Store {
   @observable
   List<ItensEstoqueModel> listaItensEstoque = [];
 
-  @observable
-  List<String> listaDescricao = [];
-
-  @action
-  List<String> getListaDescricao() {
-    var list = <String>[];
-    for (var i = 0; i < listaItensEstoque.length; i++) {
-      list.add(listaItensEstoque[i].descricao);
-    }
-    return list;
-  }
+  @computed
+  List<GenericFieldsModel> get listaDescricao => listaItensEstoque
+      .map((e) => GenericFieldsModel(caption: e.descricao, id: e.idEstoque))
+      .toList();
 
   @action
   void setDescricao(String value) {
@@ -81,6 +75,17 @@ abstract class CadastroEstoqueControllerBase with Store {
   }
 
   @action
+  void setCategorias(CategoriasEstoqueEnum? value) {
+    itensEstoque = itensEstoque.copyWith(categoriasEstoqueEnum: value);
+  }
+
+  @action
+  void setEstoque(int id) {
+    itensEstoque =
+        listaItensEstoque.firstWhere((element) => element.idEstoque == id);
+  }
+
+  @action
   Future<void> getListaItens() async {
     listaItensEstoque = await repository.getListaItensEstoque();
   }
@@ -95,19 +100,13 @@ abstract class CadastroEstoqueControllerBase with Store {
   }
 
   @action
-  Future<void> limparTexto() async {
+  void limparTexto() {
     itensEstoque = ItensEstoqueModel.newInstance();
   }
 
-  // @action
-  // bool validaTexto() {
-  //   var validacao = (itensEstoque.tipoItem == null ||
-  //           itensEstoque.unidadeItem == null ||
-  //           itensEstoque.estoqueMinimo == 0 ||
-  //           itensEstoque.estoqueMaximo == 0 ||
-  //           itensEstoque.estoqueMaximo <= itensEstoque.estoqueMinimo)
-  //       ? false
-  //       : true;
-  //   return validacao;
-  // }
+  @action
+  void selectProduto(int id) {
+    itensEstoque =
+        listaItensEstoque.firstWhere((element) => element.idEstoque == id);
+  }
 }

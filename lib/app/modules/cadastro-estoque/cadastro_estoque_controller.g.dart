@@ -9,6 +9,14 @@ part of 'cadastro_estoque_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$CadastroEstoqueController on CadastroEstoqueControllerBase, Store {
+  Computed<List<GenericFieldsModel>>? _$listaDescricaoComputed;
+
+  @override
+  List<GenericFieldsModel> get listaDescricao => (_$listaDescricaoComputed ??=
+          Computed<List<GenericFieldsModel>>(() => super.listaDescricao,
+              name: 'CadastroEstoqueControllerBase.listaDescricao'))
+      .value;
+
   final _$itensEstoqueAtom =
       Atom(name: 'CadastroEstoqueControllerBase.itensEstoque');
 
@@ -41,22 +49,6 @@ mixin _$CadastroEstoqueController on CadastroEstoqueControllerBase, Store {
     });
   }
 
-  final _$listaDescricaoAtom =
-      Atom(name: 'CadastroEstoqueControllerBase.listaDescricao');
-
-  @override
-  List<String> get listaDescricao {
-    _$listaDescricaoAtom.reportRead();
-    return super.listaDescricao;
-  }
-
-  @override
-  set listaDescricao(List<String> value) {
-    _$listaDescricaoAtom.reportWrite(value, super.listaDescricao, () {
-      super.listaDescricao = value;
-    });
-  }
-
   final _$getListaItensAsyncAction =
       AsyncAction('CadastroEstoqueControllerBase.getListaItens');
 
@@ -73,27 +65,8 @@ mixin _$CadastroEstoqueController on CadastroEstoqueControllerBase, Store {
     return _$salvarItemAsyncAction.run(() => super.salvarItem());
   }
 
-  final _$limparTextoAsyncAction =
-      AsyncAction('CadastroEstoqueControllerBase.limparTexto');
-
-  @override
-  Future<void> limparTexto() {
-    return _$limparTextoAsyncAction.run(() => super.limparTexto());
-  }
-
   final _$CadastroEstoqueControllerBaseActionController =
       ActionController(name: 'CadastroEstoqueControllerBase');
-
-  @override
-  List<String> getListaDescricao() {
-    final _$actionInfo = _$CadastroEstoqueControllerBaseActionController
-        .startAction(name: 'CadastroEstoqueControllerBase.getListaDescricao');
-    try {
-      return super.getListaDescricao();
-    } finally {
-      _$CadastroEstoqueControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
 
   @override
   void setDescricao(String value) {
@@ -189,6 +162,50 @@ mixin _$CadastroEstoqueController on CadastroEstoqueControllerBase, Store {
         .startAction(name: 'CadastroEstoqueControllerBase.setEspessura');
     try {
       return super.setEspessura(value);
+    } finally {
+      _$CadastroEstoqueControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setCategorias(CategoriasEstoqueEnum? value) {
+    final _$actionInfo = _$CadastroEstoqueControllerBaseActionController
+        .startAction(name: 'CadastroEstoqueControllerBase.setCategorias');
+    try {
+      return super.setCategorias(value);
+    } finally {
+      _$CadastroEstoqueControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setEstoque(int id) {
+    final _$actionInfo = _$CadastroEstoqueControllerBaseActionController
+        .startAction(name: 'CadastroEstoqueControllerBase.setEstoque');
+    try {
+      return super.setEstoque(id);
+    } finally {
+      _$CadastroEstoqueControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void limparTexto() {
+    final _$actionInfo = _$CadastroEstoqueControllerBaseActionController
+        .startAction(name: 'CadastroEstoqueControllerBase.limparTexto');
+    try {
+      return super.limparTexto();
+    } finally {
+      _$CadastroEstoqueControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void selectProduto(int id) {
+    final _$actionInfo = _$CadastroEstoqueControllerBaseActionController
+        .startAction(name: 'CadastroEstoqueControllerBase.selectProduto');
+    try {
+      return super.selectProduto(id);
     } finally {
       _$CadastroEstoqueControllerBaseActionController.endAction(_$actionInfo);
     }

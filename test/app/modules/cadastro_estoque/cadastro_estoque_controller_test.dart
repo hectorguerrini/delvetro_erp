@@ -1,6 +1,7 @@
 import 'package:delvetro_erp/app/modules/cadastro-estoque/cadastro_estoque_controller.dart';
+import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/categorais_estoque_model.dart';
 import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/tipo_item_enum.dart';
-import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/unidade_item_enum.dart';
+import 'package:delvetro_erp/app/shared/enumerate/unidade_item_enum.dart';
 import 'package:delvetro_erp/app/modules/cadastro-estoque/models/itens_estoque_model.dart';
 import 'package:delvetro_erp/app/modules/cadastro-estoque/repositories/cadastro_estoque_repository_interface.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -13,13 +14,22 @@ import 'cadastro_estoque_controller_test.mocks.dart';
 void main() {
   ICadastroEstoqueRepository repository = MockICadastroEstoqueRepository();
   late CadastroEstoqueController cadastroEstoqueController;
-  var array = [
-    ItensEstoqueModel(descricao: '', estoqueMinimo: 5, estoqueMaximo: 10)
+  var mockItens = [
+    ItensEstoqueModel(
+        descricao: 'Item Teste',
+        estoqueMinimo: 5,
+        estoqueMaximo: 10,
+        idEstoque: 10)
   ];
 
   setUpAll(() {
-    when(repository.getListaItensEstoque()).thenAnswer((_) async => array);
+    when(repository.getListaItensEstoque()).thenAnswer((_) async => mockItens);
     cadastroEstoqueController = CadastroEstoqueController(repository);
+  });
+
+  test('[TEST] - get listaDescricao', () {
+    var mockListaItens = cadastroEstoqueController.listaDescricao;
+    expect(mockListaItens.isNotEmpty, true);
   });
 
   test('[TEST] - setDescricao', () {
@@ -76,8 +86,14 @@ void main() {
     expect(cadastroEstoqueController.itensEstoque.espessura, teste);
   });
 
+  test('[TEST] - setCategorias', () {
+    var teste = CategoriasEstoqueEnum.ALUMINIO;
+    cadastroEstoqueController.setCategorias(teste);
+    expect(cadastroEstoqueController.itensEstoque.categoriasEstoqueEnum, teste);
+  });
+
   test('[TEST] - getListaItens', () {
-    expect(cadastroEstoqueController.listaItensEstoque, array);
+    expect(cadastroEstoqueController.listaItensEstoque, mockItens);
   });
 
   test('[TEST] - salvarItem args idEstoque diferente null', () async {
@@ -104,5 +120,23 @@ void main() {
     when(repository.salvarItem(itemAdicional)).thenAnswer((_) async {});
     await cadastroEstoqueController.salvarItem();
     verify(repository.salvarItem(itemAdicional)).called(1);
+  });
+
+  test('[TEST] - limparTexto', () async {
+    var itemAdicional = ItensEstoqueModel(
+        descricao: 'Vidro Cortado',
+        estoqueMinimo: 5,
+        estoqueMaximo: 10,
+        idEstoque: 1,
+        localizacao: 'sp');
+    cadastroEstoqueController.itensEstoque = itemAdicional;
+    cadastroEstoqueController.limparTexto();
+    expect(cadastroEstoqueController.itensEstoque.descricao, '');
+    expect(cadastroEstoqueController.itensEstoque.idEstoque, null);
+  });
+
+  test('[TEST] - selectProduto', () {
+    cadastroEstoqueController.selectProduto(10);
+    expect(cadastroEstoqueController.itensEstoque.descricao.isNotEmpty, true);
   });
 }

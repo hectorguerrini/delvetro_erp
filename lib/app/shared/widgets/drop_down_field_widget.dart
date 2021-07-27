@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
 
 class DropDownFieldWidget<T> extends StatelessWidget {
-  final String titulo;
+  final String? titulo;
   final void Function(T? value)? onChanged;
   final List<DropdownMenuItem<T>> items;
   final bool isRequired;
-  const DropDownFieldWidget(
-      {Key? key,
-      required this.titulo,
-      this.isRequired = false,
-      this.onChanged,
-      required this.items})
-      : super(key: key);
+  final int flex;
+  final T? value;
+  const DropDownFieldWidget({
+    Key? key,
+    this.titulo,
+    this.value,
+    this.isRequired = false,
+    this.onChanged,
+    required this.items,
+    required this.flex,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.17,
+    return Expanded(
+      flex: flex,
       child: DropdownButtonHideUnderline(
         child: DropdownButtonFormField<T>(
           validator: (value) {
@@ -25,6 +29,8 @@ class DropDownFieldWidget<T> extends StatelessWidget {
             }
             return null;
           },
+          value: value,
+          isExpanded: true,
           onChanged: onChanged,
           items: items,
           style: TextStyle(

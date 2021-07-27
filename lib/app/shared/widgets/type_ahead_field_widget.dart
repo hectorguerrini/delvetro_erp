@@ -1,26 +1,32 @@
+import 'package:delvetro_erp/app/shared/models/generic_fields_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 class TypeAheadFieldWidget extends StatelessWidget {
-  final String titulo;
+  final String? titulo;
   final bool isRequired;
-  final List<String> list;
-
-  final void Function(String value) onChanged;
+  final List<GenericFieldsModel> list;
+  final int flex;
+  final String? value;
+  final void Function(String value)? onChanged;
+  final void Function(int value)? onSuggestionSelected;
   const TypeAheadFieldWidget(
       {Key? key,
-      required this.titulo,
+      this.titulo,
+      this.value,
       this.isRequired = false,
       required this.list,
-      required this.onChanged})
+      this.onChanged,
+      required this.flex,
+      this.onSuggestionSelected})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var controller = TextEditingController();
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.25,
-      child: TypeAheadField(
+    var controller = TextEditingController(text: value);
+    return Expanded(
+      flex: flex,
+      child: TypeAheadField<GenericFieldsModel>(
         textFieldConfiguration: TextFieldConfiguration(
           controller: controller,
           onChanged: onChanged,
@@ -32,21 +38,22 @@ class TypeAheadFieldWidget extends StatelessWidget {
             labelStyle: TextStyle(
               fontSize: 24,
             ),
+            suffixIcon: IconButton(
+                onPressed: controller.clear, icon: Icon(Icons.close)),
             contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
             border: OutlineInputBorder(),
           ),
         ),
         suggestionsCallback: (pattern) {
           return list
-              .where((value) => value
-                  .toLowerCase()
-                  .startsWith(pattern.toString().toLowerCase()))
+              .where((value) =>
+                  value.caption.toLowerCase().startsWith(pattern.toLowerCase()))
               .take(10);
         },
         itemBuilder: (context, suggestion) {
           return ListTile(
             title: Text(
-              suggestion.toString(),
+              suggestion.caption,
               style: TextStyle(
                 fontSize: 20,
               ),
@@ -57,8 +64,9 @@ class TypeAheadFieldWidget extends StatelessWidget {
         hideOnEmpty: true,
         hideOnError: true,
         onSuggestionSelected: (suggestion) {
-          onChanged;
-          controller.text = suggestion.toString();
+          if (onSuggestionSelected != null && suggestion.id != null) {
+            onSuggestionSelected!(suggestion.id!);
+          }
         },
       ),
     );

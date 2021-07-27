@@ -1,9 +1,13 @@
 import 'package:delvetro_erp/app/modules/cadastro-estoque/cadastro_estoque_controller.dart';
+import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/categorais_estoque_model.dart';
+import 'package:delvetro_erp/app/modules/cadastro-estoque/enumerate/tipo_item_enum.dart';
+import 'package:delvetro_erp/app/shared/enumerate/tipo_campo_texto_enum.dart';
+import 'package:delvetro_erp/app/shared/enumerate/unidade_item_enum.dart';
 import 'package:delvetro_erp/app/shared/widgets/drop_down_field_widget.dart';
 import 'package:delvetro_erp/app/shared/widgets/elevated_button_padrao_widget.dart';
-import 'package:delvetro_erp/app/shared/widgets/text_form_field_padrao_widget.dart';
-import 'package:delvetro_erp/app/shared/widgets/text_form_field_pequeno_widget.dart';
+import 'package:delvetro_erp/app/shared/widgets/text_form_field_custom_widget.dart';
 import 'package:delvetro_erp/app/shared/widgets/type_ahead_field_widget.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -39,7 +43,7 @@ class _CadastroEstoquePageState
                 ),
               ],
             ),
-            height: MediaQuery.of(context).size.height * 0.4,
+            height: MediaQuery.of(context).size.height * 0.5,
             width: MediaQuery.of(context).size.width * 0.8,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
@@ -68,28 +72,48 @@ class _CadastroEstoquePageState
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         TypeAheadFieldWidget(
-                          titulo: 'Descricao *',
-                          list: controller.getListaDescricao(),
-                          isRequired: true,
-                          onChanged: (value) {
-                            controller.setDescricao(value);
-                          },
+                            flex: 2,
+                            titulo: 'Descricao *',
+                            value: controller.itensEstoque.descricao,
+                            onSuggestionSelected: (value) {
+                              controller.selectProduto(value);
+                              setState(() {});
+                            },
+                            isRequired: true,
+                            onChanged: controller.setDescricao,
+                            list: controller.listaDescricao),
+                        SizedBox(
+                          width: 8,
                         ),
                         DropDownFieldWidget<TipoItemEnum>(
+                          flex: 2,
                           titulo: 'Tipo *',
-                          onChanged: controller.setTipoItem,
-                          isRequired: true,
-                          items: TipoItemEnum.values
-                              .map((TipoItemEnum tipoItemEnum) {
+                          value: controller.itensEstoque.tipoItem,
+                          items: TipoItemEnum.values.map((TipoItemEnum value) {
                             return DropdownMenuItem<TipoItemEnum>(
-                                value: tipoItemEnum,
-                                child: Text(tipoItemEnum.name));
+                              value: value,
+                              child: Text(value.name),
+                            );
                           }).toList(),
+                          isRequired: true,
+                          onChanged: controller.setTipoItem,
                         ),
-                        TextFormFieldPadraoWidget(
-                          titulo: 'Localizacao',
-                          onChanged: controller.setLocalizacao,
-                          value: controller.itensEstoque.localizacao,
+                        SizedBox(
+                          width: 8,
+                        ),
+                        DropDownFieldWidget<CategoriasEstoqueEnum>(
+                          flex: 2,
+                          titulo: 'Categorias *',
+                          isRequired: true,
+                          value: controller.itensEstoque.categoriasEstoqueEnum,
+                          items: CategoriasEstoqueEnum.values
+                              .map((CategoriasEstoqueEnum value) {
+                            return DropdownMenuItem<CategoriasEstoqueEnum>(
+                              value: value,
+                              child: Text(value.name),
+                            );
+                          }).toList(),
+                          onChanged: controller.setCategorias,
                         ),
                       ],
                     ),
@@ -99,27 +123,18 @@ class _CadastroEstoquePageState
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        DropDownFieldWidget<UnidadeItemEnum>(
-                          titulo: 'Unidade *',
-                          onChanged: controller.setUnidade,
-                          isRequired: true,
-                          items: UnidadeItemEnum.values
-                              .map((UnidadeItemEnum unidadeItemEnum) {
-                            return DropdownMenuItem<UnidadeItemEnum>(
-                                value: unidadeItemEnum,
-                                child: Text(unidadeItemEnum.name));
-                          }).toList(),
+                        TextFormFieldCustomWidget(
+                          flex: 3,
+                          titulo: 'Localizacao',
+                          onChanged: controller.setLocalizacao,
+                          value: controller.itensEstoque.localizacao,
                         ),
-                        TextFormFieldPequenoWidget(
-                          titulo: 'Quantidade',
-                          onChanged: (value) {
-                            var valor = int.parse(value);
-                            controller.setQuantidade(valor);
-                          },
-                          isNumber: true,
-                          value: controller.itensEstoque.quantidade.toString(),
+                        SizedBox(
+                          width: 8,
                         ),
-                        TextFormFieldPequenoWidget(
+                        TextFormFieldCustomWidget(
+                          tipoCampoTextoEnum: TipoCampoTextoEnum.NUMERO,
+                          flex: 1,
                           titulo: 'Estoque Mínimo *',
                           onChanged: (value) {
                             var valor = int.parse(value);
@@ -130,7 +145,12 @@ class _CadastroEstoquePageState
                           value:
                               controller.itensEstoque.estoqueMinimo.toString(),
                         ),
-                        TextFormFieldPequenoWidget(
+                        SizedBox(
+                          width: 8,
+                        ),
+                        TextFormFieldCustomWidget(
+                          tipoCampoTextoEnum: TipoCampoTextoEnum.NUMERO,
+                          flex: 1,
                           titulo: 'Estoque Máximo *',
                           onChanged: (value) {
                             var valor = int.parse(value);
@@ -141,13 +161,69 @@ class _CadastroEstoquePageState
                           value:
                               controller.itensEstoque.estoqueMaximo.toString(),
                         ),
-                        TextFormFieldPequenoWidget(
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        DropDownFieldWidget<UnidadeItemEnum>(
+                          flex: 2,
+                          titulo: 'Unidade *',
+                          isRequired: true,
+                          value: controller.itensEstoque.unidadeItem,
+                          items: UnidadeItemEnum.values
+                              .map((UnidadeItemEnum value) {
+                            return DropdownMenuItem<UnidadeItemEnum>(
+                              value: value,
+                              child: Text(value.name),
+                            );
+                          }).toList(),
+                          onChanged: controller.setUnidade,
+                        ),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        TextFormFieldCustomWidget(
+                          tipoCampoTextoEnum: TipoCampoTextoEnum.NUMERO,
+                          flex: 1,
+                          titulo: 'Quantidade',
+                          onChanged: (value) {
+                            var valor = int.parse(value);
+                            controller.setQuantidade(valor);
+                          },
+                          isNumber: true,
+                          value: controller.itensEstoque.quantidade.toString(),
+                        ),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        TextFormFieldCustomWidget(
+                          tipoCampoTextoEnum: TipoCampoTextoEnum.VALOR,
+                          flex: 1,
                           titulo: 'Custo',
+                          isNumber: true,
                           onChanged: (value) {
                             var valor = double.parse(value);
                             controller.setCusto(valor);
                           },
                           value: controller.itensEstoque.custo.toString(),
+                        ),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        TextFormFieldCustomWidget(
+                          tipoCampoTextoEnum: TipoCampoTextoEnum.DOUBLE,
+                          flex: 1,
+                          titulo: 'Espessura',
+                          onChanged: (value) {
+                            var valor = double.parse(value);
+                            controller.setEspessura(valor);
+                          },
+                          isNumber: true,
+                          value: controller.itensEstoque.espessura.toString(),
                         ),
                       ],
                     ),
