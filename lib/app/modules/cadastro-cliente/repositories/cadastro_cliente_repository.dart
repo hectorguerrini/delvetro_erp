@@ -3,7 +3,7 @@ import 'package:delvetro_erp/app/modules/cadastro-cliente/models/cliente_model.d
 
 import 'cadastro_cliente_repository_interface.dart';
 
-class ClienteCadastroRepository implements ICadastroClienteRepository {
+class CadastroClienteRepository implements ICadastroClienteRepository {
   List<ClienteModel> listaClientes = [
     ClienteModel(
       telefones: [],
@@ -53,7 +53,7 @@ class ClienteCadastroRepository implements ICadastroClienteRepository {
   }
 
   @override
-  Future<void> alterarCliente(ClienteModel cliente) async {
+  Future<void> atualizarCliente(ClienteModel cliente) async {
     var clienteAlterado = cliente;
     for (var i = 0; i < listaClientes.length; i++) {
       if (clienteAlterado.idCliente == listaClientes[i].idCliente) {

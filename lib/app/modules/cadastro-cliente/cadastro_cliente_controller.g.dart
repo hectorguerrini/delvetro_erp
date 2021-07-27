@@ -9,12 +9,12 @@ part of 'cadastro_cliente_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$CadastroClienteController on _CadastroControllerBase, Store {
-  Computed<List<GenericFieldsModel>>? _$listaNomeComputed;
+  Computed<List<GenericFieldsModel>>? _$listaNomesComputed;
 
   @override
-  List<GenericFieldsModel> get listaNome => (_$listaNomeComputed ??=
-          Computed<List<GenericFieldsModel>>(() => super.listaNome,
-              name: '_CadastroControllerBase.listaNome'))
+  List<GenericFieldsModel> get listaNomes => (_$listaNomesComputed ??=
+          Computed<List<GenericFieldsModel>>(() => super.listaNomes,
+              name: '_CadastroControllerBase.listaNomes'))
       .value;
 
   final _$clienteAtom = Atom(name: '_CadastroControllerBase.cliente');
@@ -62,14 +62,6 @@ mixin _$CadastroClienteController on _CadastroControllerBase, Store {
   @override
   Future<void> salvarCliente() {
     return _$salvarClienteAsyncAction.run(() => super.salvarCliente());
-  }
-
-  final _$limparTextoAsyncAction =
-      AsyncAction('_CadastroControllerBase.limparTexto');
-
-  @override
-  Future<void> limparTexto() {
-    return _$limparTextoAsyncAction.run(() => super.limparTexto());
   }
 
   final _$_CadastroControllerBaseActionController =
@@ -241,11 +233,22 @@ mixin _$CadastroClienteController on _CadastroControllerBase, Store {
   }
 
   @override
+  void limparTexto() {
+    final _$actionInfo = _$_CadastroControllerBaseActionController.startAction(
+        name: '_CadastroControllerBase.limparTexto');
+    try {
+      return super.limparTexto();
+    } finally {
+      _$_CadastroControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 cliente: ${cliente},
 listaClientes: ${listaClientes},
-listaNome: ${listaNome}
+listaNomes: ${listaNomes}
     ''';
   }
 }

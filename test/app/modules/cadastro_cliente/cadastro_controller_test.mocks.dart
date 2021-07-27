@@ -31,8 +31,8 @@ class MockICadastroClienteRepository extends _i1.Mock
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future.value()) as _i3.Future<void>);
   @override
-  _i3.Future<void> alterarCliente(_i4.ClienteModel? cliente) =>
-      (super.noSuchMethod(Invocation.method(#alterarCliente, [cliente]),
+  _i3.Future<void> atualizarCliente(_i4.ClienteModel? cliente) =>
+      (super.noSuchMethod(Invocation.method(#atualizarCliente, [cliente]),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future.value()) as _i3.Future<void>);
   @override

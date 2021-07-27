@@ -23,7 +23,7 @@ abstract class _CadastroControllerBase with Store {
   List<ClienteModel> listaClientes = [];
 
   @computed
-  List<GenericFieldsModel> get listaNome => listaClientes
+  List<GenericFieldsModel> get listaNomes => listaClientes
       .map((e) => GenericFieldsModel(caption: e.nome, id: e.idCliente))
       .toList();
 
@@ -105,7 +105,7 @@ abstract class _CadastroControllerBase with Store {
   @action
   Future<void> salvarCliente() async {
     if (cliente.idCliente != null) {
-      await repository.alterarCliente(cliente);
+      await repository.atualizarCliente(cliente);
     } else {
       await repository.salvarCliente(cliente);
     }
@@ -117,7 +117,7 @@ abstract class _CadastroControllerBase with Store {
   }
 
   @action
-  Future<void> limparTexto() async {
+  void limparTexto() {
     cliente = ClienteModel.newInstance();
   }
 }

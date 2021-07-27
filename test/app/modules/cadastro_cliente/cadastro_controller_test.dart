@@ -10,10 +10,153 @@ import 'cadastro_controller_test.mocks.dart';
 @GenerateMocks([ICadastroClienteRepository])
 void main() {
   ICadastroClienteRepository repository = MockICadastroClienteRepository();
-  var controller = CadastroClienteController(repository);
+  late CadastroClienteController cadastroClienteController;
 
-  test('[TEST] - Salvar Cliente (que não existe) ClienteID = Null', () async {
-    var clienteTeste = ClienteModel(
+  var mockClientes = [
+    ClienteModel(
+        telefones: [],
+        nome: 'nome',
+        razaoSocial: 'razaoSocial',
+        cpf: 'cpf',
+        nomeContato: 'nomeContato',
+        rgContato: 'rgContato',
+        lojista: LojistaEnum.SIM,
+        cep: 'cep',
+        endereco: 'endereco',
+        numero: 'numero',
+        complemento: 'complemento',
+        bairro: 'bairro',
+        cidade: 'cidade',
+        estado: 'estado',
+        idCliente: 10,
+        email: '')
+  ];
+
+  setUpAll(() {
+    when(repository.getListaClientes()).thenAnswer((_) async => mockClientes);
+    cadastroClienteController = CadastroClienteController(repository);
+  });
+
+  test('[TEST] - get listaNomes', () {
+    var mockListaItens = cadastroClienteController.listaNomes;
+    expect(mockListaItens.isNotEmpty, true);
+  });
+
+  test('[TEST] - setNome', () {
+    var teste = 'teste10';
+    cadastroClienteController.setNome(teste);
+    expect(cadastroClienteController.cliente.nome, teste);
+  });
+
+  test('[TEST] - setRazaoSocial', () {
+    var teste = 'teste10';
+    cadastroClienteController.setRazaoSocial(teste);
+    expect(cadastroClienteController.cliente.razaoSocial, teste);
+  });
+
+  test('[TEST] - setCpf', () {
+    var teste = 'teste10';
+    cadastroClienteController.setCpf(teste);
+    expect(cadastroClienteController.cliente.cpf, teste);
+  });
+
+  test('[TEST] - setEmail', () {
+    var teste = 'teste10';
+    cadastroClienteController.setEmail(teste);
+    expect(cadastroClienteController.cliente.email, teste);
+  });
+
+  test('[TEST] - setNomeContato', () {
+    var teste = 'teste10';
+    cadastroClienteController.setNomeContato(teste);
+    expect(cadastroClienteController.cliente.nomeContato, teste);
+  });
+
+  test('[TEST] - setRgContato', () {
+    var teste = 'teste10';
+    cadastroClienteController.setRgContato(teste);
+    expect(cadastroClienteController.cliente.rgContato, teste);
+  });
+
+  test('[TEST] - setLojista', () {
+    var teste = LojistaEnum.SIM;
+    cadastroClienteController.setLojista(teste);
+    expect(cadastroClienteController.cliente.lojista, teste);
+  });
+
+  test('[TEST] - setCep', () {
+    var teste = 'teste10';
+    cadastroClienteController.setCep(teste);
+    expect(cadastroClienteController.cliente.cep, teste);
+  });
+
+  test('[TEST] - setEndereco', () {
+    var teste = 'teste10';
+    cadastroClienteController.setEndereco(teste);
+    expect(cadastroClienteController.cliente.endereco, teste);
+  });
+
+  test('[TEST] - setNumero', () {
+    var teste = 'teste10';
+    cadastroClienteController.setNumero(teste);
+    expect(cadastroClienteController.cliente.numero, teste);
+  });
+
+  test('[TEST] - setComplemento', () {
+    var teste = 'teste10';
+    cadastroClienteController.setComplemento(teste);
+    expect(cadastroClienteController.cliente.complemento, teste);
+  });
+
+  test('[TEST] - setBairro', () {
+    var teste = 'teste10';
+    cadastroClienteController.setBairro(teste);
+    expect(cadastroClienteController.cliente.bairro, teste);
+  });
+
+  test('[TEST] - setCidade', () {
+    var teste = 'teste10';
+    cadastroClienteController.setCidade(teste);
+    expect(cadastroClienteController.cliente.cidade, teste);
+  });
+
+  test('[TEST] - setEstado', () {
+    var teste = 'teste10';
+    cadastroClienteController.setEstado(teste);
+    expect(cadastroClienteController.cliente.estado, teste);
+  });
+
+  test('[TEST] - getListaClientes', () {
+    expect(cadastroClienteController.listaClientes, mockClientes);
+  });
+
+  test('[TEST] - salvarItem args idCliente diferente null', () async {
+    var clienteAdicional = ClienteModel(
+        telefones: [],
+        nome: 'nome',
+        razaoSocial: 'razaoSocial',
+        cpf: 'cpf',
+        nomeContato: 'nomeContato',
+        rgContato: 'rgContato',
+        lojista: LojistaEnum.SIM,
+        cep: 'cep',
+        endereco: 'endereco',
+        numero: 'numero',
+        complemento: 'complemento',
+        bairro: 'bairro',
+        cidade: 'cidade',
+        estado: 'estado',
+        idCliente: 1,
+        email: '');
+    cadastroClienteController.cliente = clienteAdicional;
+    when(repository.atualizarCliente(clienteAdicional))
+        .thenAnswer((_) async {});
+    await cadastroClienteController.salvarCliente();
+    verify(repository.atualizarCliente(clienteAdicional)).called(1);
+  });
+
+  test('[TEST] - salvarItem args idCliente igual null', () async {
+    var clienteAdicional = ClienteModel(
         telefones: [],
         nome: 'nome',
         razaoSocial: 'razaoSocial',
@@ -30,14 +173,14 @@ void main() {
         estado: 'estado',
         idCliente: null,
         email: '');
-    controller.cliente = clienteTeste;
-    when(repository.salvarCliente(clienteTeste)).thenAnswer((_) async {});
-    await controller.salvarCliente();
-    verify(repository.salvarCliente(clienteTeste)).called(1);
+    cadastroClienteController.cliente = clienteAdicional;
+    when(repository.salvarCliente(clienteAdicional)).thenAnswer((_) async {});
+    await cadastroClienteController.salvarCliente();
+    verify(repository.salvarCliente(clienteAdicional)).called(1);
   });
 
-  test('[TEST] - Salvar Cliente (que já existe)', () async {
-    var clienteTeste = ClienteModel(
+  test('[TEST] - limparTexto', () async {
+    var clienteAdicional = ClienteModel(
         telefones: [],
         nome: 'nome',
         razaoSocial: 'razaoSocial',
@@ -52,34 +195,11 @@ void main() {
         bairro: 'bairro',
         cidade: 'cidade',
         estado: 'estado',
-        idCliente: 2,
+        idCliente: 1,
         email: '');
-    controller.cliente = clienteTeste;
-    when(repository.alterarCliente(clienteTeste)).thenAnswer((_) async {});
-    await controller.salvarCliente();
-    verify(repository.alterarCliente(clienteTeste)).called(1);
-  });
-
-  test('Limpar texto', () async {
-    var clienteTeste = ClienteModel(
-        telefones: [],
-        nome: 'nome',
-        razaoSocial: 'razaoSocial',
-        cpf: 'cpf',
-        nomeContato: 'nomeContato',
-        rgContato: 'rgContato',
-        lojista: LojistaEnum.SIM,
-        cep: 'cep',
-        endereco: 'endereco',
-        numero: 'numero',
-        complemento: 'complemento',
-        bairro: 'bairro',
-        cidade: 'cidade',
-        estado: 'estado',
-        idCliente: 2,
-        email: '');
-    controller.cliente = clienteTeste;
-    await controller.limparTexto();
-    expect(controller.cliente.idCliente, null);
+    cadastroClienteController.cliente = clienteAdicional;
+    cadastroClienteController.limparTexto();
+    expect(cadastroClienteController.cliente.nome, '');
+    expect(cadastroClienteController.cliente.idCliente, null);
   });
 }

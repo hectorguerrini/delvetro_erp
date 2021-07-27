@@ -7,7 +7,7 @@ import 'repositories/cadastro_cliente_repository.dart';
 class CadastroClienteModule extends Module {
   @override
   final List<Bind> binds = [
-    Bind.lazySingleton((i) => ClienteCadastroRepository()),
+    Bind.lazySingleton((i) => CadastroClienteRepository()),
     Bind.lazySingleton((i) => CadastroClienteController(i())),
   ];
 

@@ -62,7 +62,7 @@ class CadastroClientePageState
                       children: [
                         TypeAheadFieldWidget(
                           flex: 2,
-                          list: controller.listaNome,
+                          list: controller.listaNomes,
                           value: controller.cliente.nome,
                           onChanged: controller.setNome,
                           onSuggestionSelected: (value) {
