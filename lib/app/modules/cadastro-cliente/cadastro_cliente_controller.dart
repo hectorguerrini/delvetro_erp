@@ -1,4 +1,5 @@
 import 'package:delvetro_erp/app/modules/cadastro-cliente/enumerates/enum_lojista.dart';
+import 'package:delvetro_erp/app/modules/cadastro-cliente/models/endereco_model.dart';
 import 'package:delvetro_erp/app/modules/cadastro-cliente/repositories/cadastro_cliente_repository_interface.dart';
 import 'package:delvetro_erp/app/modules/cadastro-cliente/models/cliente_model.dart';
 import 'package:delvetro_erp/app/shared/models/generic_fields_model.dart';
@@ -27,12 +28,15 @@ abstract class _CadastroControllerBase with Store {
   ResultCepModel enderecoCliente = ResultCepModel.newInstance();
 
   @observable
+  EnderecoModel endereco = EnderecoModel.newInstance();
+
+  @observable
   List<ClienteModel> listaClientes = [];
 
   @action
   Future<void> procuraCep(String cep) async {
-    var enderecoCliente = await repositoryExternal.getCepExterno(cep);
-    var endereco = cliente.enderecoModel;
+    enderecoCliente = await repositoryExternal.getCepExterno(cep);
+    endereco = cliente.enderecoModel;
     endereco = endereco.copyWith(
         bairro: enderecoCliente.bairro,
         cep: enderecoCliente.cep,
@@ -68,6 +72,24 @@ abstract class _CadastroControllerBase with Store {
   }
 
   @action
+  void setTelefone1(String telefone1) {
+    cliente.telefones.removeAt(0);
+    cliente.telefones.insert(0, telefone1);
+  }
+
+  @action
+  void setTelefone2(String telefone2) {
+    cliente.telefones.removeAt(1);
+    cliente.telefones.insert(1, telefone2);
+  }
+
+  @action
+  void setTelefone3(String telefone3) {
+    cliente.telefones.removeAt(2);
+    cliente.telefones.insert(2, telefone3);
+  }
+
+  @action
   void setNomeContato(String nomeContato) {
     cliente = cliente.copyWith(nomeContato: nomeContato);
   }
@@ -88,33 +110,15 @@ abstract class _CadastroControllerBase with Store {
   }
 
   @action
-  void setEndereco(String endereco) {
-    enderecoCliente = enderecoCliente.copyWith(logradouro: endereco);
-  }
-
-  @action
   void setNumero(String numero) {
-    enderecoCliente = enderecoCliente.copyWith(numero: numero);
+    cliente =
+        cliente.copyWith(enderecoModel: endereco.copyWith(numero: numero));
   }
 
   @action
   void setComplemento(String? complemento) {
-    enderecoCliente = enderecoCliente.copyWith(complemento: complemento);
-  }
-
-  @action
-  void setBairro(String bairro) {
-    enderecoCliente = enderecoCliente.copyWith(bairro: bairro);
-  }
-
-  @action
-  void setCidade(String cidade) {
-    enderecoCliente = enderecoCliente.copyWith(localidade: cidade);
-  }
-
-  @action
-  void setEstado(String estado) {
-    enderecoCliente = enderecoCliente.copyWith(uf: estado);
+    cliente = cliente.copyWith(
+        enderecoModel: endereco.copyWith(complemento: complemento));
   }
 
   @action
@@ -139,5 +143,6 @@ abstract class _CadastroControllerBase with Store {
   @action
   void limparTexto() {
     cliente = ClienteModel.newInstance();
+    enderecoCliente = ResultCepModel.newInstance();
   }
 }

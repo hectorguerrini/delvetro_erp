@@ -28,7 +28,7 @@ class ClienteModel {
 
   factory ClienteModel.newInstance() {
     return ClienteModel(
-      telefones: [],
+      telefones: ['', '', ''],
       nome: '',
       razaoSocial: '',
       cpf: '',

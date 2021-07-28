@@ -27,7 +27,7 @@ void main() {
         lojista: LojistaEnum.SIM,
         enderecoModel: EnderecoModel(
             bairro: 'Vila Vermelha',
-            cep: '04297000',
+            cep: '',
             cidade: 'São Paulo',
             complemento: '',
             endereco: 'teste',
@@ -43,8 +43,6 @@ void main() {
     localidade: 'São Paulo',
     logradouro: 'Avenida Paulista',
     uf: '',
-    numero: '',
-    complemento: '',
   );
 
   setUpAll(() {
@@ -90,6 +88,37 @@ void main() {
     expect(cadastroClienteController.cliente.email, teste);
   });
 
+  test('[TEST] - setTelefone', () {
+    var teste = '(11) 12121-1212';
+    var teste1 = '(11) 34343-3434';
+    var teste2 = '(11) 56565-5656';
+    cadastroClienteController.cliente = ClienteModel(
+        telefones: ['1223', '1337', ''],
+        nome: 'nome',
+        razaoSocial: 'razaoSocial',
+        cpf: 'cpf',
+        nomeContato: 'nomeContato',
+        rgContato: 'rgContato',
+        lojista: LojistaEnum.SIM,
+        enderecoModel: EnderecoModel(
+            bairro: 'Vila Vermelha',
+            cep: '',
+            cidade: 'São Paulo',
+            complemento: '',
+            endereco: 'teste',
+            estado: 'SP',
+            numero: null),
+        idCliente: 10,
+        email: '');
+    cadastroClienteController.setTelefone1(teste);
+    cadastroClienteController.setTelefone2(teste1);
+    cadastroClienteController.setTelefone3(teste2);
+    expect(cadastroClienteController.cliente.telefones[0], teste);
+    expect(cadastroClienteController.cliente.telefones[1], teste1);
+    expect(cadastroClienteController.cliente.telefones[2], teste2);
+    expect(cadastroClienteController.cliente.nome, 'nome');
+  });
+
   test('[TEST] - setNomeContato', () {
     var teste = 'teste10';
     cadastroClienteController.setNomeContato(teste);
@@ -114,12 +143,6 @@ void main() {
     expect(cadastroClienteController.enderecoCliente.cep, teste);
   });
 
-  test('[TEST] - setEndereco', () {
-    var teste = 'teste10';
-    cadastroClienteController.setEndereco(teste);
-    expect(cadastroClienteController.cliente.enderecoModel.endereco, teste);
-  });
-
   test('[TEST] - setNumero', () async {
     await cadastroClienteController.procuraCep(mockCep.cep);
     var teste = '10';
@@ -129,24 +152,13 @@ void main() {
     expect(cadastroClienteController.cliente.enderecoModel.numero, teste);
   });
 
-  test('[TEST] - setComplemento', () {});
-
-  test('[TEST] - setBairro', () {
-    var teste = 'teste10';
-    cadastroClienteController.setBairro(teste);
-    expect(cadastroClienteController.enderecoCliente.bairro, teste);
-  });
-
-  test('[TEST] - setCidade', () {
-    var teste = 'teste10';
-    cadastroClienteController.setCidade(teste);
-    expect(cadastroClienteController.enderecoCliente.localidade, teste);
-  });
-
-  test('[TEST] - setEstado', () {
-    var teste = 'teste10';
-    cadastroClienteController.setEstado(teste);
-    expect(cadastroClienteController.enderecoCliente.uf, teste);
+  test('[TEST] - setComplemento', () async {
+    await cadastroClienteController.procuraCep(mockCep.cep);
+    var teste = 'apto 64';
+    cadastroClienteController.setComplemento(teste);
+    expect(
+        cadastroClienteController.cliente.enderecoModel.bairro, mockCep.bairro);
+    expect(cadastroClienteController.cliente.enderecoModel.complemento, teste);
   });
 
   test('[TEST] - getListaClientes', () {

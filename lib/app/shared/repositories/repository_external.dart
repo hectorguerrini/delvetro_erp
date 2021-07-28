@@ -13,15 +13,14 @@ class RepositoryExternal {
           ResultCepModel.fromMap(response.data as Map<String, dynamic>);
       return endereco;
     } on DioError catch (error) {
-      print(error.response!.statusCode);
+      print('erro:' + error.response!.statusCode.toString());
       return ResultCepModel(
-          bairro: '',
-          cep: '',
-          complemento: '',
-          localidade: '',
-          logradouro: '',
-          uf: '',
-          numero: '');
+        bairro: '',
+        cep: '',
+        localidade: '',
+        logradouro: '',
+        uf: '',
+      );
     }
   }
 }

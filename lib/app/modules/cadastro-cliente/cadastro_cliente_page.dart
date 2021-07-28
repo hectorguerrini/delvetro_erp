@@ -36,7 +36,7 @@ class CadastroClientePageState
                 ),
               ],
             ),
-            height: MediaQuery.of(context).size.height * 0.7,
+            height: MediaQuery.of(context).size.height * 0.68,
             width: MediaQuery.of(context).size.width * 0.8,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 32, vertical: 20),
@@ -95,6 +95,9 @@ class CadastroClientePageState
                           isRequired: true,
                           onChanged: controller.setCpf,
                           value: controller.cliente.cpf,
+                          tipoCampoTextoEnum: controller.cliente.cpf == ''
+                              ? TipoCampoTextoEnum.CPF
+                              : TipoCampoTextoEnum.TEXTO,
                         )
                       ],
                     ),
@@ -119,7 +122,12 @@ class CadastroClientePageState
                           titulo: 'Telefone 1 *',
                           isRequired: true,
                           isNumber: true,
-                          tipoCampoTextoEnum: TipoCampoTextoEnum.NUMERO,
+                          value: controller.cliente.telefones[0],
+                          tipoCampoTextoEnum:
+                              controller.cliente.telefones[0] == ''
+                                  ? TipoCampoTextoEnum.TELEFONE
+                                  : TipoCampoTextoEnum.TEXTO,
+                          onChanged: controller.setTelefone1,
                         ),
                         SizedBox(
                           width: 16,
@@ -128,7 +136,12 @@ class CadastroClientePageState
                           flex: 1,
                           titulo: 'Telefone 2',
                           isNumber: true,
-                          tipoCampoTextoEnum: TipoCampoTextoEnum.NUMERO,
+                          tipoCampoTextoEnum:
+                              controller.cliente.telefones[1] == ''
+                                  ? TipoCampoTextoEnum.TELEFONE
+                                  : TipoCampoTextoEnum.TEXTO,
+                          value: controller.cliente.telefones[1],
+                          onChanged: controller.setTelefone2,
                         ),
                         SizedBox(
                           width: 16,
@@ -137,7 +150,12 @@ class CadastroClientePageState
                           flex: 1,
                           titulo: 'Telefone 3',
                           isNumber: true,
-                          tipoCampoTextoEnum: TipoCampoTextoEnum.NUMERO,
+                          tipoCampoTextoEnum:
+                              controller.cliente.telefones[2] == ''
+                                  ? TipoCampoTextoEnum.TELEFONE
+                                  : TipoCampoTextoEnum.TEXTO,
+                          value: controller.cliente.telefones[2],
+                          onChanged: controller.setTelefone3,
                         ),
                       ],
                     ),
@@ -193,7 +211,7 @@ class CadastroClientePageState
                           titulo: 'Cep *',
                           isRequired: true,
                           onChanged: controller.setCep,
-                          value: controller.enderecoCliente.cep.toString(),
+                          value: controller.cliente.enderecoModel.cep,
                         ),
                         SizedBox(
                           width: 16,
@@ -214,7 +232,6 @@ class CadastroClientePageState
                             flex: 2,
                             titulo: 'Endereço *',
                             isRequired: true,
-                            onChanged: controller.setEndereco,
                             value: controller.cliente.enderecoModel.endereco),
                         SizedBox(
                           width: 16,
@@ -226,7 +243,7 @@ class CadastroClientePageState
                           isNumber: true,
                           onChanged: controller.setNumero,
                           tipoCampoTextoEnum: TipoCampoTextoEnum.NUMERO,
-                          value: controller.cliente.enderecoModel.endereco,
+                          value: controller.cliente.enderecoModel.numero,
                         ),
                       ],
                     ),
@@ -240,7 +257,6 @@ class CadastroClientePageState
                           flex: 1,
                           titulo: 'Bairro *',
                           isRequired: true,
-                          onChanged: controller.setBairro,
                           value: controller.cliente.enderecoModel.bairro,
                         ),
                         SizedBox(
@@ -250,7 +266,6 @@ class CadastroClientePageState
                           flex: 1,
                           titulo: 'Cidade *',
                           isRequired: true,
-                          onChanged: controller.setCidade,
                           value: controller.cliente.enderecoModel.cidade,
                         ),
                         SizedBox(
@@ -260,7 +275,6 @@ class CadastroClientePageState
                           flex: 1,
                           titulo: 'Estado *',
                           isRequired: true,
-                          // onChanged: controller.setEstado,
                           value: controller.cliente.enderecoModel.estado,
                         ),
                         SizedBox(

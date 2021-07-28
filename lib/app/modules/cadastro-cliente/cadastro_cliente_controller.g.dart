@@ -48,6 +48,21 @@ mixin _$CadastroClienteController on _CadastroControllerBase, Store {
     });
   }
 
+  final _$enderecoAtom = Atom(name: '_CadastroControllerBase.endereco');
+
+  @override
+  EnderecoModel get endereco {
+    _$enderecoAtom.reportRead();
+    return super.endereco;
+  }
+
+  @override
+  set endereco(EnderecoModel value) {
+    _$enderecoAtom.reportWrite(value, super.endereco, () {
+      super.endereco = value;
+    });
+  }
+
   final _$listaClientesAtom =
       Atom(name: '_CadastroControllerBase.listaClientes');
 
@@ -180,17 +195,6 @@ mixin _$CadastroClienteController on _CadastroControllerBase, Store {
   }
 
   @override
-  void setEndereco(String endereco) {
-    final _$actionInfo = _$_CadastroControllerBaseActionController.startAction(
-        name: '_CadastroControllerBase.setEndereco');
-    try {
-      return super.setEndereco(endereco);
-    } finally {
-      _$_CadastroControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   void setNumero(String numero) {
     final _$actionInfo = _$_CadastroControllerBaseActionController.startAction(
         name: '_CadastroControllerBase.setNumero');
@@ -207,39 +211,6 @@ mixin _$CadastroClienteController on _CadastroControllerBase, Store {
         name: '_CadastroControllerBase.setComplemento');
     try {
       return super.setComplemento(complemento);
-    } finally {
-      _$_CadastroControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setBairro(String bairro) {
-    final _$actionInfo = _$_CadastroControllerBaseActionController.startAction(
-        name: '_CadastroControllerBase.setBairro');
-    try {
-      return super.setBairro(bairro);
-    } finally {
-      _$_CadastroControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setCidade(String cidade) {
-    final _$actionInfo = _$_CadastroControllerBaseActionController.startAction(
-        name: '_CadastroControllerBase.setCidade');
-    try {
-      return super.setCidade(cidade);
-    } finally {
-      _$_CadastroControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setEstado(String estado) {
-    final _$actionInfo = _$_CadastroControllerBaseActionController.startAction(
-        name: '_CadastroControllerBase.setEstado');
-    try {
-      return super.setEstado(estado);
     } finally {
       _$_CadastroControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -272,6 +243,7 @@ mixin _$CadastroClienteController on _CadastroControllerBase, Store {
     return '''
 cliente: ${cliente},
 enderecoCliente: ${enderecoCliente},
+endereco: ${endereco},
 listaClientes: ${listaClientes},
 listaNomes: ${listaNomes}
     ''';
