@@ -1,20 +1,20 @@
 class EnderecoModel {
-  final String cep;
-  final String endereco;
-  final String numero;
-  final String complemento;
-  final String bairro;
-  final String cidade;
-  final String estado;
+  final String? cep;
+  final String? endereco;
+  final String? numero;
+  final String? complemento;
+  final String? bairro;
+  final String? cidade;
+  final String? estado;
 
   EnderecoModel(
-      {required this.cep,
-      required this.endereco,
-      required this.numero,
-      required this.complemento,
-      required this.bairro,
-      required this.cidade,
-      required this.estado});
+      {this.cep,
+      this.endereco,
+      this.numero,
+      this.complemento,
+      this.bairro,
+      this.cidade,
+      this.estado});
 
   factory EnderecoModel.newInstance() {
     return EnderecoModel(

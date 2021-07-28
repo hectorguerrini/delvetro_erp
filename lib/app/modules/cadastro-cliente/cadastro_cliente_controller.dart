@@ -14,9 +14,9 @@ class CadastroClienteController = _CadastroControllerBase
 
 abstract class _CadastroControllerBase with Store {
   final ICadastroClienteRepository repository;
-  final RepositoryExternal externalRepository;
+  final RepositoryExternal repositoryExternal;
 
-  _CadastroControllerBase(this.repository, this.externalRepository) {
+  _CadastroControllerBase(this.repository, this.repositoryExternal) {
     getListaClientes();
   }
 
@@ -31,7 +31,7 @@ abstract class _CadastroControllerBase with Store {
 
   @action
   Future<void> procuraCep(String cep) async {
-    var enderecoCliente = await externalRepository.getCepExterno(cep);
+    var enderecoCliente = await repositoryExternal.getCepExterno(cep);
     var endereco = cliente.enderecoModel;
     endereco = endereco.copyWith(
         bairro: enderecoCliente.bairro,
