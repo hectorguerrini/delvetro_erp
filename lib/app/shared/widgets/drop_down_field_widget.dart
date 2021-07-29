@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DropDownFieldWidget<T> extends StatelessWidget {
-  final String titulo;
+  final String? titulo;
   final void Function(T? value)? onChanged;
   final List<DropdownMenuItem<T>> items;
   final bool isRequired;
@@ -9,7 +9,7 @@ class DropDownFieldWidget<T> extends StatelessWidget {
   final T? value;
   const DropDownFieldWidget({
     Key? key,
-    required this.titulo,
+    this.titulo,
     this.value,
     this.isRequired = false,
     this.onChanged,

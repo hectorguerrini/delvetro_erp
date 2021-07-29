@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:extended_masked_text/extended_masked_text.dart';
 
 class TextFormFieldCustomWidget extends StatelessWidget {
-  final String titulo;
+  final String? titulo;
   final TextInputFormatter? textInputFormatter;
   final void Function(String value)? onChanged;
   final bool isRequired;
@@ -14,7 +14,7 @@ class TextFormFieldCustomWidget extends StatelessWidget {
   final TipoCampoTextoEnum tipoCampoTextoEnum;
   const TextFormFieldCustomWidget(
       {Key? key,
-      required this.titulo,
+      this.titulo,
       this.onChanged,
       this.isRequired = false,
       this.isNumber = false,
