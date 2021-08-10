@@ -45,10 +45,12 @@ class TextFormFieldCustomWidget extends StatelessWidget {
                 : tipoCampoTextoEnum == TipoCampoTextoEnum.TELEFONE
                     ? MaskedTextController(
                         mask: '(00) 00000-0000',
+                        text: value,
                         cursorBehavior: CursorBehaviour.end)
                     : tipoCampoTextoEnum == TipoCampoTextoEnum.CPF
                         ? MaskedTextController(
                             mask: '000.000.000-00',
+                            text: value,
                             cursorBehavior: CursorBehaviour.end,
                           )
                         : TextEditingController(text: value);

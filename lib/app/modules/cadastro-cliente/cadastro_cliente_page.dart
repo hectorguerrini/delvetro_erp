@@ -95,9 +95,7 @@ class CadastroClientePageState
                           isRequired: true,
                           onChanged: controller.setCpf,
                           value: controller.cliente.cpf,
-                          tipoCampoTextoEnum: controller.cliente.cpf == ''
-                              ? TipoCampoTextoEnum.CPF
-                              : TipoCampoTextoEnum.TEXTO,
+                          tipoCampoTextoEnum: TipoCampoTextoEnum.CPF,
                         )
                       ],
                     ),
@@ -123,10 +121,7 @@ class CadastroClientePageState
                           isRequired: true,
                           isNumber: true,
                           value: controller.cliente.telefones[0],
-                          tipoCampoTextoEnum:
-                              controller.cliente.telefones[0] == ''
-                                  ? TipoCampoTextoEnum.TELEFONE
-                                  : TipoCampoTextoEnum.TEXTO,
+                          tipoCampoTextoEnum: TipoCampoTextoEnum.TELEFONE,
                           onChanged: controller.setTelefone1,
                         ),
                         SizedBox(
@@ -136,10 +131,7 @@ class CadastroClientePageState
                           flex: 1,
                           titulo: 'Telefone 2',
                           isNumber: true,
-                          tipoCampoTextoEnum:
-                              controller.cliente.telefones[1] == ''
-                                  ? TipoCampoTextoEnum.TELEFONE
-                                  : TipoCampoTextoEnum.TEXTO,
+                          tipoCampoTextoEnum: TipoCampoTextoEnum.TELEFONE,
                           value: controller.cliente.telefones[1],
                           onChanged: controller.setTelefone2,
                         ),
@@ -150,10 +142,7 @@ class CadastroClientePageState
                           flex: 1,
                           titulo: 'Telefone 3',
                           isNumber: true,
-                          tipoCampoTextoEnum:
-                              controller.cliente.telefones[2] == ''
-                                  ? TipoCampoTextoEnum.TELEFONE
-                                  : TipoCampoTextoEnum.TEXTO,
+                          tipoCampoTextoEnum: TipoCampoTextoEnum.TELEFONE,
                           value: controller.cliente.telefones[2],
                           onChanged: controller.setTelefone3,
                         ),
