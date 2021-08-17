@@ -1,1 +1,1 @@
-enum TipoCampoTextoEnum { TEXTO, NUMERO, DOUBLE, VALOR }
+enum TipoCampoTextoEnum { TEXTO, NUMERO, DOUBLE, VALOR, TELEFONE, CPF }

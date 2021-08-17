@@ -42,7 +42,18 @@ class TextFormFieldCustomWidget extends StatelessWidget {
                     decimalSeparator: ',',
                     precision: 2,
                     initialValue: double.tryParse(value ?? ''))
-                : TextEditingController(text: value);
+                : tipoCampoTextoEnum == TipoCampoTextoEnum.TELEFONE
+                    ? MaskedTextController(
+                        mask: '(00) 00000-0000',
+                        text: value,
+                        cursorBehavior: CursorBehaviour.end)
+                    : tipoCampoTextoEnum == TipoCampoTextoEnum.CPF
+                        ? MaskedTextController(
+                            mask: '000.000.000-00',
+                            text: value,
+                            cursorBehavior: CursorBehaviour.end,
+                          )
+                        : TextEditingController(text: value);
 
     return Expanded(
       flex: flex,

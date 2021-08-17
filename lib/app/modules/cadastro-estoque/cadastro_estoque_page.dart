@@ -11,6 +11,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import 'enumerate/tipo_item_enum.dart';
+
 class CadastroEstoquePage extends StatefulWidget {
   const CadastroEstoquePage({Key? key}) : super(key: key);
 
@@ -236,6 +238,7 @@ class _CadastroEstoquePageState
                             titulo: 'Salvar',
                             onPressed: () {
                               controller.salvarItem();
+                              setState(() {});
                             },
                           ),
                         ),
@@ -244,6 +247,7 @@ class _CadastroEstoquePageState
                           titulo: 'Limpar',
                           onPressed: () {
                             controller.limparTexto();
+                            setState(() {});
                           },
                         ),
                       ],
